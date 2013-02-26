@@ -1,0 +1,30 @@
+#!/bin/bash
+
+echo '
+==> Installing Ruby dependencies'
+bundle install
+
+echo '
+==> Setting up the database'
+bundle exec rake db:create
+bundle exec rake db:schema:load
+# Test environment similarly
+RAILS_ENV=test bundle exec rake db:schema:load
+
+echo '
+==> Configuring teloga.dev'
+if [ -d ~/.pow ]; then
+  if [ ! -e ~/.pow/brubeck ]; then
+    ln -s $PWD ~/.pow/brubeck
+  fi
+else
+  echo 'Pow not set up. See: http://pow.cx/'
+fi
+
+echo '
+==> Setting up babar'
+babar install
+
+echo '
+==> Setup complete
+'
