@@ -5,6 +5,10 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'sqlite3'
 gem 'thin'
+gem 'slim'
+
+gem 'devise'
+gem 'gollum', git: 'git://github.com/github/gollum.git'
 
 group :assets do
   gem 'sass-rails',   '~> 4.0.0.beta1'

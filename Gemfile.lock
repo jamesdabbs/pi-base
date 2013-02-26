@@ -1,4 +1,20 @@
 GIT
+  remote: git://github.com/github/gollum.git
+  revision: 1201d2434a4a9e3d52bb13c3f74ebb9a3f748ad7
+  specs:
+    gollum (2.4.11)
+      github-markdown (~> 0.5.3)
+      github-markup (>= 0.7.5, < 1.0.0)
+      grit (~> 2.5.0)
+      mustache (>= 0.99.4, < 1.0.0)
+      nokogiri (~> 1.5.6)
+      pygments.rb (= 0.3.7)
+      sanitize (~> 2.0.3)
+      sinatra (~> 1.3.4)
+      stringex (~> 1.5.1)
+      useragent (~> 0.4.16)
+
+GIT
   remote: git://github.com/jamesdabbs/babar.git
   revision: f09761852cb6a5295b8db453622b2229e0150bd3
   specs:
@@ -33,6 +49,7 @@ GEM
       tzinfo (~> 0.3.33)
     arel (4.0.0.beta1)
     atomic (1.0.1)
+    bcrypt-ruby (3.0.1)
     builder (3.1.4)
     coderay (1.0.9)
     coffee-rails (4.0.0.beta1)
@@ -43,10 +60,21 @@ GEM
       execjs
     coffee-script-source (1.5.0)
     daemons (1.1.9)
+    devise (1.5.4)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.0.3)
+      warden (~> 1.1)
+    diff-lcs (1.2.1)
     erubis (2.7.0)
     eventmachine (1.0.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    github-markdown (0.5.3)
+    github-markup (0.7.5)
+    grit (2.5.0)
+      diff-lcs (~> 1.1)
+      mime-types (~> 1.15)
+      posix-spawn (~> 0.3.6)
     hike (1.2.1)
     i18n (0.6.2)
     jquery-rails (2.2.1)
@@ -61,12 +89,21 @@ GEM
     mime-types (1.21)
     minitest (4.6.1)
     multi_json (1.6.1)
+    mustache (0.99.4)
+    nokogiri (1.5.6)
+    orm_adapter (0.0.7)
     polyglot (0.3.3)
+    posix-spawn (0.3.6)
     pry (0.9.12)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pygments.rb (0.3.7)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.1.0)
     rack (1.5.2)
+    rack-protection (1.3.2)
+      rack
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.0.0.beta1)
@@ -86,12 +123,22 @@ GEM
     rake (10.0.3)
     rdoc (3.12.2)
       json (~> 1.4)
+    sanitize (2.0.3)
+      nokogiri (>= 1.4.4, < 1.6)
+      nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.6)
     sass-rails (4.0.0.beta1)
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0.rc0)
       tilt (~> 1.3)
+    sinatra (1.3.5)
+      rack (~> 1.4)
+      rack-protection (~> 1.3)
+      tilt (~> 1.3, >= 1.3.3)
+    slim (1.3.6)
+      temple (~> 0.5.5)
+      tilt (~> 1.3.3)
     slop (3.4.3)
     sprockets (2.9.0)
       hike (~> 1.2)
@@ -103,6 +150,8 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.7)
+    stringex (1.5.1)
+    temple (0.5.5)
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -120,6 +169,10 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    useragent (0.4.16)
+    warden (1.2.1)
+      rack (>= 1.0)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -127,10 +180,13 @@ PLATFORMS
 DEPENDENCIES
   babar!
   coffee-rails (~> 4.0.0.beta1)
+  devise
+  gollum!
   jquery-rails
   pry
   rails (= 4.0.0.beta1)
   sass-rails (~> 4.0.0.beta1)
+  slim
   sqlite3
   thin
   turbolinks
