@@ -22,4 +22,14 @@ class Formula::Atom < Formula
   def subformulae
     self
   end
+
+  def self.parse str
+    if str.include? '='
+      new *str.split('=')
+    elsif str.start_with? '~'
+      new str, false
+    else
+      new str, true
+    end
+  end
 end

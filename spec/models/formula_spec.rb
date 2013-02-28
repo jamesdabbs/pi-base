@@ -31,26 +31,37 @@ describe Formula do
 
   it 'looks up spaces' do
     a1t.spaces.should have(2).members
-  end
-
-  it 'looks up spaces' do
     a1t.spaces(false).should have(1).member
-  end
-
-  it 'looks up spaces' do
     a1t.spaces(nil).should be_empty
+
+    a1f.spaces.should have(1).member
+    a1f.spaces(false).should have(2).members
+    a1f.spaces(nil).should be_empty
   end
 
   it 'conjunts correctly' do
     (a1t + a1f).spaces.should be_empty
+    (a1t + a2f).spaces.should have(1).member
   end
 
   it 'disjuncts correctly' do
     (a1t | a1f).spaces.should have(3).members
+    (a1f | a2t).spaces.should have(2).members
   end
 
   it 'handles complicated formulae' do
     f = (a1t + a2f) | a1f
     f.spaces.should have(2).members
+    f.spaces(false).should have(1).member
+  end
+
+  it 'can parse subformulae' do
+    f = Formula.parse '(a | b) + ((c + d) | e) + f'
+    f.should be_an_instance_of Formula::Conjunction
+    f.subformulae.should have(3).members
+
+    sf = f.subformulae[1]
+    sf.should be_an_instance_of Formula::Disjunction
+    sf.subformulae.should have(2).members
   end
 end
