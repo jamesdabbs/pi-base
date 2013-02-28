@@ -26,3 +26,8 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry'
 end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end

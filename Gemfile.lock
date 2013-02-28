@@ -77,6 +77,11 @@ GEM
     eventmachine (1.0.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     github-markdown (0.5.3)
     github-markup (0.7.5)
     grit (2.5.0)
@@ -131,6 +136,17 @@ GEM
     rake (10.0.3)
     rdoc (3.12.2)
       json (~> 1.4)
+    rspec-core (2.13.0)
+    rspec-expectations (2.13.0)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.13.0)
+    rspec-rails (2.13.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 2.13.0)
+      rspec-expectations (~> 2.13.0)
+      rspec-mocks (~> 2.13.0)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
       nokogiri (>= 1.4.4, < 1.6)
@@ -201,10 +217,12 @@ DEPENDENCIES
   binding_of_caller
   coffee-rails (~> 4.0.0.beta1)
   devise
+  factory_girl_rails
   gollum!
   jquery-rails
   pry
   rails (= 4.0.0.beta1)
+  rspec-rails
   sass-rails (~> 4.0.0.beta1)
   slim-rails
   sqlite3
