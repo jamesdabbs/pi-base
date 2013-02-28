@@ -13,9 +13,9 @@ class Formula::Atom < Formula
       set = @property.traits.pluck :space_id
       Space.where('id NOT IN (?)', set).pluck :id
     elsif where
-      @property.traits.where(value: @value).pluck :space_id
+      @property.traits.where(value_id: @value.id).pluck :space_id
     else
-      @propery.traits.where(value: @value.compliment).pluck :space_id
+      @property.traits.where(value_id: @value.compliment).pluck :space_id
     end
   end
 

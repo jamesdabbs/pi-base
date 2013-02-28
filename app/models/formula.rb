@@ -20,11 +20,11 @@ class Formula
   private # ----------
 
   # TODO: improve using the fact that each array is sorted
-  def intersection *arrays
+  def intersection arrays
     arrays.inject &:&
   end
 
-  def union *arrays
+  def union arrays
     arrays.inject &:|
   end
 end
