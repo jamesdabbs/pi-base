@@ -5,4 +5,8 @@ class Value < ActiveRecord::Base
   def to_s
     name
   end
+
+  def compliment
+    value_set.values.pluck(:id).reject { |v| v == id }
+  end
 end
