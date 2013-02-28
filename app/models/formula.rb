@@ -6,15 +6,18 @@ class Formula
   end
 
   def + other
-    subs = [self.subformulae, other.subformulae]
-    subs.flatten! if other.is_a? Formula::Conjunction
-    Formula::Conjunction.new subs
+    Formula::Conjunction.new([self, other].inject([]) do |a, f|
+      f.is_a?(Formula::Conjunction) ? a + f.subformulae : a + [f]
+    end)
   end
 
   def | other
-    subs = [self.subformulae, other.subformulae]
-    subs.flatten! if other.is_a? Formula::Disjunction
-    Formula::Disjunction.new subs
+    Formula::Disjunction.new([self, other].inject([]) do |a, f|
+      f.is_a?(Formula::Disjunction) ? a + f.subformulae : a + [f]
+    end)
+  end
+
+  def self.parse str
   end
 
   private # ----------

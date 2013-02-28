@@ -1,4 +1,8 @@
 class Formula::Disjunction < Formula
+  def + other
+
+  end
+
   def spaces where=true
     subs = subformulae.map { |sf| sf.spaces where }
     # True if any is true

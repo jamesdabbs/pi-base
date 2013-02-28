@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Formula do
   before :each do
-    @p1 = create :property
-    @p2 = create :property
+    @p1 = create :property, name: '1'
+    @p2 = create :property, name: '2'
 
     s1 = create :space
     s2 = create :space
@@ -24,26 +24,33 @@ describe Formula do
     end
   end
 
-  let(:a1) { Formula::Atom.new @p1, @t }
-  let(:a2) { Formula::Atom.new @p1, @f }
+  let(:a1t) { Formula::Atom.new @p1, @t }
+  let(:a1f) { Formula::Atom.new @p1, @f }
+  let(:a2t) { Formula::Atom.new @p2, @t }
+  let(:a2f) { Formula::Atom.new @p2, @f }
 
   it 'looks up spaces' do
-    a1.spaces.should have(2).members
+    a1t.spaces.should have(2).members
   end
 
   it 'looks up spaces' do
-    a1.spaces(false).should have(1).members
+    a1t.spaces(false).should have(1).member
   end
 
   it 'looks up spaces' do
-    a1.spaces(nil).should be_empty
+    a1t.spaces(nil).should be_empty
   end
 
   it 'conjunts correctly' do
-    (a1 + a2).spaces.should be_empty
+    (a1t + a1f).spaces.should be_empty
   end
 
   it 'disjuncts correctly' do
-    (a1 | a2).spaces.should have(3).members
+    (a1t | a1f).spaces.should have(3).members
+  end
+
+  it 'handles complicated formulae' do
+    f = (a1t + a2f) | a1f
+    f.spaces.should have(2).members
   end
 end
