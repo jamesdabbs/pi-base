@@ -41,6 +41,8 @@ GEM
       activesupport (= 4.0.0.beta1)
       arel (~> 4.0.0.beta1)
     activerecord-deprecated_finders (0.0.3)
+    activerecord-import (0.2.0)
+      rails (>= 3.0.0rc)
     activesupport (4.0.0.beta1)
       i18n (~> 0.6.2)
       minitest (~> 4.2)
@@ -193,6 +195,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-import
   babar!
   better_errors
   binding_of_caller

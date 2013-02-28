@@ -7,6 +7,8 @@ gem 'sqlite3'
 gem 'thin'
 gem 'slim-rails'
 
+gem 'activerecord-import'
+
 gem 'devise'
 gem 'gollum', git: 'git://github.com/github/gollum.git'
 

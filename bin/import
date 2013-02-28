@@ -1,0 +1,72 @@
+#!/usr/bin/env ruby
+
+puts "Loading Rails environment ..."
+require File.expand_path '../../config/environment', __FILE__
+
+raise "This script is not safe to run in #{Rails.env}" unless Rails.env.development?
+
+# -- Helpers -----
+require 'import_buffer'
+
+def import objs, klass, &block
+  klass.delete_all
+  ids = []
+  ImportBuffer.new do |buffer|
+    objs.each do |id, obj|
+      ids    << id
+      buffer << klass.new(block.call(id, obj))
+    end
+  end
+
+  oids = klass.order('id ASC').pluck :id
+  if ids.length == oids.length
+    puts "Saved #{ids.length} #{klass} objects"
+  else
+    binding.pry
+  end
+  klass.const_set 'Map', Hash[ids.zip oids]
+end
+
+# -- Imports -----
+path = ARGV.first
+puts "Reading data from '#{path}'"
+
+data = {}
+JSON.parse(File.read(path)).each do |obj|
+  data[obj["model"]] ||= {}
+  data[obj["model"]][obj["pk"]] = obj["fields"]
+end
+
+import data["brubeck.valueset"], ValueSet do |id, vs|
+  {
+    name: vs["name"]
+  }
+end
+
+import data["brubeck.value"], Value do |id, v|
+  {
+    name: v["name"],
+    value_set_id: ValueSet::Map[v["value_set"]]
+  }
+end
+
+import data["brubeck.space"], Space do |id, s| 
+  { 
+    name: s["name"] 
+  }
+end
+
+import data["brubeck.property"], Property do |id, p|
+  {
+    name: p["name"],
+    value_set_id: ValueSet::Map[p["value_set"]]
+  }
+end
+
+import data["brubeck.trait"], Trait do |id, t|
+  {
+    space_id: Space::Map[t["space"]],
+    property_id: Property::Map[t["property"]],
+    value_id: Value::Map[t["value"]]
+  }
+end
