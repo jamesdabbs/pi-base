@@ -11,7 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130226052324) do
+ActiveRecord::Schema.define(version: 20130228002043) do
+
+  create_table "properties", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "value_set_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spaces", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "traits", force: true do |t|
+    t.integer  "space_id"
+    t.integer  "property_id"
+    t.integer  "value_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "traits", ["property_id", "value_id"], name: "index_traits_on_property_id_and_value_id"
+  add_index "traits", ["space_id"], name: "index_traits_on_space_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                              default: "", null: false
@@ -30,5 +57,20 @@ ActiveRecord::Schema.define(version: 20130226052324) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "value_sets", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "values", force: true do |t|
+    t.string   "name"
+    t.integer  "value_set_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "values", ["value_set_id"], name: "index_values_on_value_set_id"
 
 end
