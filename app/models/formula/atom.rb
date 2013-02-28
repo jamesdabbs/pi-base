@@ -1,11 +1,21 @@
 class Formula::Atom < Formula
   def initialize property, value
+    # TODO: coerce these between ints, bools & models on demand
     @property = property
     @value    = value
   end
 
   def to_s
     "#{@property} = #{@value}"
+  end
+
+  def to_atom
+    self
+  end
+
+  def ~
+    # FIXME: handling of value negation
+    Atom.new @property, !@value
   end
 
   def spaces where=true
