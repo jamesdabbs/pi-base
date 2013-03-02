@@ -7,7 +7,7 @@ gem 'sqlite3'
 gem 'thin'
 gem 'slim-rails'
 
-gem 'devise'
+gem 'devise', git: 'git://github.com/plataformatec/devise.git', branch: 'rails4'
 gem 'grit', git: "git://github.com/gitlabhq/grit.git"
 gem 'gollum', git: 'git://github.com/github/gollum.git'
 gem 'will_paginate'
