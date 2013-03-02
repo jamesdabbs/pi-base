@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-puts "Loading Rails environment ..."
+puts "==> Loading Rails environment ..."
 require File.expand_path '../../config/environment', __FILE__
 
 raise "This script is not safe to run in #{Rails.env}" unless Rails.env.development?
@@ -20,7 +20,7 @@ def import objs, klass, &block
 
   oids = klass.order('id ASC').pluck :id
   if ids.length == oids.length
-    puts "Saved #{ids.length} #{klass} objects"
+    puts "  #{ids.length} #{klass.name.pluralize}"
   else
     binding.pry
   end
@@ -30,7 +30,7 @@ end
 # -- Imports -----
 path = ARGV.first
 raise "Please specify a file to load" unless path
-puts "Reading data from '#{path}'"
+puts "==> Reading data from '#{path}'"
 
 data = {}
 JSON.parse(File.read(path)).each do |obj|
@@ -38,6 +38,7 @@ JSON.parse(File.read(path)).each do |obj|
   data[obj["model"]][obj["pk"]] = obj["fields"]
 end
 
+puts "==> Importing objects"
 import data["brubeck.valueset"], ValueSet do |id, vs|
   {
     name: vs["name"]
@@ -73,18 +74,35 @@ import data["brubeck.trait"], Trait do |id, t|
 end
 
 # -- Snippets ------
-content_types = data["contenttypes.contenttype"].inject({}) do |h, (k,v)|
+puts "==> Updating descriptions"
+content_types = data["contenttypes.contenttype"].inject({}) do |h, (_,v)|
   begin
-    h[k] = v["model"].capitalize.constantize
+    model = v["model"]
+    h[model] = model.capitalize.constantize
   rescue
   end
   h
 end
+documents = Hash[ data["brubeck.document"] ] 
+snippets  = Hash[ data["brubeck.snippet"]  ]
 
-data["brubeck.snippet"].each do |id, s|
-
+skipped = []
+data["brubeck.revision"].each.group_by do |id, r| 
+  r["page"] 
+end.each do |page_id, revisions|
+  id, r   = revisions.max_by { |id, r| Time.parse r["timestamp"] }
+  text    = r["text"]
+  snippet = snippets[page_id]
+  model   = content_types[snippet["content_type"][1]]
+  next unless model
+  begin
+    obj = model.find model.const_get('Map')[snippet["object_id"]]
+    obj.update_attribute :description, text
+  rescue
+    skipped << "  #{model}: #{text}" unless text.empty?
+  end
 end
-
-data["brubeck.revision"].each do |id, r|
-
+unless skipped.empty?
+  puts "Failed to update some descriptions:"
+  skipped.each { |str| puts str }
 end
