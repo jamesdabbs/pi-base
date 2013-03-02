@@ -34,12 +34,9 @@ class Formula::Atom < Formula
   end
 
   def self.parse str
-    if str.include? '='
-      new *str.split('=')
-    elsif str.start_with? '~'
-      new str, false
-    else
-      new str, true
-    end
+    p,v      = str.split('=')
+    property = Property.where(name: p).first!
+    value    = Value.where(name: v).first!
+    new property, value
   end
 end
