@@ -1,0 +1,5 @@
+= will_paginate @properties, renderer: BootstrapPagination::Rails
+
+ul
+  - @properties.each do |property|
+    li= link_to property.name, property

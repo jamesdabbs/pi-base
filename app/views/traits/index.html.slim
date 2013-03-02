@@ -1,0 +1,5 @@
+= will_paginate @traits, renderer: BootstrapPagination::Rails
+
+ul
+  - @traits.each do |trait|
+    li= link_to "#{trait.space}: #{trait.property} = #{trait.value}", trait

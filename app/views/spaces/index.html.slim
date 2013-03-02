@@ -1,0 +1,5 @@
+= will_paginate @spaces, renderer: BootstrapPagination::Rails
+
+ul
+  - @spaces.each do |space|
+    li= link_to space.name, space

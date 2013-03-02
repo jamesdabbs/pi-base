@@ -29,6 +29,7 @@ end
 
 # -- Imports -----
 path = ARGV.first
+raise "Please specify a file to load" unless path
 puts "Reading data from '#{path}'"
 
 data = {}
@@ -69,4 +70,21 @@ import data["brubeck.trait"], Trait do |id, t|
     property_id: Property::Map[t["property"]],
     value_id: Value::Map[t["value"]]
   }
+end
+
+# -- Snippets ------
+content_types = data["contenttypes.contenttype"].inject({}) do |h, (k,v)|
+  begin
+    h[k] = v["model"].capitalize.constantize
+  rescue
+  end
+  h
+end
+
+data["brubeck.snippet"].each do |id, s|
+
+end
+
+data["brubeck.revision"].each do |id, r|
+
 end

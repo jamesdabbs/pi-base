@@ -25,30 +25,22 @@ html lang="en"
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.brand href="#"Brubeck
+          = link_to "Brubeck", root_path, class: :brand
           .container.nav-collapse
             ul.nav
-              li= link_to "Link 1", "/path1"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
+              li= link_to "Spaces", spaces_path
+              li= link_to "Properties", properties_path
+              li= link_to "Traits", traits_path
 
     .container
 
       .row
-        .span9
+        .span12
           = bootstrap_flash
           = yield
-        .span3
-          .well.sidebar-nav
-            h3 Sidebar
-            ul.nav.nav-list
-              li.nav-header Sidebar
-              li= link_to "Link 1", "/path1"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
     
       footer
-        p &copy; Company 2013
+        p &copy; James Dabbs 2012 - #{Time.now.year}
     /!
       Javascripts
       \==================================================
