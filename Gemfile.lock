@@ -15,6 +15,15 @@ GIT
       useragent (~> 0.4.16)
 
 GIT
+  remote: git://github.com/gitlabhq/grit.git
+  revision: 79d7f98f18d006889a757b244b9285774a5c167e
+  specs:
+    grit (2.5.0)
+      diff-lcs (~> 1.1)
+      mime-types (~> 1.15)
+      posix-spawn (~> 0.3.6)
+
+GIT
   remote: git://github.com/jamesdabbs/babar.git
   revision: f09761852cb6a5295b8db453622b2229e0150bd3
   specs:
@@ -84,10 +93,6 @@ GEM
       railties (>= 3.0.0)
     github-markdown (0.5.3)
     github-markup (0.7.5)
-    grit (2.5.0)
-      diff-lcs (~> 1.1)
-      mime-types (~> 1.15)
-      posix-spawn (~> 0.3.6)
     hike (1.2.1)
     i18n (0.6.2)
     jquery-rails (2.2.1)
@@ -222,6 +227,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   gollum!
+  grit!
   jquery-rails
   pry
   rails (= 4.0.0.beta1)

@@ -8,6 +8,7 @@ gem 'thin'
 gem 'slim-rails'
 
 gem 'devise'
+gem 'grit', git: "git://github.com/gitlabhq/grit.git"
 gem 'gollum', git: 'git://github.com/github/gollum.git'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
