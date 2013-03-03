@@ -94,7 +94,11 @@ end.each do |page_id, revisions|
   text    = r["text"]
   snippet = snippets[page_id]
   model   = content_types[snippet["content_type"][1]]
+  next if text =~ /careerjobs/  # Residual spam cleanup
   next unless model
+  if model == Trait && snippet["proof_agent"].present?
+    text = snippet["proof_text"]
+  end
   begin
     obj = model.find model.const_get('Map')[snippet["object_id"]]
     obj.update_attribute :description, text
@@ -108,9 +112,10 @@ unless skipped.empty?
 end
 
 puts "==> Writing descriptions to file"
-[Space, Property].each do |klass|
+[Space, Property, Trait].each do |klass|
+  ext = klass == Trait ? :bmd : :md
   klass.find_each do |obj|
-    File.open "#{Brubeck::GollumPath}/#{klass.name}/#{obj.name}.md", "w" do |f|
+    File.open "#{Brubeck::GollumPath}/#{klass.name}/#{obj.name}.#{ext}", "w" do |f|
       f.puts obj[:description]
     end
   end
