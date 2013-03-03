@@ -52,7 +52,7 @@ import data["brubeck.value"], Value do |id, v|
   }
 end
 
-import data["brubeck.space"], Space do |id, s| 
+import data["brubeck.space"], Space do |id, s|
   { 
     name: s["name"] 
   }
@@ -106,3 +106,13 @@ unless skipped.empty?
   puts "Failed to update some descriptions:"
   skipped.each { |str| puts str }
 end
+
+puts "==> Writing descriptions to file"
+[Space, Property].each do |klass|
+  klass.find_each do |obj|
+    File.open "#{Brubeck::GollumPath}/#{klass.name}/#{obj.name}.md", "w" do |f|
+      f.puts obj[:description]
+    end
+  end
+end
+
