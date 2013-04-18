@@ -1,5 +1,5 @@
 h1= @space.name
-p= @space.description
+p= Markdown.render(@space.description).html_safe
 
 h3 Traits
 = will_paginate @traits, renderer: BootstrapPagination::Rails

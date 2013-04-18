@@ -10,6 +10,7 @@ gem 'slim-rails'
 gem 'devise', git: 'git://github.com/plataformatec/devise.git', branch: 'rails4'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'redcarpet'
 
 group :assets do
   gem 'sass-rails'
