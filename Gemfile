@@ -17,8 +17,6 @@ group :assets do
   gem 'uglifier'
 end
 
-gem 'twitter-bootstrap-rails', group: [:assets, :development]
-
 group :development do
   gem 'activerecord-import'
   gem 'better_errors'
