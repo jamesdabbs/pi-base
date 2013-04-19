@@ -1,0 +1,5 @@
+= bootstrap_will_paginate @theorems
+
+ul
+  - @theorems.each do |theorem|
+    li= link_to theorem.name, theorem

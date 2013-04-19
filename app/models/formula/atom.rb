@@ -34,9 +34,17 @@ class Formula::Atom < Formula
   end
 
   def self.parse str
-    p,v      = str.split('=')
-    property = Property.where(name: p).first!
-    value    = Value.where(name: v).first!
+    p,v = str.split('=').map &:strip
+    property = if p =~ /\d+/
+      Property.find p.to_i
+    else
+      Property.where(name: p).first!
+    end
+    value = if v =~ /\d+/
+      Value.find v.to_i
+    else
+      Value.where(name: v).first!
+    end
     new property, value
   end
 end

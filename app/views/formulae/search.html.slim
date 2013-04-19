@@ -7,7 +7,7 @@
 
 - if @results
   h3 Results
-  = will_paginate @results, renderer: BootstrapPagination::Rails
+  = bootstrap_will_paginate @results
   ul
     - @results.each do |s|
       li= s

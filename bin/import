@@ -65,6 +65,24 @@ import data["brubeck.property"], Property do |id, p|
   }
 end
 
+# Theorems are a bit of a special case since we have to serialize
+Theorem.delete_all
+data["brubeck.implication"].each do |id, t|
+  ant = t["antecedent"].gsub /(\d+)=(\d+)/ do
+    "#{Property::Map[$1.to_i]}=#{Value::Map[$2.to_i]}"
+  end
+  con = t["consequent"].gsub /(\d+)=(\d+)/ do
+    "#{Property::Map[$1.to_i]}=#{Value::Map[$2.to_i]}"
+  end
+  t = Theorem.new({
+    antecedent: Formula.import(ant).to_s, 
+    consequent: Formula.import(con).to_s,
+    description: ''
+  })
+  t.save!
+end
+puts "#{Theorem.all.count} Theorems"
+
 import data["brubeck.trait"], Trait do |id, t|
   {
     space_id: Space::Map[t["space"]],
@@ -111,13 +129,13 @@ unless skipped.empty?
   skipped.each { |str| puts str }
 end
 
-puts "==> Writing descriptions to file"
-[Space, Property, Trait].each do |klass|
-  ext = klass == Trait ? :bmd : :md
-  klass.find_each do |obj|
-    File.open "#{Brubeck::GollumPath}/#{klass.name}/#{obj.name}.#{ext}", "w" do |f|
-      f.puts obj[:description]
-    end
-  end
-end
+# puts "==> Writing descriptions to file"
+# [Space, Property, Trait].each do |klass|
+#   ext = klass == Trait ? :bmd : :md
+#   klass.find_each do |obj|
+#     File.open "#{Brubeck::GollumPath}/#{klass.name}/#{obj.name}.#{ext}", "w" do |f|
+#       f.puts obj[:description]
+#     end
+#   end
+# end
 

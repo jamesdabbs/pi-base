@@ -10,6 +10,7 @@ class Formula
       f.is_a?(Formula::Conjunction) ? a + f.subformulae : a + [f]
     end)
   end
+  alias_method :&, :+
 
   def | other
     Formula::Disjunction.new([self, other].inject([]) do |a, f|
@@ -21,12 +22,18 @@ class Formula
     conj, subs = parse_parens str
     if conj.nil?
       Formula::Atom.parse str
-    elsif conj == '+'
-      Formula::Conjunction.new(subs.map { |s| parse s })
-    elsif conj == '|'
-      Formula::Disjunction.new(subs.map { |s| parse s })
     else
-      raise "Unrecognized conjunction '#{conj}'"
+      subs.map { |s| parse s }.inject &conj.to_sym
+    end
+  end
+
+  def self.import str
+    # For importing strings from the old-style format
+    if str[0] == '('
+      conj = str[1]
+      str[2..-2].split(',').map { |s| import s }.inject &conj.to_sym
+    else
+      Formula::Atom.parse str
     end
   end
 
