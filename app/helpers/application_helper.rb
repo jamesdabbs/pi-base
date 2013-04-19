@@ -1,4 +1,10 @@
 module ApplicationHelper
+  def onload
+    content_for :onload do
+      yield
+    end
+  end
+
   def bootstrap_will_paginate list
      will_paginate list, renderer: BootstrapPagination::Rails
   end
