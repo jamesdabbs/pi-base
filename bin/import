@@ -81,7 +81,7 @@ data["brubeck.implication"].each do |id, t|
   })
   t.save!
 end
-puts "#{Theorem.all.count} Theorems"
+puts "  #{Theorem.all.count} Theorems"
 
 import data["brubeck.trait"], Trait do |id, t|
   {

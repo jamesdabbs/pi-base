@@ -6,6 +6,7 @@ gem 'turbolinks'
 gem 'sqlite3'
 gem 'thin'
 gem 'slim-rails'
+gem 'mysql2'
 
 gem 'devise', git: 'git://github.com/plataformatec/devise.git', branch: 'rails4'
 gem 'will_paginate'
