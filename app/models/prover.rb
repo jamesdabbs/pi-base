@@ -4,4 +4,8 @@ class Prover
     contrapositive = theorem.antecedent.spaces(nil) & theorem.consequent.spaces(false)
     Space.find (direct + contrapositive).uniq
   end
+
+  def self.check theorem
+    # FIXME: implement as background job
+  end
 end
