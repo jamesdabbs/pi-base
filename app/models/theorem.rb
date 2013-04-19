@@ -8,10 +8,20 @@ class Theorem < ActiveRecord::Base
   end
 
   def antecedent
-    Formula.parse self[:antecedent]
+    @antecedent ||= Formula.parse self[:antecedent]
   end
 
   def consequent
-    Formula.parse self[:consequent]
+    @consequent ||= Formula.parse self[:consequent]
+  end
+
+  def examples
+    ids = antecedent.spaces(true) & consequent.spaces(true)
+    Space.find ids
+  end
+
+  def counterexamples
+    ids = antecedent.spaces(true) & consequent.spaces(false)
+    Space.find ids
   end
 end
