@@ -8,7 +8,7 @@ set :deploy_via,  :remote_cache
 
 server "192.81.219.239", :app, :web, :db, primary: true
 
-set :default_environment, { 'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH" }
+set :default_environment, { "PATH" => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH" }
 set :deploy_to, "/home/james/brubeck"
 set :use_sudo,  false
 
@@ -21,3 +21,6 @@ after "deploy:restart", "deploy:cleanup"
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
+
+require "new_relic/recipes"
+after "deploy:update", "newrelic:notice_deployment"
