@@ -49,13 +49,18 @@ class Formula
   end
 
   def self.parse_parens str
-    scanner = StringScanner.new str
-    result  = scanner.eos? ? Array.new : [""]
-    depth   = 0
-    conj    = nil
+    stripped = str =~ /^\((.*[\+\|].*)\)$/ ? $1 : str
+    scanner  = StringScanner.new stripped
+    result   = scanner.eos? ? Array.new : [""]
+    depth    = 0
+    conj     = nil
 
     until scanner.eos?
-      if scanner.scan(/[^()\+\|]+/)
+      if scanner.scan(/\\/)
+        result.last << scanner.matched
+        scanner.scan(/./)
+        result.last << scanner.matched
+      elsif scanner.scan(/[^()\+\|\\]+/)
         result.last << scanner.matched
       elsif scanner.scan(/\(/)
         result.last << scanner.matched unless depth.zero?

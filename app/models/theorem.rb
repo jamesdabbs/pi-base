@@ -16,12 +16,26 @@ class Theorem < ActiveRecord::Base
   end
 
   def examples
-    ids = antecedent.spaces(true) & consequent.spaces(true)
-    Space.find ids
+    Space.by_formula antecedent => true, consequent => true
   end
 
   def counterexamples
-    ids = antecedent.spaces(true) & consequent.spaces(false)
-    Space.find ids
+    Space.by_formula antecedent => true, consequent => false
+  end
+
+  class Examiner < Brubeck::Examiner
+    def check
+      # This should just check counterexamples.empty?, but what should we do if it isn't?
+      raise "FIXME: add checking logic"
+    end
+
+    def explore
+      direct = Space.by_formula @obj.antecedent => true, @obj.consequent => nil
+      contra = Space.by_formula @obj.antecedent => nil,  @obj.consequent => false
+      puts "Exploring #{@obj}"
+      puts "  Direct: #{direct.map &:name}"
+      puts "  Contra: #{contra.map &:name}"
+      raise "FIXME: add proofs" unless direct.empty? && contra.empty?
+    end
   end
 end

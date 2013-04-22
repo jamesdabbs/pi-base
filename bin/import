@@ -5,6 +5,16 @@ require File.expand_path '../../config/environment', __FILE__
 
 raise "This script is not safe to run in #{Rails.env}" unless Rails.env.development?
 
+path = ARGV.first
+raise "Please specify a file to load" unless path
+puts "==> Reading data from '#{path}'"
+
+data = {}
+JSON.parse(File.read(path)).each do |obj|
+  data[obj["model"]] ||= {}
+  data[obj["model"]][obj["pk"]] = obj["fields"]
+end
+
 # -- Helpers -----
 require 'import_buffer'
 
@@ -13,8 +23,10 @@ def import objs, klass, &block
   ids = []
   ImportBuffer.new do |buffer|
     objs.each do |id, obj|
+      attrs = block.call id, obj
+      next unless attrs
       ids    << id
-      buffer << klass.new(block.call(id, obj))
+      buffer << klass.new(attrs)
     end
   end
 
@@ -27,17 +39,46 @@ def import objs, klass, &block
   klass.const_set 'Map', Hash[ids.zip oids]
 end
 
-# -- Imports -----
-path = ARGV.first
-raise "Please specify a file to load" unless path
-puts "==> Reading data from '#{path}'"
+# -- Snippets ------
+puts "==> Finding descriptions"
+content_types = data["contenttypes.contenttype"].inject({}) do |h, (_,v)|
+  begin
+    model = v["model"]
+    h[model] = model.capitalize.constantize
+  rescue
+  end
+  h
+end
+documents = Hash[ data["brubeck.document"] ] 
+snippets  = Hash[ data["brubeck.snippet"]  ]
 
-data = {}
-JSON.parse(File.read(path)).each do |obj|
-  data[obj["model"]] ||= {}
-  data[obj["model"]][obj["pk"]] = obj["fields"]
+skipped = []
+Descriptions = {}
+data["brubeck.revision"].each.group_by do |id, r| 
+  r["page"] 
+end.each do |page_id, revisions|
+  id, r   = revisions.max_by { |id, r| Time.parse r["timestamp"] }
+  text    = r["text"]
+  snippet = snippets[page_id]
+  model   = content_types[snippet["content_type"][1]]
+  next if text =~ /careerjobs/  # Residual spam cleanup
+  next unless model
+  if model == Trait && snippet["proof_agent"].present?
+    text = "AUTOMATICALLY GENERATED"
+  end
+  begin
+    Descriptions[[model, snippet["object_id"]]] = text
+  rescue
+    skipped << "  #{model}: #{text}" unless text.empty?
+  end
 end
 
+unless skipped.empty?
+  puts "Failed to update some descriptions:"
+  skipped.each { |str| puts str }
+end
+
+# -- Imports -----
 puts "==> Importing objects"
 import data["brubeck.valueset"], ValueSet do |id, vs|
   {
@@ -54,14 +95,16 @@ end
 
 import data["brubeck.space"], Space do |id, s|
   { 
-    name: s["name"] 
+    name: s["name"],
+    description: Descriptions[[Space, id]]
   }
 end
 
 import data["brubeck.property"], Property do |id, p|
   {
     name: p["name"],
-    value_set_id: ValueSet::Map[p["value_set"]]
+    value_set_id: ValueSet::Map[p["value_set"]],
+    description: Descriptions[[Property, id]]
   }
 end
 
@@ -77,56 +120,21 @@ data["brubeck.implication"].each do |id, t|
   t = Theorem.new({
     antecedent: Formula.import(ant).to_s, 
     consequent: Formula.import(con).to_s,
-    description: ''
+    description: Descriptions[[Theorem, id]]
   })
   t.save!
 end
 puts "  #{Theorem.all.count} Theorems"
 
 import data["brubeck.trait"], Trait do |id, t|
+  description = Descriptions[[Trait, id]]
+  next if description == "AUTOMATICALLY GENERATED"
   {
     space_id: Space::Map[t["space"]],
     property_id: Property::Map[t["property"]],
-    value_id: Value::Map[t["value"]]
+    value_id: Value::Map[t["value"]],
+    description: description
   }
-end
-
-# -- Snippets ------
-puts "==> Updating descriptions"
-content_types = data["contenttypes.contenttype"].inject({}) do |h, (_,v)|
-  begin
-    model = v["model"]
-    h[model] = model.capitalize.constantize
-  rescue
-  end
-  h
-end
-documents = Hash[ data["brubeck.document"] ] 
-snippets  = Hash[ data["brubeck.snippet"]  ]
-
-skipped = []
-data["brubeck.revision"].each.group_by do |id, r| 
-  r["page"] 
-end.each do |page_id, revisions|
-  id, r   = revisions.max_by { |id, r| Time.parse r["timestamp"] }
-  text    = r["text"]
-  snippet = snippets[page_id]
-  model   = content_types[snippet["content_type"][1]]
-  next if text =~ /careerjobs/  # Residual spam cleanup
-  next unless model
-  if model == Trait && snippet["proof_agent"].present?
-    text = snippet["proof_text"]
-  end
-  begin
-    obj = model.find model.const_get('Map')[snippet["object_id"]]
-    obj.update_attribute :description, text
-  rescue
-    skipped << "  #{model}: #{text}" unless text.empty?
-  end
-end
-unless skipped.empty?
-  puts "Failed to update some descriptions:"
-  skipped.each { |str| puts str }
 end
 
 # puts "==> Writing descriptions to file"
