@@ -14,8 +14,9 @@ class Formula::Atom < Formula
   end
 
   def ~
-    # FIXME: handling of value negation
-    Atom.new @property, !@value
+    # FIXME: handling of value negation for non-booleans
+    # FIXME: negating booleans should not require a database hit
+    Atom.new @property, Value.find(@value.compliment).first
   end
 
   def spaces where=true
