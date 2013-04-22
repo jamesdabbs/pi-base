@@ -40,16 +40,6 @@ class Formula
     end
   end
 
-  def self.import str
-    # For importing strings from the old-style format
-    if str[0] == '('
-      conj = str[1]
-      str[2..-2].split(',').map { |s| import s }.inject &conj.to_sym
-    else
-      Formula::Atom.parse str
-    end
-  end
-
   private # ----------
 
   # TODO: improve using the fact that each array is sorted

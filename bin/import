@@ -109,6 +109,17 @@ import data["brubeck.property"], Property do |id, p|
 end
 
 # Theorems are a bit of a special case since we have to serialize
+class Formula
+  def self.import str
+    if str[0] == '('
+      conj = str[1]
+      str[2..-2].split(',').map { |s| import s }.inject &conj.to_sym
+    else
+      Formula::Atom.parse str
+    end
+  end
+end
+
 Theorem.delete_all
 data["brubeck.implication"].each do |id, t|
   ant = t["antecedent"].gsub /(\d+)=(\d+)/ do
