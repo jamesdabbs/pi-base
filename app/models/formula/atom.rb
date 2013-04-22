@@ -9,6 +9,10 @@ class Formula::Atom < Formula
     "#{@property} = #{@value}"
   end
 
+  def subformulae
+    self
+  end
+
   def to_atom
     self
   end
@@ -30,8 +34,13 @@ class Formula::Atom < Formula
     end
   end
 
-  def subformulae
-    self
+  def verify space
+    [space.traits.where(property: @property, value: @value).first]
+  end
+
+  def force space, assumptions
+    description = assumptions.map { |a| "* #{a.assumption_description}" }.join "\n"
+    space.traits.create! property: @property, value: @value, description: description
   end
 
   def self.parse str

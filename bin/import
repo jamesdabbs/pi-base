@@ -109,14 +109,12 @@ import data["brubeck.property"], Property do |id, p|
 end
 
 # Theorems are a bit of a special case since we have to serialize
-class Formula
-  def self.import str
-    if str[0] == '('
-      conj = str[1]
-      str[2..-2].split(',').map { |s| import s }.inject &conj.to_sym
-    else
-      Formula::Atom.parse str
-    end
+def import_formula str
+  if str[0] == '('
+    conj = str[1]
+    str[2..-2].split(',').map { |s| import_formula s }.inject &conj.to_sym
+  else
+    Formula::Atom.parse str
   end
 end
 
@@ -129,8 +127,8 @@ data["brubeck.implication"].each do |id, t|
     "#{Property::Map[$1.to_i]}=#{Value::Map[$2.to_i]}"
   end
   t = Theorem.new({
-    antecedent: Formula.import(ant).to_s, 
-    consequent: Formula.import(con).to_s,
+    antecedent: import_formula(ant).to_s, 
+    consequent: import_formula(con).to_s,
     description: Descriptions[[Theorem, id]]
   })
   t.save!

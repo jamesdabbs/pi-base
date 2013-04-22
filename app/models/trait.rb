@@ -6,4 +6,8 @@ class Trait < ActiveRecord::Base
   def name
     "#{space} - #{property}"
   end
+
+  def assumption_description
+    Formula::Atom.new(property, value).to_s
+  end
 end

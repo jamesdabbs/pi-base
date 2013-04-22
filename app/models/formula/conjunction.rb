@@ -8,4 +8,12 @@ class Formula::Conjunction < Formula
     # Nil if any is nil
     where ? intersection(subs) : union(subs)
   end
+
+  def verify space
+    subformula.map { |sf| sf.verify(space) or raise "Formula did not match" }
+  end
+
+  def force space, assumptions
+    subformulae.each { |sf| sf.force space, assumptions }
+  end
 end

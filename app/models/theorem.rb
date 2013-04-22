@@ -7,6 +7,10 @@ class Theorem < ActiveRecord::Base
     "#{antecedent} ⇒ #{consequent}"
   end
 
+  def assumption_description
+    to_s
+  end
+
   # FIXME: use Rails serialization for 
   def antecedent
     @antecedent ||= Formula.parse self[:antecedent]
@@ -50,10 +54,9 @@ class Theorem < ActiveRecord::Base
     end
 
     def apply theorem, space
-      puts "Applying #{theorem} to #{space} ..."
-      # TODO:
-      # - Generate proof trace (traits appearing in antecedent, possibly consequent for disjunctions)
-      # - For each trait to be proved, add it with the generated description
+      assumptions = theorem.antecedent.verify space
+      assumptions << theorem
+      theorem.consequent.force space, assumptions
     end
   end
 end
