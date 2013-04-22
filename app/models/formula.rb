@@ -1,24 +1,37 @@
 class Formula
+  @@conj = '?'
+
   attr_accessor :subformulae
 
-  def initialize subformulae
+  def initialize *subformulae
     @subformulae = subformulae
   end
 
   def + other
-    Formula::Conjunction.new([self, other].inject([]) do |a, f|
-      f.is_a?(Formula::Conjunction) ? a + f.subformulae : a + [f]
-    end)
+    Formula::Conjunction.new(self, other).flatten
   end
   alias_method :&, :+
 
   def | other
-    Formula::Disjunction.new([self, other].inject([]) do |a, f|
-      f.is_a?(Formula::Disjunction) ? a + f.subformulae : a + [f]
+    Formula::Disjunction.new(self, other).flatten
+  end
+
+  def flatten
+    self.class.new(subformulae.inject([]) do |fs, f|
+      if f.class == self.class
+        fs += f.subformulae
+      else
+        fs << f.subformulae
+      end
     end)
   end
 
+  def to_s
+    '(' + subformulae.join(" #{@@conj} ") + ')'
+  end
+
   def self.parse str
+    return str if str.is_a? Formula
     conj, subs = parse_parens str
     if conj.nil?
       Formula::Atom.parse str

@@ -64,4 +64,6 @@ describe Formula do
     sf.should be_an_instance_of Formula::Disjunction
     sf.subformulae.should have(2).members
   end
+
+  pending 'handles e.g. "(\\(T_1\\) = True + Normal = True)"'
 end

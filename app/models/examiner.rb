@@ -1,4 +1,6 @@
 class Examiner
+  attr_accessor :obj
+  
   def initialize obj
     @obj = obj
   end
