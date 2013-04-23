@@ -11,19 +11,19 @@ h1 New Trait
           li = message
 
   .control-group
-    = f.label :space_id
+    = f.label :space
     .controls
-      = f.select :space_id, Space.choices, class: 'span12'
+      = typeahead f, Space, class: 'span12'
   .control-group
-    = f.label :property_id
+    = f.label :property
     .controls
-      = f.select :property_id, Property.choices, class: 'span12'
+      = typeahead f, Property, class: 'span12'
   .control-group
-    = f.label :value_id
+    = f.label :value
     .controls
-      = f.select :value_id, Value.choices, class: 'span12'
+      = typeahead f, Value, class: 'span12'
   .control-group
     = f.label :description
     .controls
-      = f.text_area :description, rows: 15, class: 'span12'
+      = f.text_area :description, rows: 15, class: 'span12', autocomplete: false
   .actions = f.submit 'Save', class: 'btn btn-primary'

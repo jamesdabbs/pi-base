@@ -27,7 +27,12 @@ class TraitsController < ApplicationController
   end
 
   def create
-    @trait = Trait.new trait_params
+    attrs = { description: params[:trait][:description] }
+    [:space, :property, :value].each do |klass|
+      attrs[klass] = klass.to_s.camelize.constantize.where(name: params[:trait][klass]).first!
+    end
+
+    @trait = Trait.new attrs
     authorize! :manage, @trait
 
     if @trait.save
@@ -50,9 +55,5 @@ class TraitsController < ApplicationController
 
   def set_trait
     @trait = Trait.find params[:id]
-  end
-
-  def trait_params
-    params.require(:trait).permit :space_id, :property_id, :value_id, :description
   end
 end
