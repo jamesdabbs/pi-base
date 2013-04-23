@@ -53,6 +53,6 @@ class TraitsController < ApplicationController
   end
 
   def trait_params
-    param.require(:trait).permit :space_id, :property_id, :value_id, :description
+    params.require(:trait).permit :space_id, :property_id, :value_id, :description
   end
 end

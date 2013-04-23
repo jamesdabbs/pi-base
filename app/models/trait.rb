@@ -1,5 +1,6 @@
 class Trait < ActiveRecord::Base
   validates :space, :property, :value, :description, presence: true
+  validates :property, uniqueness: { scope: :space_id }
 
   belongs_to :space
   belongs_to :property
