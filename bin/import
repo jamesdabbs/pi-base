@@ -129,7 +129,7 @@ data["brubeck.implication"].each do |id, t|
   t = Theorem.new({
     antecedent: import_formula(ant).to_s, 
     consequent: import_formula(con).to_s,
-    description: Descriptions[[Theorem, id]]
+    description: Descriptions[[Theorem, id]] || ''
   })
   t.save validate: false
 end
