@@ -2,13 +2,13 @@ class TraitsController < ApplicationController
   before_action :set_trait, only: [:show, :edit, :update]
 
   def index
-    @spaces     = Space.order('id ASC').pluck :id
-    @properties = Property.order('id ASC').pluck :id
+    @spaces     = Space.order 'id ASC'
+    @properties = Property.order 'id ASC'
 
     values = {}
     Value.all.each { |v| values[v.id] = v.name.sub('True', '+').sub('False', '-') }
 
-    @traits = Hash[ @spaces.map { |s| [s,{}] } ]
+    @traits = Hash[ @spaces.map { |s| [s.id,{}] } ]
     Trait.select(:id, :space_id, :property_id, :value_id).each do |t|
       @traits[t.space_id][t.property_id] ||= [t.id, values[t.value_id]]
     end

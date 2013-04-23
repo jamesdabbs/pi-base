@@ -1,15 +1,17 @@
-= link_to 'New Trait', new_trait_path, class: 'btn'
+h3 
+  | #{Trait.count} Traits 
+  = link_to 'New', new_trait_path, class: 'btn btn-mini'
 
-table
+table.table.table-condensed
   tr
     td
     - @properties.each do |property|
-      td= property
+      td= link_to property.id, property, title: property.name
   - @spaces.each do |space|
     tr
-      td= space
+      td= link_to space.id, space, title: space.name
       - @properties.each do |property|
-        - trait, value = @traits[space][property]
+        - trait, value = @traits[space.id][property.id]
         td
           - if value
             = link_to value, trait_path(trait)
