@@ -6,7 +6,8 @@ class SpacesController < ApplicationController
   end
 
   def show
-    @traits = @space.traits.paginate page: params[:page], per_page: 30
+    @direct  = @space.traits.direct.paginate  page: params[:direct],  per_page: 15
+    @deduced = @space.traits.deduced.paginate page: params[:deduced], per_page: 15
   end
 
   def new

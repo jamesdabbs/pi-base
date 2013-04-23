@@ -6,7 +6,8 @@ class PropertiesController < ApplicationController
   end
 
   def show
-    @traits = @property.traits.paginate page: params[:page], per_page: 30
+    @direct  = @property.traits.direct.paginate  page: params[:direct],  per_page: 15
+    @deduced = @property.traits.deduced.paginate page: params[:deduced], per_page: 15
   end
 
   def new

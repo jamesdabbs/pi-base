@@ -5,7 +5,8 @@ class Trait < ActiveRecord::Base
   belongs_to :property
   belongs_to :value
 
-  scope :deduced, -> { where deduced: true }
+  scope :direct,  -> { where deduced: false }
+  scope :deduced, -> { where deduced: true  }
 
   def name
     "#{space} - #{property}"

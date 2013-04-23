@@ -131,7 +131,7 @@ data["brubeck.implication"].each do |id, t|
     consequent: import_formula(con).to_s,
     description: Descriptions[[Theorem, id]]
   })
-  t.save!
+  t.save validate: false
 end
 puts "  #{Theorem.all.count} Theorems"
 

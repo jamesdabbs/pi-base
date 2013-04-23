@@ -5,8 +5,9 @@ module ApplicationHelper
     end
   end
 
-  def bootstrap_will_paginate list
-     will_paginate list, renderer: BootstrapPagination::Rails
+  def bootstrap_will_paginate list, opts={}
+    opts[:renderer] = BootstrapPagination::Rails
+    will_paginate list, opts
   end
   
   def markdown text

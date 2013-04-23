@@ -5,7 +5,16 @@ h1= @property.name
 = markdown @property.description
 
 h3 Traits
-= bootstrap_will_paginate @traits
-ul
-  - @traits.each do |trait|
-    li= link_to "#{trait.space}: #{trait.value}", trait
+.row
+  .span6
+    h4 Manually Added
+    = bootstrap_will_paginate @direct, param_name: :direct
+    ul
+      - @direct.each do |trait|
+        li= link_to "#{trait.space}: #{trait.value}", trait
+  .span6
+    h4 Automatically Generated
+    = bootstrap_will_paginate @deduced, param_name: :deduced
+    ul
+      - @deduced.each do |trait|
+        li= link_to "#{trait.space}: #{trait.value}", trait
