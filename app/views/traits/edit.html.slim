@@ -1,0 +1,17 @@
+= link_to 'Back', @trait, class: 'btn'
+
+h1 Editing '#{@trait}'
+
+= form_for @trait do |f|
+  - if @trait.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@trait.errors.count, "error")} prohibited this trait from being saved:"
+      ul
+        - @trait.errors.full_messages.each do |message|
+          li = message
+
+  .control-group
+    = f.label :description
+    .controls
+      = f.text_area :description, rows: 15, class: 'span12'
+  .actions = f.submit 'Save', class: 'btn btn-primary'

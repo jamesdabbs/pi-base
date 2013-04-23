@@ -5,8 +5,8 @@ Brubeck::Application.routes.draw do
 
   devise_for :users
 
-  resources :spaces, :properties
-  resources :traits, :theorems, only: [:index, :show]
+  resources :spaces, :properties, :traits, except: [:delete]
+  resources :theorems, only: [:index, :show]
 
   get 'search', to: 'formulae#search'
 
