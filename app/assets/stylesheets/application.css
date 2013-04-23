@@ -13,7 +13,20 @@
  *= require darkstrap
  *= require_tree .
  */
+html, body { height: 100%; }
 
-body {
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -60px;
+}
+
+#wrap > .container {
   padding-top: 60px;
+}
+
+#push, footer {
+  height: 60px;
+  display: block;
 }

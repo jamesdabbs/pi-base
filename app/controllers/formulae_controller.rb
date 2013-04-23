@@ -1,9 +1,14 @@
 class FormulaeController < ApplicationController
   def search
-    if q = params[:q]
-      @formula = Formula.parse q
-      @results = Space.where(id: @formula.spaces).paginate(
-        page: params[:page], per_page: 30)
+    if @q = params[:q]
+      begin
+        @formula = Formula.parse @q.gsub /\&/, '+'
+        @results = Space.where(id: @formula.spaces).paginate(
+          page: params[:page], per_page: 30)
+        @q = @formula.to_s  # Standardize for re-display
+      rescue Formula::ParseError => e
+        @error = e
+      end
     end
   end
 end

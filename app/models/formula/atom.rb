@@ -52,16 +52,14 @@ class Formula::Atom < Formula
 
   def self.parse str
     p,v = str.split('=').map &:strip
-    property = if p.to_i.zero?
-      Property.where(name: p).first!
-    else
-      Property.find p.to_i
-    end
-    value = if v.to_i.zero?
-      Value.where(name: v).first!
-    else
-      Value.find v.to_i
-    end
+    property = Atom.parse_name_or_id p, Property
+    value    = Atom.parse_name_or_id v, Value
     new property, value
+  end
+
+  def self.parse_name_or_id str, klass
+    str.to_i.zero? ? klass.where(name: str).first! : klass.find
+  rescue => e
+    raise ParseError.new "Unrecognized #{klass}: #{str}"
   end
 end

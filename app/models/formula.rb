@@ -1,4 +1,7 @@
 class Formula
+  class ParseError < StandardError
+  end
+
   @@conj = '?'
 
   attr_accessor :subformulae
