@@ -49,6 +49,8 @@ content_types = data["contenttypes.contenttype"].inject({}) do |h, (_,v)|
   end
   h
 end
+content_types["implication"] = Theorem
+
 documents = Hash[ data["brubeck.document"] ] 
 snippets  = Hash[ data["brubeck.snippet"]  ]
 
