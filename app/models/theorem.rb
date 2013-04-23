@@ -10,7 +10,7 @@ class Theorem < ActiveRecord::Base
     [antecedent.atoms, consequent.atoms].flatten.map(&:property).uniq.each do |p|
       TheoremProperty.where(theorem: self, property: p).create!
     end
-    Resque.enqueue TheoremExploreJob, self.id
+    Resque.enqueue TheoremExploreJob, id
   end
 
   def name
@@ -53,9 +53,15 @@ class Theorem < ActiveRecord::Base
 
   def apply space
     assumptions = antecedent.verify space
+    return unless assumptions
     assumptions << self
     consequent.force space, assumptions
+  rescue ActiveRecord::RecordInvalid
+    # Presumably because it violates the uniqueness constraint, and so already exists
+    false
   end
+
+  #-----
 
   class Examiner
     attr_accessor :theorem

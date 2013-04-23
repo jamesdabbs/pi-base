@@ -11,6 +11,10 @@ class Trait < ActiveRecord::Base
 
   scope :unproven, -> { where description: '' }
 
+  after_create do
+    Resque.enqueue TraitExploreJob, id
+  end
+
   def name
     "#{space} - #{property}"
   end
@@ -21,5 +25,25 @@ class Trait < ActiveRecord::Base
 
   def assumption_description
     Formula::Atom.new(property, value).to_s
+  end
+
+  #-----
+
+  class Examiner
+    attr_accessor :trait
+
+    def initialize trait
+      @trait = trait
+    end
+
+    def explore
+      trait.property.theorems.each do |theorem|
+        if theorem.antecedent.verify trait.space
+          theorem.apply trait.space
+        elsif (~theorem.consequent).verify trait.space
+          theorem.contrapositive.apply trait.space
+        end
+      end
+    end
   end
 end
