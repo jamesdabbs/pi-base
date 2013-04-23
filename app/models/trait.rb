@@ -3,6 +3,8 @@ class Trait < ActiveRecord::Base
   belongs_to :property
   belongs_to :value
 
+  scope :deduced, -> { where deduced: true }
+
   def name
     "#{space} - #{property}"
   end

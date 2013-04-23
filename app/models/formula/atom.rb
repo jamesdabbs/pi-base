@@ -41,7 +41,7 @@ class Formula::Atom < Formula
 
   def force space, assumptions
     description = assumptions.flatten.map { |a| "* #{a.assumption_description}" }.join "\n"
-    space.traits.create! property: @property, value: @value, description: description
+    space.traits.create! property: @property, value: @value, description: description, deduced: true
   end
 
   def self.parse str

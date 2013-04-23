@@ -147,8 +147,7 @@ import data["brubeck.trait"], Trait do |id, t|
 end
 
 #-- Make an admin user -----
-u = User.new
-u.email = 'jamesdabbs@gmail.com'
+u = User.where(email: 'jamesdabbs@gmail.com').first_or_initialize
 u.password = u.password_confirmation = 'password'
 u.admin = true
 u.save!
