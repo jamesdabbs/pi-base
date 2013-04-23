@@ -11,8 +11,11 @@ gem 'newrelic_rpm'
 gem 'resque'
 
 gem 'devise', git: 'git://github.com/plataformatec/devise.git', branch: 'rails4'
+gem 'cancan'
+
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+
 gem 'redcarpet'
 
 group :assets do

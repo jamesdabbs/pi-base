@@ -11,13 +11,16 @@ class PropertiesController < ApplicationController
 
   def new
     @property = Propery.new
+    authorize! :manage, @property
   end
 
   def edit
+    authorize! :manage, @property
   end
 
   def create
     @property = Property.new property_params
+    authorize! :manage, @property
 
     if @property.save
       redirect_to @property, notice: 'Property created'
@@ -27,6 +30,7 @@ class PropertiesController < ApplicationController
   end
 
   def update
+    authorize! :manage, @property
     if @property.update property_params
       redirect_to @property, notice: 'Property updated'
     else

@@ -146,6 +146,13 @@ import data["brubeck.trait"], Trait do |id, t|
   }
 end
 
+#-- Make an admin user -----
+u = User.new
+u.email = 'jamesdabbs@gmail.com'
+u.password = u.password_confirmation = 'password'
+u.admin = true
+u.save!
+
 # puts "==> Writing descriptions to file"
 # [Space, Property, Trait].each do |klass|
 #   ext = klass == Trait ? :bmd : :md

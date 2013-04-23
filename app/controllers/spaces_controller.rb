@@ -11,13 +11,16 @@ class SpacesController < ApplicationController
 
   def new
     @space = Space.new
+    authorize! :manage, @space
   end
 
   def edit
+    authorize! :manage, @space
   end
 
   def create
     @space = Space.new space_params
+    authorize! :manage, @space
 
     if @space.save
       redirect_to @space, notice: 'Space created'
@@ -27,6 +30,7 @@ class SpacesController < ApplicationController
   end
 
   def update
+    authorize! :manage, @space
     if @space.update space_params
       redirect_to @space, notice: 'Space updated'
     else

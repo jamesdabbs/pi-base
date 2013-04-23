@@ -47,6 +47,7 @@ GEM
     binding_of_caller (0.7.1)
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
+    cancan (1.6.9)
     capistrano (2.14.2)
       highline
       net-scp (>= 1.0.0)
@@ -208,6 +209,7 @@ DEPENDENCIES
   activerecord-import
   better_errors
   binding_of_caller
+  cancan
   capistrano
   coffee-rails
   devise!

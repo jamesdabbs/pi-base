@@ -36,7 +36,7 @@ html lang="en"
               li= link_to "Search", search_path
             ul.nav.pull-right
               - if current_user
-                li= link_to current_user.name, edit_user_registration_path
+                li= link_to current_user.email, edit_user_registration_path
                 li= link_to "Logout", destroy_user_session_path, method: :delete
               - else
                 li= link_to "Login", new_user_session_path
