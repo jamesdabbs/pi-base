@@ -14,6 +14,9 @@ class TraitsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def new
     @trait = Trait.new
     authorize! :manage, @trait

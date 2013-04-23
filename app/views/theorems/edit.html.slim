@@ -1,0 +1,17 @@
+= link_to 'Back', @theorem, class: 'btn'
+
+h1 Editing '#{@theorem}'
+
+= form_for @theorem do |f|
+  - if @theorem.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@theorem.errors.count, "error")} prohibited this theorem from being saved:"
+      ul
+        - @theorem.errors.full_messages.each do |message|
+          li = message
+
+  .control-group
+    = f.label :description
+    .controls
+      = f.text_area :description, rows: 15, class: 'span12'
+  .actions = f.submit 'Save', class: 'btn btn-primary'
