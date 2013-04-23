@@ -1,7 +1,5 @@
-h1 Editing #{@space}
+= link_to 'Back', @space, class: 'btn'
+
+h1 Editing '#{@space}'
 
 = render 'form'
-
-= link_to 'Show', @space
-'|
-= link_to 'Back', spaces_path

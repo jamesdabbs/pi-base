@@ -1,7 +1,7 @@
+= link_to 'New Space', new_space_path, class: 'btn'
+
 = bootstrap_will_paginate @spaces
 
 ul
   - @spaces.each do |space|
     li= link_to space.name, space
-
-= link_to 'New Space', new_space_path

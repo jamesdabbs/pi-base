@@ -1,7 +1,7 @@
+= link_to 'New Property', new_property_path, class: 'btn'
+
 = bootstrap_will_paginate @properties
 
 ul
   - @properties.each do |property|
     li= link_to property.name, property
-
-= link_to 'New Property', new_property_path

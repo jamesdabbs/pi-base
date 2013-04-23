@@ -1,3 +1,6 @@
+= link_to 'Back', spaces_path, class: 'btn'
+= link_to 'Edit', edit_space_path(@space), class: 'btn'
+
 h1= @space.name
 = markdown @space.description
 
@@ -6,7 +9,3 @@ h3 Traits
 ul
   - @traits.each do |trait|
     li= link_to "#{trait.property}: #{trait.value}", trait
-
-= link_to 'Edit', edit_space_path(@space)
-'|
-= link_to 'Back', spaces_path
