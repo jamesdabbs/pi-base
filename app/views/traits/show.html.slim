@@ -1,5 +1,9 @@
 = link_to 'Back', traits_path, class: 'btn'
 = link_to 'Edit', edit_trait_path(@trait), class: 'btn'
 
-h1 #{@trait.space}: #{@trait.property} = #{@trait.value}
+h1 
+  = link_to @trait.space, @trait.space
+h2
+  = link_to @trait.property, @trait.property
+  = " = #{@trait.value}"
 = markdown @trait.description
