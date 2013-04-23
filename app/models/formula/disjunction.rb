@@ -9,15 +9,20 @@ class Formula::Disjunction < Formula
     where == false ? intersection(subs) : union(subs)
   end
 
+  def ~
+    Formula::Conjunction.new *subformulae.map(&:~)
+  end
+
   def verify space
+    # FIXME: memoize this verify call
     witness = subformulae.find { |sf| sf.verify space }
-    witness.nil? ? false : [witness]
+    witness.nil? ? false : [witness.verify(space)]
   end
 
   def force space, assumptions
     unknown = nil
     subformulae.each do |sf|
-      witnesses = (~sf).verify
+      witnesses = (~sf).verify space
       if witnesses
         assumptions += witnesses
       else

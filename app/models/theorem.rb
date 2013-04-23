@@ -41,8 +41,10 @@ class Theorem < ActiveRecord::Base
     @counterexamples ||= Space.by_formula antecedent => true, consequent => false
   end
 
-  def explore!
-
+  def apply space
+    assumptions = antecedent.verify space
+    assumptions << self
+    consequent.force space, assumptions
   end
 
   class Examiner
@@ -59,18 +61,12 @@ class Theorem < ActiveRecord::Base
 
     def explore
       Space.by_formula(theorem.antecedent => true, theorem.consequent => nil).each do |s|
-        Examiner.apply theorem, s
+        theorem.apply s
       end
 
       Space.by_formula(theorem.antecedent => nil,  theorem.consequent => false).each do |s|
-        Examiner.apply theorem.contrapositive, s
+        theorem.contrapositive.apply s
       end
-    end
-
-    def self.apply theorem, space
-      assumptions = theorem.antecedent.verify space
-      assumptions << theorem
-      theorem.consequent.force space, assumptions
     end
   end
 end

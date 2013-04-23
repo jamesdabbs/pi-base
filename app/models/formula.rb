@@ -17,7 +17,7 @@ class Formula
   end
 
   def flatten
-    self.class.new(subformulae.inject([]) do |fs, f|
+    self.class.new(*subformulae.inject([]) do |fs, f|
       if f.class == self.class
         fs += f.subformulae
       else

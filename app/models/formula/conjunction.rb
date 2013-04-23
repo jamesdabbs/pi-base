@@ -9,8 +9,12 @@ class Formula::Conjunction < Formula
     where ? intersection(subs) : union(subs)
   end
 
+  def ~
+    Formula::Disjunction.new *subformulae.map(&:~)
+  end
+
   def verify space
-    subformula.map { |sf| sf.verify(space) or return false }
+    subformulae.map { |sf| sf.verify(space) or return false }
   end
 
   def force space, assumptions
