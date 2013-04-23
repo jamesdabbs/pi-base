@@ -6,3 +6,7 @@ h3 Traits
 ul
   - @traits.each do |trait|
     li= link_to "#{trait.space}: #{trait.value}", trait
+
+= link_to 'Edit', edit_property_path(@property)
+'|
+= link_to 'Back', properties_path

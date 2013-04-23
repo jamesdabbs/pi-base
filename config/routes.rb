@@ -1,9 +1,12 @@
 require 'resque/server'
 
 Brubeck::Application.routes.draw do
+  resources :examples
+
   devise_for :users
 
-  resources :spaces, :properties, :traits, :theorems, only: [:index, :show]
+  resources :spaces, :properties
+  resources :traits, :theorems, only: [:index, :show]
 
   get 'search', to: 'formulae#search'
 
