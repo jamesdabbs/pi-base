@@ -10,10 +10,25 @@ class Formula::Disjunction < Formula
   end
 
   def verify space
-    [subformulae.find { |sf| sf.verify space }] or raise "Formula did not match"
+    witness = subformulae.find { |sf| sf.verify space }
+    witness.nil? ? false : [witness]
   end
 
   def force space, assumptions
-    raise "FIXME: Not Implemented"
+    unknown = nil
+    subformulae.each do |sf|
+      witnesses = (~sf).verify
+      if witnesses
+        assumptions += witnesses
+      else
+        if unknown
+          warn "Unable to force #{self} - too many unknowns"
+          return
+        else
+          unknown = sf
+        end
+      end
+    end
+    unknown.force space, assumptions
   end
 end

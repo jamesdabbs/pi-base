@@ -1,4 +1,8 @@
 class Theorem < ActiveRecord::Base
+  after_create do
+    Resque.enqueue TheoremExploreJob, self.id
+  end
+
   def name
     to_s
   end
@@ -37,23 +41,33 @@ class Theorem < ActiveRecord::Base
     @counterexamples ||= Space.by_formula antecedent => true, consequent => false
   end
 
-  class Examiner < Brubeck::Examiner
+  def explore!
+
+  end
+
+  class Examiner
+    attr_accessor :theorem
+
+    def initialize theorem
+      @theorem = theorem
+    end
+
     def check
-      raise "Found counterexamples: #{@obj.counterexamples}" unless obj.counterexamples.empty?
+      raise "Found counterexamples: #{theorem.counterexamples}" unless theorem.counterexamples.empty?
       true
     end
 
     def explore
-      Space.by_formula(obj.antecedent => true, obj.consequent => nil).each do |s|
-        apply obj, s
+      Space.by_formula(theorem.antecedent => true, theorem.consequent => nil).each do |s|
+        Examiner.apply theorem, s
       end
 
-      Space.by_formula(obj.antecedent => nil,  obj.consequent => false).each do |s|
-        apply obj.contrapositive, s
+      Space.by_formula(theorem.antecedent => nil,  theorem.consequent => false).each do |s|
+        Examiner.apply theorem.contrapositive, s
       end
     end
 
-    def apply theorem, space
+    def self.apply theorem, space
       assumptions = theorem.antecedent.verify space
       assumptions << theorem
       theorem.consequent.force space, assumptions

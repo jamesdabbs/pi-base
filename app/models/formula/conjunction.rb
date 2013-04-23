@@ -10,7 +10,7 @@ class Formula::Conjunction < Formula
   end
 
   def verify space
-    subformula.map { |sf| sf.verify(space) or raise "Formula did not match" }
+    subformula.map { |sf| sf.verify(space) or return false }
   end
 
   def force space, assumptions

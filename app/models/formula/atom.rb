@@ -35,7 +35,8 @@ class Formula::Atom < Formula
   end
 
   def verify space
-    [space.traits.where(property: @property, value: @value).first]
+    witness = space.traits.where(property: @property, value: @value).first
+    witness.nil? ? false : [witness]
   end
 
   def force space, assumptions
