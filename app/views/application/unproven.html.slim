@@ -1,0 +1,11 @@
+h3 Theorems
+= bootstrap_will_paginate @theorems, param_name: :theorems
+ul
+  - @theorems.each do |theorem|
+    li= link_to theorem, theorem
+
+h3 Traits
+= bootstrap_will_paginate @traits, param_name: :traits
+ul
+  - @traits.each do |trait|
+    li= link_to trait, trait

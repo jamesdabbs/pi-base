@@ -9,8 +9,14 @@ class Trait < ActiveRecord::Base
   scope :direct,  -> { where deduced: false }
   scope :deduced, -> { where deduced: true  }
 
+  scope :unproven, -> { where description: '' }
+
   def name
     "#{space} - #{property}"
+  end
+
+  def to_s
+    name
   end
 
   def assumption_description
