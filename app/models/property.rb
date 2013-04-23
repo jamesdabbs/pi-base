@@ -1,4 +1,6 @@
 class Property < ActiveRecord::Base
+  validates :name, :description, presence: true
+
   has_many :traits
   belongs_to :value_set
 

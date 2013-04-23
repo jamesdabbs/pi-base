@@ -1,4 +1,6 @@
 class Trait < ActiveRecord::Base
+  validates :space, :property, :value, :description, presence: true
+
   belongs_to :space
   belongs_to :property
   belongs_to :value

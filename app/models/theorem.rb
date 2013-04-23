@@ -1,4 +1,6 @@
 class Theorem < ActiveRecord::Base
+  validates :antecedent, :consequent, :description, presence: true
+
   after_create do
     Resque.enqueue TheoremExploreJob, self.id
   end
