@@ -1,13 +1,14 @@
-= form_tag search_path, method: 'get' do
-  = text_field_tag :q
-  = submit_tag 'Search'
+= form_tag search_path, method: 'get', class: 'form-search' do
+  = text_field_tag :q, @formula.to_s, class: 'input-xxlarge'
+  = submit_tag 'Search', class: 'btn btn-primary'
 
 - if @formula
+  h3 You searched for
   = @formula
 
 - if @results
-  h3 Results
+  h3 #{@results.count} Results
   = bootstrap_will_paginate @results
   ul
-    - @results.each do |s|
-      li= s
+    - @results.each do |space|
+      li= link_to space, space
