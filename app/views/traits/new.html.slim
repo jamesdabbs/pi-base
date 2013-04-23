@@ -13,15 +13,15 @@ h1 New Trait
   .control-group
     = f.label :space_id
     .controls
-      = f.text_field :space_id, class: 'span12'
+      = f.select :space_id, Space.choices, class: 'span12'
   .control-group
     = f.label :property_id
     .controls
-      = f.text_field :property_id, class: 'span12'
+      = f.select :property_id, Property.choices, class: 'span12'
   .control-group
     = f.label :value_id
     .controls
-      = f.text_field :value_id, class: 'span12'
+      = f.select :value_id, Value.choices, class: 'span12'
   .control-group
     = f.label :description
     .controls

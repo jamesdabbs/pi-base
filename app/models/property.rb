@@ -4,6 +4,10 @@ class Property < ActiveRecord::Base
   has_many :traits
   belongs_to :value_set
 
+  def self.choices
+    Property.all.map { |s| [s.name, s.id] }
+  end
+
   def to_s
     name
   end
