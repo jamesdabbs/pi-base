@@ -1,9 +1,15 @@
 class Theorem < ActiveRecord::Base
   validates :antecedent, :consequent, :description, presence: true
 
+  has_many :theorem_properties
+  has_many :properties, through: :theorem_properties
+
   scope :unproven, -> { where description: '' }
 
   after_create do
+    [antecedent.atoms, consequent.atoms].flatten.map(&:property).uniq.each do |p|
+      TheoremProperty.where(theorem: self, property: p).create!
+    end
     Resque.enqueue TheoremExploreJob, self.id
   end
 

@@ -4,6 +4,9 @@ class Property < ActiveRecord::Base
   has_many :traits
   belongs_to :value_set
 
+  has_many :theorem_properties
+  has_many :theorems, through: :theorem_properties
+
   def self.choices
     Property.all.map { |s| [s.name, s.id] }
   end

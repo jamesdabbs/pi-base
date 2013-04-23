@@ -1,4 +1,6 @@
 class Formula::Atom < Formula
+  attr_reader :property, :value
+
   def initialize property, value
     # TODO: coerce these between ints, bools & models on demand
     @property = property
@@ -11,6 +13,10 @@ class Formula::Atom < Formula
 
   def subformulae
     self
+  end
+
+  def atoms
+    [self]
   end
 
   def to_atom

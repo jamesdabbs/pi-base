@@ -30,6 +30,10 @@ class Formula
     '(' + subformulae.join(" #{@@conj} ") + ')'
   end
 
+  def atoms
+    subformulae.map(&:atoms).flatten
+  end
+
   def self.parse str
     return str if str.is_a? Formula
     conj, subs = parse_parens str
