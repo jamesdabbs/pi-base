@@ -1,4 +1,6 @@
-= link_to 'New Space', new_space_path, class: 'btn'
+h3
+  | #{Space.count} Spaces 
+  = link_to 'New', new_space_path, class: 'btn btn-mini'
 
 = bootstrap_will_paginate @spaces
 

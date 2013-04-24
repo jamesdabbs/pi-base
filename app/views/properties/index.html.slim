@@ -1,4 +1,6 @@
-= link_to 'New Property', new_property_path, class: 'btn'
+h3
+  | #{Property.count} Properties 
+  = link_to 'New', new_property_path, class: 'btn btn-mini'
 
 = bootstrap_will_paginate @properties
 
