@@ -1,0 +1,37 @@
+h2 Edit User
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| 
+  = devise_error_messages! 
+
+  .control-group
+    = f.label :email 
+    .controls
+      = f.email_field :email, autofocus: true 
+
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation? 
+      div
+        | Currently waiting confirmation for: 
+        = resource.unconfirmed_email 
+
+  .control-group
+    = f.label :password
+    .controls
+      = f.password_field :password, autocomplete: "off"
+      span.help-block
+        | (leave blank if you don't want to change it)
+
+  .control-group
+    = f.label :password_confirmation
+    .controls
+      = f.password_field :password_confirmation 
+
+  .control-group
+    = f.label :current_password
+    .controls
+      = f.password_field :current_password 
+      span.help-block
+        | (we need your current password to confirm your changes)
+
+  .actions
+    = link_to "Back", :back, class: 'btn'
+    = f.submit "Update", class: 'btn btn-primary'
