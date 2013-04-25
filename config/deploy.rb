@@ -14,13 +14,14 @@ set :use_sudo,  false
 
 after "deploy:restart", "deploy:cleanup"
 
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+namespace :deploy do
+  %w{ start stop restart }.each do |action|
+    desc "#{action.capitalize} the Thin processes"
+    task action do
+      run "cd /srv/web/brubeck/current; bundle exec thin #{action} -C config/thin.yml"
+    end
+  end
+end
 
 require "new_relic/recipes"
 after "deploy:update", "newrelic:notice_deployment"
