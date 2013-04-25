@@ -6,7 +6,7 @@ gem 'turbolinks'
 gem 'thin'
 gem 'slim-rails'
 gem 'mysql2'
-gem 'capistrano'
+gem 'capistrano', git: 'git://github.com/capistrano/capistrano.git'
 gem 'newrelic_rpm'
 gem 'resque'
 
