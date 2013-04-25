@@ -8,8 +8,8 @@ set :deploy_via,  :remote_cache
 
 server "192.81.219.239", :app, :web, :db, primary: true
 
-set :default_environment, { "PATH" => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH" }
-set :deploy_to, "/home/james/brubeck"
+set :deploy_to, "/srv/web/brubeck"
+set :user,      "brubeck"
 set :use_sudo,  false
 
 after "deploy:restart", "deploy:cleanup"
