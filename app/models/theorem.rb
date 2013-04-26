@@ -4,14 +4,21 @@ class Theorem < ActiveRecord::Base
   has_many :theorem_properties
   has_many :properties, through: :theorem_properties
 
-  scope :unproven, -> { where description: '' }
-
-  after_create do
+  def associate_properties!
     [antecedent.atoms, consequent.atoms].flatten.map(&:property).uniq.each do |p|
       TheoremProperty.where(theorem: self, property: p).create!
     end
+  end
+  after_create :associate_properties!
+
+
+  scope :unproven, -> { where description: '' }
+
+  def queue_job
     Resque.enqueue TheoremExploreJob, id
   end
+  after_create :queue_job
+  
 
   def name
     to_s
