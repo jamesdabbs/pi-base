@@ -2,8 +2,6 @@ class Formula
   class ParseError < StandardError
   end
 
-  @@conj = '?'
-
   attr_accessor :subformulae
 
   def initialize *subformulae
@@ -30,7 +28,7 @@ class Formula
   end
 
   def to_s
-    '(' + subformulae.join(" #{@@conj} ") + ')'
+    '(' + subformulae.join(" #{symbol} ") + ')'
   end
 
   def atoms

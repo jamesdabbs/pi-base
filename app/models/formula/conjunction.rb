@@ -1,5 +1,7 @@
 class Formula::Conjunction < Formula
-  @@conj = '+'
+  def symbol
+    '+'
+  end
 
   def spaces where=true
     subs = subformulae.map { |sf| sf.spaces where }
