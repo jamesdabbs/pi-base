@@ -1,4 +1,4 @@
-class ObjectController < ApplicationController
+class ObjectsController < ApplicationController
   before_action :set_object, only: [:show, :edit, :update, :destroy]
 
   def index

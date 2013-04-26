@@ -1,3 +1,3 @@
-class PropertiesController < ObjectController
+class PropertiesController < ObjectsController
   @object_class = Property
 end
