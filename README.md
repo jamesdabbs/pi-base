@@ -1,5 +1,7 @@
 # Brubeck Topology Database
 
+[![Code Climate](https://codeclimate.com/github/jamesdabbs/brubeck.png)](https://codeclimate.com/github/jamesdabbs/brubeck)
+
 ### Testing locally
 
 To run locally, you will need to install the following dependencies:
