@@ -26,7 +26,7 @@ class Trait < ActiveRecord::Base
   end
 
   def assumption_description
-    Formula::Atom.new(property, value).to_s
+    Formula::Atom.new(property, value).pretty_print
   end
 
   #-----
