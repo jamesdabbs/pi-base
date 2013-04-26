@@ -21,4 +21,15 @@ module ApplicationHelper
     opts['data-source']  = klass.pluck(:name).to_json
     form.text_field klass.name.downcase, opts
   end
+
+  def link atom
+    case atom.value.name
+    when "True"
+      link_to atom.property.name, atom.property
+    when "False"
+      link_to "¬ #{atom.property.name}", atom.property
+    else
+      "#{link_to atom.property, atom.property} = #{link_to atom.value, atom.value}"
+    end
+  end
 end

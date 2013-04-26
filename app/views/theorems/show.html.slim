@@ -1,7 +1,8 @@
 = link_to 'Back', theorems_path, class: 'btn'
 = link_to 'Edit', edit_theorem_path(@theorem), class: 'btn'
 
-h1= @theorem.name
+h1= @theorem.name { |atom| link atom }.html_safe
+
 = markdown @theorem.description
 
 / h3 Traits

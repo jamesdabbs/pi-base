@@ -1,6 +1,6 @@
 = link_to 'Back', @theorem, class: 'btn'
 
-h1 Editing '#{@theorem}'
+h1 Editing '#{@theorem.name { |atom| link atom }.html_safe }'
 
 = form_for @theorem do |f|
   - if @theorem.errors.any?

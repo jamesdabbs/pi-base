@@ -21,9 +21,9 @@ class Theorem < ActiveRecord::Base
   end
   after_create :queue_job
   
-
-  def name
-    to_s
+  def name &block
+    block ||= Proc.new { |atom| atom.pretty_print }
+    "#{antecedent.to_s &block} ⇒ #{consequent.to_s &block}"
   end
   
   def to_s

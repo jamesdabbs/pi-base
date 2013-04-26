@@ -7,8 +7,20 @@ class Formula::Atom < Formula
     @value    = value
   end
 
-  def to_s
-    "#{@property} = #{@value}"
+  def to_s &block
+    block ? block.call(self) : "#{@property} = #{@value}"
+  end
+
+  # FIXME: factor out printer object
+  def pretty_print
+    case value.name
+    when "True"
+      property.name
+    when "False"
+      "¬ #{property.name}"
+    else
+      to_s
+    end
   end
 
   def subformulae

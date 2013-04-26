@@ -27,8 +27,8 @@ class Formula
     end)
   end
 
-  def to_s
-    '(' + subformulae.join(" #{symbol} ") + ')'
+  def to_s &block
+    '(' + subformulae.map { |s| s.to_s(&block) }.join(" #{symbol} ") + ')'
   end
 
   def atoms
