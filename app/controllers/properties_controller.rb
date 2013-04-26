@@ -11,7 +11,7 @@ class PropertiesController < ApplicationController
   end
 
   def new
-    @property = Propery.new
+    @property = Property.new
     authorize! :manage, @property
   end
 
