@@ -20,11 +20,11 @@ class ObjectController < ApplicationController
   end
 
   def create
-    self.object = object_class.new space_params
+    self.object = object_class.new object_params
     authorize! :manage, object
 
     if object.save
-      redirect_to object, notice: "#{object_class.name} created"
+      redirect_to object, notice: "#{object_name.capitalize} created"
     else
       render action: 'new'
     end
@@ -32,8 +32,8 @@ class ObjectController < ApplicationController
 
   def update
     authorize! :manage, object
-    if object.update space_params
-      redirect_to object, notice: "#{object_class.name} updated"
+    if object.update object_params
+      redirect_to object, notice: "#{object_name.capitalize} updated"
     else
       render action: 'edit'
     end
@@ -42,7 +42,8 @@ class ObjectController < ApplicationController
   def destroy
     authorize! :manage, object
     object.destroy
-    redirect_to spaces_url, notice: "#{object_class.name} destroyed"
+    redirect_to send("#{object_class.model_name.plural}_url"), 
+      notice: "#{object_name.capitalize} destroyed"
   end
 
   private #-----
@@ -52,7 +53,7 @@ class ObjectController < ApplicationController
   end
 
   def object_name
-    object_class.name
+    object_class.model_name.singular
   end
 
   def objects= objs
@@ -60,11 +61,11 @@ class ObjectController < ApplicationController
   end
 
   def object= obj
-    instance_variable_set :"@#{object_class.model_name.singular}", obj
+    instance_variable_set :"@#{object_name}", obj
   end
 
   def object
-    instance_variable_get :"@#{object_class.model_name.singular}"
+    instance_variable_get :"@#{object_name}"
   end
 
   def set_object
@@ -72,6 +73,6 @@ class ObjectController < ApplicationController
   end
 
   def object_params
-    params.require(object_name.lower.to_sym).permit :name, :description
+    params.require(object_name).permit :name, :description
   end
 end
