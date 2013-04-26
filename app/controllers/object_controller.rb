@@ -12,16 +12,16 @@ class ObjectController < ApplicationController
 
   def new
     self.object = object_class.new
-    authorize! :manage, object
+    authorize! :create, object
   end
 
   def edit
-    authorize! :manage, object
+    authorize! :edit, object
   end
 
   def create
     self.object = object_class.new object_params
-    authorize! :manage, object
+    authorize! :create, object
 
     if object.save
       redirect_to object, notice: "#{object_name.capitalize} created"
@@ -31,7 +31,7 @@ class ObjectController < ApplicationController
   end
 
   def update
-    authorize! :manage, object
+    authorize! :edit, object
     if object.update object_params
       redirect_to object, notice: "#{object_name.capitalize} updated"
     else

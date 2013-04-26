@@ -19,11 +19,11 @@ class TraitsController < ApplicationController
 
   def new
     @trait = Trait.new
-    authorize! :manage, @trait
+    authorize! :create, @trait
   end
 
   def edit
-    authorize! :manage, @trait
+    authorize! :edit, @trait
   end
 
   def create
@@ -33,7 +33,7 @@ class TraitsController < ApplicationController
     end
 
     @trait = Trait.new attrs
-    authorize! :manage, @trait
+    authorize! :create, @trait
 
     if @trait.save
       redirect_to @trait, notice: 'Trait created'
@@ -43,7 +43,7 @@ class TraitsController < ApplicationController
   end
 
   def update
-    authorize! :manage, @trait
+    authorize! :edit, @trait
     if @trait.update params.require(:trait).permit :description
       redirect_to @trait, notice: 'Trait updated'
     else

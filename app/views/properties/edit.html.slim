@@ -1,4 +1,6 @@
 = link_to 'Back', @property, class: 'btn'
+- if can? :manage, @property
+  = link_to 'Delete', @property, class: 'btn btn-danger', confirm: 'Are you sure?', method: :delete
 
 h1 Editing '#{@property}'
 

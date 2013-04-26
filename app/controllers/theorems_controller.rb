@@ -9,11 +9,11 @@ class TheoremsController < ApplicationController
   end
 
   def edit
-    authorize! :manage, @theorem
+    authorize! :edit, @theorem
   end
 
   def update
-    authorize! :manage, @theorem
+    authorize! :edit, @theorem
     if @theorem.update params.require(:theorem).permit :description
       redirect_to @theorem, notice: 'Theorem updated'
     else
