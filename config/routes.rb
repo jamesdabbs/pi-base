@@ -1,13 +1,10 @@
 require 'resque/server'
 
 Brubeck::Application.routes.draw do
-  resources :examples
-
   devise_for :users
 
   resources :spaces, :properties
-  resources :traits, except: [:delete]
-  resources :theorems, except: [:delete, :new, :create]
+  resources :traits, :theorems, except: [:delete]
 
   get 'unproven', to: 'application#unproven'
 

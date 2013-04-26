@@ -8,8 +8,24 @@ class TheoremsController < ApplicationController
   def show
   end
 
+  def new
+    @theorem = Theorem.new
+    authorize! :create, @theorem
+  end
+
   def edit
     authorize! :edit, @theorem
+  end
+
+  def create
+    @theorem = Theorem.new params.require(:theorem).permit :description, :antecedent, :consequent
+    authorize! :create, @theorem
+
+    if @theorem.save
+      redirect_to @theorem, notice: 'Theorem created'
+    else
+      render action: 'new'
+    end
   end
 
   def update
@@ -25,5 +41,5 @@ class TheoremsController < ApplicationController
 
   def set_theorem
     @theorem = Theorem.find params[:id]
-  end    
+  end
 end

@@ -27,13 +27,13 @@ class TraitsController < ApplicationController
   end
 
   def create
-    attrs = { description: params[:trait][:description] }
-    [:space, :property, :value].each do |klass|
-      attrs[klass] = klass.to_s.camelize.constantize.where(name: params[:trait][klass]).first!
-    end
-
-    @trait = Trait.new attrs
+    @trait = Trait.new trait_params
     authorize! :create, @trait
+    
+    [:space, :property, :value].each do |klass|
+      object = klass.to_s.camelize.constantize.where(name: params[:trait][klass]).first!
+      @trait.send "#{klass}=", object
+    end
 
     if @trait.save
       redirect_to @trait, notice: 'Trait created'
@@ -44,7 +44,7 @@ class TraitsController < ApplicationController
 
   def update
     authorize! :edit, @trait
-    if @trait.update params.require(:trait).permit :description
+    if @trait.update trait_params
       redirect_to @trait, notice: 'Trait updated'
     else
       render action: 'edit'
@@ -55,5 +55,9 @@ class TraitsController < ApplicationController
 
   def set_trait
     @trait = Trait.find params[:id]
+  end
+
+  def trait_params
+    params.require(:trait).permit :description
   end
 end
