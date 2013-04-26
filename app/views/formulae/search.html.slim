@@ -2,6 +2,14 @@
   = text_field_tag :q, @q, class: 'input-xxlarge'
   = submit_tag 'Search', class: 'btn btn-primary'
 
+.alert.alert-notice
+  a.close data-dismiss="alert"
+    | &times;
+  #search-notice
+    | Search is actively under construction. See the 
+    = link_to 'GitHub issue', 'https://github.com/jamesdabbs/brubeck/issues/3'
+    |  for view planned improvements or contribute ideas.
+
 - if @formula
   h3 
     | You searched for 
@@ -16,3 +24,11 @@
 - elsif @error
   .alert.alert-error
     = @error
+
+- else
+  .examples
+    | Try a search like:
+    ul
+      li= example_search 'Hyperconnected = True'
+      li= example_search 'Regular = True | Lindelof = True'
+      li= example_search 'First Countable = True + Separable = True + Second Countable = False'

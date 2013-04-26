@@ -32,4 +32,8 @@ module ApplicationHelper
       "#{link_to atom.property, atom.property} = #{link_to atom.value, atom.value}"
     end
   end
+
+  def example_search str
+    link_to str, search_path(q: str)
+  end
 end
