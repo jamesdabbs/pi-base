@@ -20,6 +20,6 @@ production:
   adapter:  mysql2
   database: brubeck_prod
   username: root
-  password: OETuqwNbTNcsKGs2RAgJJ0E3
+  password: <%= ENV['MYSQL_PASSWORD'] || 'OETuqwNbTNcsKGs2RAgJJ0E3' %>
   pool:     5
   timeout:  5000
