@@ -5,7 +5,8 @@ Brubeck::Application.routes.draw do
 
   devise_for :users
 
-  resources :spaces, :properties, :traits, except: [:delete]
+  resources :spaces, :properties
+  resources :traits, except: [:delete]
   resources :theorems, except: [:delete, :new, :create]
 
   get 'unproven', to: 'application#unproven'

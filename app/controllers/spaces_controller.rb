@@ -1,5 +1,5 @@
 class SpacesController < ApplicationController
-  before_action :set_space, only: [:show, :edit, :update]
+  before_action :set_space, only: [:show, :edit, :update, :destroy]
 
   def index
     @spaces = Space.paginate page: params[:page], per_page: 30
@@ -37,6 +37,12 @@ class SpacesController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  def destroy
+    authorize! :manage, @space
+    @space.destroy
+    redirect_to spaces_url, notice: 'Space destroyed'
   end
 
   private #-----

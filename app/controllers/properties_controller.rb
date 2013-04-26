@@ -1,5 +1,5 @@
 class PropertiesController < ApplicationController
-  before_action :set_property, only: [:show, :edit, :update]
+  before_action :set_property, only: [:show, :edit, :update, :destroy]
 
   def index
     @properties = Property.paginate page: params[:page], per_page: 30
@@ -37,6 +37,12 @@ class PropertiesController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  def destroy
+    authorize! :manage, @property
+    @property.destroy
+    redirect_to properties_url, notice: 'Property destroyed'
   end
 
   private #-----
