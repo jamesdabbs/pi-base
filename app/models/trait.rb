@@ -1,4 +1,6 @@
 class Trait < ActiveRecord::Base
+  has_paper_trail only: [:description]
+
   validates :space, :property, :value, :description, presence: true
   validates :property, uniqueness: { scope: :space_id }
 

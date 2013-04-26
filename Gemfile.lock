@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/airblade/paper_trail.git
+  revision: 009d3bd4a371f6c93c765fb4ee754ed98608437e
+  branch: rails4
+  specs:
+    paper_trail (2.7.1)
+      activerecord (>= 4.0.0.beta, < 5.0)
+      railties (>= 4.0.0.beta, < 5.0)
+
+GIT
   remote: git://github.com/capistrano/capistrano.git
   revision: 9d8a94046dce4c7dfc04950d7c754bcfca82c283
   specs:
@@ -233,6 +242,7 @@ DEPENDENCIES
   jquery-rails
   mysql2
   newrelic_rpm
+  paper_trail!
   pry
   rails
   redcarpet

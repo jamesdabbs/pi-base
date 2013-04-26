@@ -19,6 +19,8 @@ gem 'will_paginate-bootstrap'
 
 gem 'redcarpet'
 
+gem 'paper_trail', git: 'git://github.com/airblade/paper_trail.git', branch: 'rails4'
+
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'

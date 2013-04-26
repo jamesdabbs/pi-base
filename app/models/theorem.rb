@@ -1,4 +1,6 @@
 class Theorem < ActiveRecord::Base
+  has_paper_trail only: [:description]
+
   validates :antecedent, :consequent, :description, presence: true
 
   has_many :theorem_properties

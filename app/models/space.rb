@@ -1,4 +1,6 @@
 class Space < ActiveRecord::Base
+  has_paper_trail only: [:name, :description]
+
   validates :name, :description, presence: true
 
   has_many :traits
