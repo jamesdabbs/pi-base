@@ -38,7 +38,7 @@ class Theorem < ActiveRecord::Base
   end
 
   def assumption_description
-    to_s
+    name
   end
 
   def contrapositive

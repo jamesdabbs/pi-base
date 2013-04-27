@@ -18,8 +18,4 @@ class Proof
   def initialize assumptions
     @assumptions = assumptions
   end
-
-  def steps
-    @assumptions.map { |a| a.assumption_description }
-  end
 end

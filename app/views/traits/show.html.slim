@@ -9,7 +9,9 @@ h2
 
 - if @trait.deduced?
   ul
-    - @trait.proof.steps.each do |step|
-      li= step
+    - @trait.proof.assumptions.each do |assumption|
+      li
+        = link_to assumption.assumption_description, assumption
+
 - else
   = markdown @trait.description

@@ -58,7 +58,8 @@ class Formula::Atom < Formula
   end
 
   def force space, proof
-    space.traits.create! property: @property, value: @value, description: proof.steps.join("\n"), deduced: true, proof: proof
+    description = proof.assumptions.map{ |a| a.assumption_description }.join("\n")
+    space.traits.create! property: @property, value: @value, description: description, deduced: true, proof: proof
   end
 
   def self.load str
