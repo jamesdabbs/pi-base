@@ -13,9 +13,7 @@ class Trait < ActiveRecord::Base
 
   scope :unproven, -> { where description: '' }
 
-  after_create do
-    Resque.enqueue TraitExploreJob, id
-  end
+  after_create :find_implied_traits
 
   def name
     "#{space} - #{property}"
@@ -27,6 +25,10 @@ class Trait < ActiveRecord::Base
 
   def assumption_description
     Formula::Atom.new(property, value).pretty_print
+  end
+
+  def find_implied_traits
+    Resque.enqueue TraitExploreJob, id
   end
 
   #-----

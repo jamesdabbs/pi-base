@@ -3,7 +3,7 @@ class Space < ActiveRecord::Base
 
   validates :name, :description, presence: true
 
-  has_many :traits
+  has_many :traits, dependent: :destroy
 
   def self.choices
     Space.all.map { |s| [s.name, s.id] }

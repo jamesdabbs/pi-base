@@ -3,7 +3,7 @@ class Property < ActiveRecord::Base
   
   validates :name, :description, presence: true
 
-  has_many :traits
+  has_many :traits, dependent: :destroy
   belongs_to :value_set
 
   has_many :theorem_properties
