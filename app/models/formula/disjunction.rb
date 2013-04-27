@@ -1,7 +1,6 @@
 class Formula::Disjunction < Formula
-  def symbol
-    '|'
-  end
+
+  # -- Common formula interface -----
 
   def spaces where=true
     subs = subformulae.map { |sf| sf.spaces where }
@@ -37,5 +36,11 @@ class Formula::Disjunction < Formula
       end
     end
     unknown.force space, proof
+  end
+
+  # ----------
+  
+  def symbol
+    '|'
   end
 end

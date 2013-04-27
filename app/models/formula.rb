@@ -17,23 +17,7 @@ class Formula
     Formula::Disjunction.new(self, other).flatten
   end
 
-  def flatten
-    self.class.new(*subformulae.inject([]) do |fs, f|
-      if f.class == self.class
-        fs += f.subformulae
-      else
-        fs << f.subformulae
-      end
-    end)
-  end
-
-  def to_s &block
-    '(' + subformulae.map { |s| s.to_s(&block) }.join(" #{symbol} ") + ')'
-  end
-
-  def atoms
-    subformulae.map(&:atoms).flatten
-  end
+  # -- Common formula interface -----
 
   def self.load str
     return str if str.is_a? Formula
@@ -47,6 +31,38 @@ class Formula
 
   def self.dump formula
     formula.to_s
+  end
+
+  def to_s &block
+    '(' + subformulae.map { |s| s.to_s(&block) }.join(" #{symbol} ") + ')'
+  end
+
+  def spaces
+  end
+
+  def ~
+  end
+
+  def verify space
+  end
+
+  def force space, proof
+  end
+
+  def atoms
+    subformulae.map(&:atoms).flatten
+  end
+
+  # ----------
+
+  def flatten
+    self.class.new(*subformulae.inject([]) do |fs, f|
+      if f.class == self.class
+        fs += f.subformulae
+      else
+        fs << f.subformulae
+      end
+    end)
   end
 
   private # ----------

@@ -1,7 +1,6 @@
 class Formula::Conjunction < Formula
-  def symbol
-    '+'
-  end
+
+  # -- Common formula interface -----
 
   def spaces where=true
     subs = subformulae.map { |sf| sf.spaces where }
@@ -21,5 +20,11 @@ class Formula::Conjunction < Formula
 
   def force space, proof
     subformulae.each { |sf| sf.force space, proof }
+  end
+
+  # ----------
+
+  def symbol
+    '+'
   end
 end
