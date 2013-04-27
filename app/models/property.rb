@@ -9,14 +9,6 @@ class Property < ActiveRecord::Base
   has_many :theorem_properties
   has_many :theorems, through: :theorem_properties
 
-  def self.choices
-    Property.all.map { |s| [s.name, s.id] }
-  end
-
-  def to_s
-    name
-  end
-
   # -- Formula convenience methods -----
   def to_atom
     Formula::Atom.new self, Value::True

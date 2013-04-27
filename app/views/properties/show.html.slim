@@ -17,10 +17,10 @@ h3 Traits
     = bootstrap_will_paginate @direct, param_name: :direct
     ul
       - @direct.each do |trait|
-        li= link_to "#{trait.space}: #{trait.value}", trait
+        li= link_to "#{trait.space.name}: #{trait.value.name}", trait
   .span6
     h4 Automatically Generated
     = bootstrap_will_paginate @deduced, param_name: :deduced
     ul
       - @deduced.each do |trait|
-        li= link_to "#{trait.space}: #{trait.value}", trait
+        li= link_to "#{trait.space.name}: #{trait.value.name}", trait

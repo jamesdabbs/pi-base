@@ -6,10 +6,11 @@ gem 'turbolinks'
 gem 'thin'
 gem 'slim-rails'
 gem 'mysql2'
+gem 'resque'
+gem 'newrelic_rpm'
+
 gem 'capistrano', git: 'git://github.com/capistrano/capistrano.git'
 gem 'capistrano-resque'
-gem 'newrelic_rpm'
-gem 'resque'
 
 gem 'devise', git: 'git://github.com/plataformatec/devise.git', branch: 'rails4'
 gem 'cancan'
@@ -33,9 +34,4 @@ group :development do
   gem 'binding_of_caller'
   gem 'colorize'
   gem 'pry'
-end
-
-group :test do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
 end

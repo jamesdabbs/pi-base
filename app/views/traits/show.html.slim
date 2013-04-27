@@ -2,10 +2,10 @@
 = link_to 'Edit', edit_trait_path(@trait), class: 'btn'
 
 h1 
-  = link_to @trait.space, @trait.space
+  = link_to @trait.space.name, @trait.space
 h2
-  = link_to @trait.property, @trait.property
-  = " = #{@trait.value}"
+  = link_to @trait.property.name, @trait.property
+  = " = #{@trait.value.name}"
 
 - if @trait.deduced?
   ul
