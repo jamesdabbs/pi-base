@@ -35,14 +35,18 @@ class Formula
     subformulae.map(&:atoms).flatten
   end
 
-  def self.parse str
+  def self.load str
     return str if str.is_a? Formula
     conj, subs = parse_parens str
     if conj.nil?
-      Formula::Atom.parse str
+      Formula::Atom.load str
     else
-      subs.map { |s| parse s }.inject &conj.to_sym
+      subs.map { |s| load s }.inject &conj.to_sym
     end
+  end
+
+  def self.dump formula
+    formula.to_s
   end
 
   private # ----------

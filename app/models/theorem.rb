@@ -1,7 +1,13 @@
 class Theorem < ActiveRecord::Base
   has_paper_trail only: [:description]
 
+  # ----------
+
+  serialize :antecedent, Formula
+  serialize :consequent, Formula
   validates :antecedent, :consequent, :description, presence: true
+
+  # ----------
 
   has_many :theorem_properties
   has_many :properties, through: :theorem_properties
@@ -13,6 +19,7 @@ class Theorem < ActiveRecord::Base
   end
   after_create :associate_properties!
 
+  # ----------
 
   scope :unproven, -> { where description: '' }
 
@@ -32,15 +39,6 @@ class Theorem < ActiveRecord::Base
 
   def assumption_description
     to_s
-  end
-
-  # FIXME: use Rails serialization for 
-  def antecedent
-    @antecedent ||= Formula.parse self[:antecedent]
-  end
-
-  def consequent
-    @consequent ||= Formula.parse self[:consequent]
   end
 
   def contrapositive

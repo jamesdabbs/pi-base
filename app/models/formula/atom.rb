@@ -62,7 +62,7 @@ class Formula::Atom < Formula
     space.traits.create! property: @property, value: @value, description: description, deduced: true
   end
 
-  def self.parse str
+  def self.load str
     p,v = str.split('=').map &:strip
     property = Atom.parse_name_or_id p, Property
     value    = Atom.parse_name_or_id v, Value
