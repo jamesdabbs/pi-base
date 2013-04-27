@@ -15,6 +15,9 @@ class Trait < ActiveRecord::Base
 
   scope :unproven, -> { where description: '', proof: nil }
 
+  def find_implied_traits
+    Resque.enqueue TraitExploreJob, id
+  end
   after_create :find_implied_traits
 
   def name
@@ -29,26 +32,12 @@ class Trait < ActiveRecord::Base
     Formula::Atom.new(property, value).pretty_print
   end
 
-  def find_implied_traits
-    Resque.enqueue TraitExploreJob, id
-  end
-
-  #-----
-
-  class Examiner
-    attr_accessor :trait
-
-    def initialize trait
-      @trait = trait
-    end
-
-    def explore
-      trait.property.theorems.each do |theorem|
-        if theorem.antecedent.verify trait.space
-          theorem.apply trait.space
-        elsif (~theorem.consequent).verify trait.space
-          theorem.contrapositive.apply trait.space
-        end
+  def explore
+    trait.property.theorems.each do |theorem|
+      if theorem.antecedent.verify trait.space
+        theorem.apply trait.space
+      elsif (~theorem.consequent).verify trait.space
+        theorem.contrapositive.apply trait.space
       end
     end
   end

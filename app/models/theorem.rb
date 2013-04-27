@@ -63,31 +63,12 @@ class Theorem < ActiveRecord::Base
   end
 
   def explore
-    TheoremExploreJob.perform id
-  end
-
-  #-----
-
-  class Examiner
-    attr_accessor :theorem
-
-    def initialize theorem
-      @theorem = theorem
+    Space.by_formula(antecedent => true, consequent => nil).each do |s|
+      apply s
     end
 
-    def check
-      raise "Found counterexamples: #{theorem.counterexamples}" unless theorem.counterexamples.empty?
-      true
-    end
-
-    def explore
-      Space.by_formula(theorem.antecedent => true, theorem.consequent => nil).each do |s|
-        theorem.apply s
-      end
-
-      Space.by_formula(theorem.antecedent => nil,  theorem.consequent => false).each do |s|
-        theorem.contrapositive.apply s
-      end
+    Space.by_formula(antecedent => nil,  consequent => false).each do |s|
+      contrapositive.apply s
     end
   end
 end
