@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130426031120) do
+ActiveRecord::Schema.define(version: 20130427185906) do
 
   create_table "properties", force: true do |t|
     t.string   "name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20130426031120) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "deduced",     default: false
+    t.string   "proof"
   end
 
   add_index "traits", ["property_id", "value_id"], name: "index_traits_on_property_id_and_value_id"

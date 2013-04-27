@@ -42,12 +42,8 @@ class Theorem < ActiveRecord::Base
   end
 
   def contrapositive
-    @contrapositive ||= begin
-      c = Theorem.new
-      c.antecedent = ~consequent
-      c.consequent = ~antecedent
-      c
-    end
+    # FIXME: make an explict reason why these can never be saved over the original
+    @contrapositive ||= Theorem.new antecedent: ~consequent, consequent: ~antecedent, id: id
   end
 
   def examples
@@ -59,13 +55,15 @@ class Theorem < ActiveRecord::Base
   end
 
   def apply space
-    assumptions = antecedent.verify space
-    return unless assumptions
-    assumptions << self
-    consequent.force space, assumptions
+    assumptions = antecedent.verify(space) or return
+    consequent.force space, Proof.new(assumptions << self)
   rescue ActiveRecord::RecordInvalid
     # Presumably because it violates the uniqueness constraint, and so already exists
     false
+  end
+
+  def explore
+    TheoremExploreJob.perform id
   end
 
   #-----

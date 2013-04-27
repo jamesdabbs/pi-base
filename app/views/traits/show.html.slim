@@ -6,4 +6,10 @@ h1
 h2
   = link_to @trait.property, @trait.property
   = " = #{@trait.value}"
-= markdown @trait.description
+
+- if @trait.deduced?
+  ul
+    - @trait.proof.steps.each do |step|
+      li= step
+- else
+  = markdown @trait.description

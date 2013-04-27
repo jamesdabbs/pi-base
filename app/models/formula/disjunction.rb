@@ -18,15 +18,15 @@ class Formula::Disjunction < Formula
   def verify space
     # FIXME: memoize this verify call
     witness = subformulae.find { |sf| sf.verify space }
-    witness.nil? ? false : [witness.verify(space)]
+    witness.nil? ? false : witness.verify(space)
   end
 
-  def force space, assumptions
+  def force space, proof
     unknown = nil
     subformulae.each do |sf|
       witnesses = (~sf).verify space
       if witnesses
-        assumptions += witnesses
+        proof.assumptions += witnesses
       else
         if unknown
           warn "Unable to force #{self} - too many unknowns"
@@ -36,6 +36,6 @@ class Formula::Disjunction < Formula
         end
       end
     end
-    unknown.force space, assumptions
+    unknown.force space, proof
   end
 end

@@ -4,6 +4,8 @@ class Trait < ActiveRecord::Base
   validates :space, :property, :value, :description, presence: true
   validates :property, uniqueness: { scope: :space_id }
 
+  serialize :proof, Proof
+
   belongs_to :space
   belongs_to :property
   belongs_to :value
@@ -11,7 +13,7 @@ class Trait < ActiveRecord::Base
   scope :direct,  -> { where deduced: false }
   scope :deduced, -> { where deduced: true  }
 
-  scope :unproven, -> { where description: '' }
+  scope :unproven, -> { where description: '', proof: nil }
 
   after_create :find_implied_traits
 

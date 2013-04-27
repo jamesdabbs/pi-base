@@ -16,10 +16,10 @@ class Formula::Conjunction < Formula
   end
 
   def verify space
-    subformulae.map { |sf| sf.verify(space) or return false }
+    subformulae.flat_map { |sf| sf.verify(space) or return false }
   end
 
-  def force space, assumptions
-    subformulae.each { |sf| sf.force space, assumptions }
+  def force space, proof
+    subformulae.each { |sf| sf.force space, proof }
   end
 end

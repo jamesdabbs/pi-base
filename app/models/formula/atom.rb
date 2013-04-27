@@ -57,9 +57,8 @@ class Formula::Atom < Formula
     witness.nil? ? false : [witness]
   end
 
-  def force space, assumptions
-    description = assumptions.flatten.map { |a| "* #{a.assumption_description}" }.join "\n"
-    space.traits.create! property: @property, value: @value, description: description, deduced: true
+  def force space, proof
+    space.traits.create! property: @property, value: @value, description: proof.steps.join("\n"), deduced: true, proof: proof
   end
 
   def self.load str
@@ -70,7 +69,7 @@ class Formula::Atom < Formula
   end
 
   def self.parse_name_or_id str, klass
-    str.to_i.zero? ? klass.where(name: str).first! : klass.find
+    str.to_i.zero? ? klass.where(name: str).first! : klass.find(str.to_i)
   rescue => e
     raise ParseError.new "Unrecognized #{klass}: #{str}"
   end

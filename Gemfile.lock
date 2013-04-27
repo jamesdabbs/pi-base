@@ -80,6 +80,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    colorize (0.5.8)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     diff-lcs (1.2.3)
@@ -237,6 +238,7 @@ DEPENDENCIES
   capistrano!
   capistrano-resque
   coffee-rails
+  colorize
   devise!
   factory_girl_rails
   jquery-rails
