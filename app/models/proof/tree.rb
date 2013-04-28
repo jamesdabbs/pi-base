@@ -4,11 +4,10 @@ class Proof
       @space = space
     end
 
-    def as_json opts={}
-      # FIXME: cache tree by space
+    def nodes
       # FIXME: cache theorem names
       # FIXME: use rabl?
-      nodes = @space.traits.includes(:property, :value, :proof => :theorem).map do |trait|
+      @nodes ||= @space.traits.includes(:property, :value, :proof => :theorem).map do |trait|
         node = {
           name: trait.assumption_description,
           id:   trait.id
@@ -23,19 +22,25 @@ class Proof
         end
         node
       end
+    end
 
-      node_index = Hash[ nodes.each_with_index.map { |n,i| [n[:id], i] } ]
+    def node_index
+      @node_index ||= Hash[ nodes.each_with_index.map { |n,i| [n[:id], i] } ]
+    end
 
-      links = []
-      Proof.where(trait_id: @space.traits.pluck(:id)).includes(:traits).each do |proof|
-        proof.traits.each do |assumption|
-          links << {
+    def links
+      Proof.where(trait_id: @space.traits.pluck(:id)).includes(:traits).flat_map do |proof|
+        proof.traits.map do |assumption|
+          {
             source: node_index[assumption.id],
             target: node_index[proof.trait_id]
           }
         end
       end
+    end
 
+    def as_json opts={}
+      # FIXME: cache tree by space
       { nodes: nodes, links: links }
     end
   end
