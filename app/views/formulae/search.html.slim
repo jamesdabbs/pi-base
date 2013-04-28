@@ -19,7 +19,7 @@
   = bootstrap_will_paginate @results
   ul
     - @results.each do |space|
-      li= link_to space, space
+      li= link_to space.name, space
 
 - elsif @error
   .alert.alert-error

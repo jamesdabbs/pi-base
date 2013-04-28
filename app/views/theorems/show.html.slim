@@ -9,4 +9,4 @@ h3 Implied Traits
 = bootstrap_will_paginate @traits
 ul
   - @traits.each do |trait|
-    li= link_to "#{trait.space.name}: #{trait.value.name}", trait
+    li= link_to "#{trait.space.name}: #{trait.assumption_description}", trait
