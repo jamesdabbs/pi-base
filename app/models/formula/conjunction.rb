@@ -19,7 +19,7 @@ class Formula::Conjunction < Formula
   end
 
   def force space, traits, theorem, index
-    subformulae.each { |sf| sf.force space, traits, theorem, index }
+    subformulae.each { |sf| sf.force(space, traits, theorem, index) rescue nil }
   end
 
   # ----------
