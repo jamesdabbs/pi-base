@@ -2,7 +2,8 @@
 = link_to 'Edit', edit_property_path(@property), class: 'btn'
 
 h1= @property.name
-= markdown @property.description
+.well
+  = markdown @property.description
 
 h3 Related Theorems
 = bootstrap_will_paginate @theorems, param_name: :theorems

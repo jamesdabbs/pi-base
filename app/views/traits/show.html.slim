@@ -7,14 +7,15 @@ h2
   = link_to @trait.property.name, @trait.property
   = " = #{@trait.value.name}"
 
-- if @trait.deduced?
-  ul
-    - @trait.proof.steps.each do |assumption|
-      li
-        = link_to assumption.assumption_description, assumption
+.well
+  - if @trait.deduced?
+    ul
+      - @trait.proof.steps.each do |assumption|
+        li
+          = link_to assumption.assumption_description, assumption
 
-- else
-  = markdown @trait.description
+  - else
+    = markdown @trait.description
 
 - if @trait.consequences.any?
   h3 Implied Traits

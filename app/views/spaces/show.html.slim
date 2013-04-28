@@ -2,7 +2,8 @@
 = link_to 'Edit', edit_space_path(@space), class: 'btn'
 
 h1= @space.name
-= markdown @space.description
+.well
+  = markdown @space.description
 
 .row
   .span6

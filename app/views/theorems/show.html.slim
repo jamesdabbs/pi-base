@@ -3,7 +3,8 @@
 
 h1= @theorem.name { |atom| link atom }.html_safe
 
-= markdown @theorem.description
+.well
+  = markdown @theorem.description
 
 h3 Implied Traits
 = bootstrap_will_paginate @traits
