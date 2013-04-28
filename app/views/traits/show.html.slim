@@ -1,11 +1,9 @@
 h1 
   = link_to @trait.space.name, @trait.space
-  |  
-  = link_to 'Edit', edit_trait_path(@trait), class: 'btn btn-mini'
-
-h2
+  | : 
   = link_to @trait.property.name, @trait.property
-  = " = #{@trait.value.name}"
+  = " = #{@trait.value.name} "
+  = link_to 'Edit', edit_trait_path(@trait), class: 'btn btn-mini'
 
 .well
   - if @trait.deduced?
