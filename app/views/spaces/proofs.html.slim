@@ -7,17 +7,17 @@ h1
 javascript:
   // FIXME: clean this up
   $(function() {
-    var width = 940,
-        height = 500;
+    var w = 940,
+        h = 500;
 
     var force = d3.layout.force()
         .charge(-150)
         .linkDistance(50)
-        .size([width, height]);
+        .size([w, h]);
 
     var svg = d3.select("#proofs_pane").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", w)
+        .attr("height", h);
 
     // See http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
     svg.append("defs").append("marker")
@@ -55,13 +55,13 @@ javascript:
           .text(function(d) { return d.name; });
 
       force.on("tick", function() {
+        node.attr("cx", function(d) { return d.x = Math.max(10, Math.min(w - 10, d.x)); })
+            .attr("cy", function(d) { return d.y = Math.max(10, Math.min(h - 10, d.y)); });
+
         link.attr("x1", function(d) { return d.source.x; })
             .attr("y1", function(d) { return d.source.y; })
             .attr("x2", function(d) { return d.target.x; })
             .attr("y2", function(d) { return d.target.y; });
-
-        node.attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; });
       });
     });
   });
