@@ -11,8 +11,12 @@ module ApplicationHelper
   end
   
   def markdown text
-    # Ugh ...
-    Markdown.render(text.gsub '\\', '\\\\\\\\').html_safe
+    # FIXME: better XSS protection with spec
+    # FIXME: scan the string and escape contextually depending on if we're in math tags
+    text.gsub! /<.*?>/, ''
+    text.gsub! '\\', '\\\\\\\\' # Ugh ...
+    text.gsub! '_', '\_'
+    Markdown.render(text).html_safe
   end
 
   def typeahead form, klass, opts={}
