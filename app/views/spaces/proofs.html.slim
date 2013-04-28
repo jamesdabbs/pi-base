@@ -1,5 +1,67 @@
-h1= @space.name
+h1
+  = @space.name 
+  |  
+  = link_to "View", space_path(@space), class: 'btn btn-mini'
 #proofs_pane.well
 
-= onload do
-  | 
+javascript:
+  // FIXME: clean this up
+  $(function() {
+    var width = 940,
+        height = 500;
+
+    var force = d3.layout.force()
+        .charge(-150)
+        .linkDistance(50)
+        .size([width, height]);
+
+    var svg = d3.select("#proofs_pane").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    // See http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
+    svg.append("defs").append("marker")
+      .attr("id", "arrowhead")
+      .attr("class", "link")
+      .attr("refX", 6 + 3) /*must be smarter way to calculate shift*/
+      .attr("refY", 2)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 4)
+      .attr("orient", "auto")
+      .append("path")
+          .attr("d", "M 0,0 V 4 L6,2 Z"); //this is actual shape for arrowhead
+
+    d3.json(document.URL + ".json", function(error, graph) {
+      force
+          .nodes(graph.nodes)
+          .links(graph.links)
+          .start();
+
+      var link = svg.selectAll(".link")
+          .data(graph.links)
+        .enter().append("line")
+          .attr("class", "link")
+          .attr("marker-end", "url(#arrowhead)") 
+          .style("stroke-width", 2);
+
+      var node = svg.selectAll(".node")
+          .data(graph.nodes)
+        .enter().append("circle")
+          .attr("class", "node")
+          .attr("r", function(d) { return d.deduced ? 5 : 10; })
+          .call(force.drag);
+
+      node.append("title")
+          .text(function(d) { return d.name; });
+
+      force.on("tick", function() {
+        link.attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+        node.attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; });
+      });
+    });
+  });

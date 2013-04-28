@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require d3.v3
 //= require google_analytics
 //= require_tree .
