@@ -36,6 +36,14 @@ html, body { height: 100%; }
   position: relative;
 }
 
+#proofs_pane .loading {
+  position: absolute;
+  top: 200px;
+  left: 0;
+  width: 920px;
+  text-align: center;
+}
+
 #info_pane {
   height: 600px;
   width: 320px;

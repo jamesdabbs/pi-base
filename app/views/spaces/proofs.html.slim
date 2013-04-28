@@ -3,9 +3,8 @@ h1
   |  
   = link_to "View", space_path(@space), class: 'btn btn-mini'
 #proofs_pane.well
+  h1.loading Loading ...
   #info_pane
-    h3 Proof Explorer
-    p Mouse over a node to the left for a description of that trait.
 
 javascript:
   // FIXME: clean this up
@@ -62,9 +61,10 @@ javascript:
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
       }
 
-      var unfocus = function() {
-        $('#info_pane').empty();
-      }
+      $('.loading').remove();
+      $('#info_pane').html(
+        $('<h3>Proof Explorer</h3><p>Mouse over a node to the left for a description of that trait.</p>')
+      );
 
       var node = svg.selectAll(".node")
           .data(graph.nodes)
@@ -72,7 +72,6 @@ javascript:
           .attr("class", "node")
           .attr("r", function(d) { return d.theorem ? 5 : 10; })
           .on("mouseover", function(d) { focus(d); })
-          .on("mouseout", function() { unfocus(); })
           .on("click", function(d) { window.location = "/traits/" + d.id; })
           .call(force.drag);
 
