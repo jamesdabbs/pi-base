@@ -1,7 +1,8 @@
-= link_to 'Back', spaces_path, class: 'btn'
-= link_to 'Edit', edit_space_path(@space), class: 'btn'
+h1
+  = @space.name
+  |  
+  = link_to 'Edit', edit_space_path(@space), class: 'btn btn-mini'
 
-h1= @space.name
 .well
   = markdown @space.description
 

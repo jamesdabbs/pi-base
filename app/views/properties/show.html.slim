@@ -1,7 +1,8 @@
-= link_to 'Back', properties_path, class: 'btn'
-= link_to 'Edit', edit_property_path(@property), class: 'btn'
+h1
+  = @property.name
+  |  
+  = link_to 'Edit', edit_property_path(@property), class: 'btn btn-mini'
 
-h1= @property.name
 .well
   = markdown @property.description
 
