@@ -26,11 +26,11 @@ class Proof
       node_index = Hash[ nodes.each_with_index.map { |n,i| [n[:id], i] } ]
 
       links = []
-      Proof.where(trait_id: @space.traits.pluck(:id)).each do |proof|
+      Proof.where(trait_id: @space.traits.pluck(:id)).includes(:traits).each do |proof|
         proof.traits.each do |assumption|
           links << {
             source: node_index[assumption.id],
-            target: node_index[proof.trait.id]
+            target: node_index[proof.trait_id]
           }
         end
       end
