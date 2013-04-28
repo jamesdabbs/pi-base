@@ -49,8 +49,8 @@ javascript:
       var focus = function(trait) {
         $('#info_pane').html('<h3>' + trait.name + '</h3>');
         if (trait.theorem) {
-          $.each(graph.links, function(l) {
-            if (l.target == trait.index) {
+          $.each(graph.links, function(i, l) {
+            if (l.target.index == trait.index) {
               $('#info_pane').append('<li>' + l.source.name + '</li>');
             }
           });
