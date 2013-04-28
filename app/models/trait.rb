@@ -32,7 +32,7 @@ class Trait < ActiveRecord::Base
   scope :direct,  -> { where deduced: false }
   scope :deduced, -> { where deduced: true  }
 
-  scope :unproven, -> { where description: '', proof: nil }
+  scope :unproven, -> { where deduced: false, description: '' }
 
   def find_implied_traits
     Resque.enqueue TraitExploreJob, id
