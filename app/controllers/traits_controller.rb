@@ -51,6 +51,18 @@ class TraitsController < ApplicationController
     end
   end
 
+  def available
+    render json: if space = Space.where(name: params[:space]).first
+      ids = space.traits.pluck :property_id
+      Property.where('id NOT IN (?)', ids).pluck :name
+    elsif property = Property.where(name: params[:property]).first
+      ids = property.traits.pluck :space_id
+      Space.where('id NOT IN (?)', ids).pluck :name
+    else
+      []
+    end
+  end
+
   private #-----
 
   def set_trait

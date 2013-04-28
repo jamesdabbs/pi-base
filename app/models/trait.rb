@@ -1,6 +1,8 @@
 class Trait < ActiveRecord::Base
   has_paper_trail only: [:description]
 
+  # ----------
+
   validates :space, :property, :value, presence: true
   validates :property, uniqueness: { scope: :space_id }
 
@@ -8,6 +10,15 @@ class Trait < ActiveRecord::Base
     errors.add(:description, "can't be blank") if !deduced && description.blank?
   end
   validate :has_description_if_manually_added
+
+  def value_is_in_value_set
+    unless value.value_set_id == property.value_set_id
+      errors.add :value, "must be in #{property.value_set}"
+    end
+  end
+  validate :value_is_in_value_set
+
+  # ----------
 
   belongs_to :space
   belongs_to :property

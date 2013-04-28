@@ -5,6 +5,10 @@ class Space < ActiveRecord::Base
 
   has_many :traits, dependent: :destroy
 
+  def to_s
+    name
+  end
+
   def self.by_formula fs
     ids = fs.map { |f, val| f.spaces(val) }.inject &:&
     Space.find ids

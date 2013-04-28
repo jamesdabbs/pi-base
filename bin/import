@@ -107,10 +107,11 @@ import data["brubeck.space"], Space do |id, s|
   }
 end
 
+Boolean = ValueSet.first
 import data["brubeck.property"], Property do |id, p|
   {
     name: p["name"],
-    value_set_id: ValueSet::Map[p["value_set"]],
+    value_set_id: Boolean,
     description: Descriptions[[Property, id]]
   }
 end
