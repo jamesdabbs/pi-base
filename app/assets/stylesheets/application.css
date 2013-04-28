@@ -33,6 +33,15 @@ html, body { height: 100%; }
 
 #proofs_pane {
   padding: 0;
+  position: relative;
+}
+
+#info_pane {
+  height: 600px;
+  width: 320px;
+  position: absolute;
+  top: 5;
+  right: 0;
 }
 
 .node {
