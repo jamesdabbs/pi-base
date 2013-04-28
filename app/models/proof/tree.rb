@@ -5,9 +5,10 @@ class Proof
     end
 
     def as_json opts={}
-      # FIXME: cache by space
+      # FIXME: cache tree by space
+      # FIXME: cache theorem names
       # FIXME: use rabl?
-      nodes = @space.traits.includes(:proof).map do |trait|
+      nodes = @space.traits.includes(:property, :value, :proof => :theorem).map do |trait|
         node = {
           name: trait.assumption_description,
           id:   trait.id
