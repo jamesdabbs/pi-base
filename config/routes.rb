@@ -3,10 +3,16 @@ require 'resque/server'
 Brubeck::Application.routes.draw do
   devise_for :users
 
-  resources :spaces, :properties
+  resources :spaces do
+    get :proofs
+  end
+
+  resources :properties
+  
   resources :traits, except: [:delete] do
     collection { get :available }
   end
+  
   resources :theorems, except: [:delete]
 
   get 'unproven', to: 'application#unproven'
