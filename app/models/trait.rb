@@ -41,11 +41,11 @@ class Trait < ActiveRecord::Base
   end
 
   def explore
-    trait.property.theorems.each do |theorem|
-      if theorem.antecedent.verify trait.space
-        theorem.apply trait.space
-      elsif (~theorem.consequent).verify trait.space
-        theorem.contrapositive.apply trait.space
+    property.theorems.each do |theorem|
+      if theorem.antecedent.verify space
+        theorem.apply space
+      elsif (~theorem.consequent).verify space
+        theorem.contrapositive.apply space
       end
     end
   end
