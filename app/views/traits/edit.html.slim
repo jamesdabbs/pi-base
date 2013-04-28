@@ -1,6 +1,6 @@
 = link_to 'Back', @trait, class: 'btn'
 
-h1 Editing '#{@trait}'
+h1 Editing '#{@trait.name}'
 
 = form_for @trait do |f|
   - if @trait.errors.any?
