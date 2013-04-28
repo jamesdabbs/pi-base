@@ -18,8 +18,8 @@ class Formula::Conjunction < Formula
     subformulae.flat_map { |sf| sf.verify(space) or return false }
   end
 
-  def force space, proof
-    subformulae.each { |sf| sf.force space, proof }
+  def force space, traits, theorem, index
+    subformulae.each { |sf| sf.force space, traits, theorem, index }
   end
 
   # ----------

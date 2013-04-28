@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130427185906) do
+ActiveRecord::Schema.define(version: 20130428002446) do
+
+  create_table "proof_traits", force: true do |t|
+    t.integer  "proof_id"
+    t.integer  "trait_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "proofs", force: true do |t|
+    t.integer  "trait_id"
+    t.integer  "theorem_id"
+    t.integer  "theorem_index"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "properties", force: true do |t|
     t.string   "name"
@@ -51,7 +66,6 @@ ActiveRecord::Schema.define(version: 20130427185906) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "deduced",     default: false
-    t.string   "proof"
   end
 
   add_index "traits", ["property_id", "value_id"], name: "index_traits_on_property_id_and_value_id"

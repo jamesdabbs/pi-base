@@ -9,6 +9,11 @@ class Theorem < ActiveRecord::Base
 
   # ----------
 
+  has_many :proofs, dependent: :destroy
+  has_many :traits, through: :proofs
+
+  # ----------
+
   has_many :theorem_properties
   has_many :properties, through: :theorem_properties
 
@@ -55,20 +60,21 @@ class Theorem < ActiveRecord::Base
   end
 
   def apply space
-    assumptions = antecedent.verify(space) or return
-    consequent.force space, Proof.new(assumptions << self)
+    traits = antecedent.verify(space) or return
+    consequent.force space, traits, self, traits.length
   rescue ActiveRecord::RecordInvalid
     # Presumably because it violates the uniqueness constraint, and so already exists
     false
   end
 
-  def explore
-    Space.by_formula(antecedent => true, consequent => nil).each do |s|
-      apply s
-    end
+  # -- Exploration tools --
 
-    Space.by_formula(antecedent => nil,  consequent => false).each do |s|
-      contrapositive.apply s
-    end
+  def candidates
+    Space.by_formula antecedent => true, consequent => nil
+  end
+
+  def explore
+    candidates.each                { |s| apply s }
+    contrapositive.candidates.each { |s| contrapositive.apply s }
   end
 end

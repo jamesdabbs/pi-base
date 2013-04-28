@@ -1,21 +1,13 @@
-class Proof
-  attr_accessor :assumptions
+class Proof < ActiveRecord::Base
+  belongs_to :trait
+  belongs_to :theorem
 
-  def self.load str
-    # FIXME: this need not make more than 2 queries
-    return nil if str.nil?
-    assumptions = str.split(',').map do |a|
-      klass, id = a.split ' '
-      klass.constantize.find id
-    end
-    new assumptions
-  end
+  has_many :proof_traits, dependent: :delete_all
+  has_many :traits, through: :proof_traits
 
-  def self.dump proof
-    proof.assumptions.map { |a| "#{a.class.name} #{a.id}" }.join ','
-  end
+  # FIXME: on delete, invalidate and recheck trait which this proves
 
-  def initialize assumptions
-    @assumptions = assumptions
+  def steps
+    traits.to_a.insert theorem_index, theorem
   end
 end

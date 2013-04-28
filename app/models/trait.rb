@@ -1,14 +1,22 @@
 class Trait < ActiveRecord::Base
   has_paper_trail only: [:description]
 
-  validates :space, :property, :value, :description, presence: true
+  validates :space, :property, :value, presence: true
   validates :property, uniqueness: { scope: :space_id }
 
-  serialize :proof, Proof
+  def has_description_if_manually_added
+    errors.add(:description, "can't be blank") if !deduced && description.blank?
+  end
+  validate :has_description_if_manually_added
 
   belongs_to :space
   belongs_to :property
   belongs_to :value
+
+  has_one :proof
+
+  has_many :proof_traits
+  has_many :consequences, through: :proof_traits, source: :proof, class_name: 'Proof'
 
   scope :direct,  -> { where deduced: false }
   scope :deduced, -> { where deduced: true  }

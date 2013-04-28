@@ -6,6 +6,7 @@ class TheoremsController < ApplicationController
   end
 
   def show
+    @traits = @theorem.traits.paginate page: params[:page], per_page: 20
   end
 
   def new

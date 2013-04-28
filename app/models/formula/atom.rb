@@ -18,7 +18,7 @@ class Formula::Atom < Formula
   end
 
   def to_s &block
-    block ? block.call(self) : "#{@property} = #{@value}"
+    block ? block.call(self) : "#{@property.name} = #{@value.name}"
   end
 
   def spaces where=true
@@ -43,9 +43,11 @@ class Formula::Atom < Formula
     witness.nil? ? false : [witness]
   end
 
-  def force space, proof
-    description = proof.assumptions.map{ |a| a.assumption_description }.join("\n")
-    space.traits.create! property: @property, value: @value, description: description, deduced: true, proof: proof
+  def force space, traits, theorem, index
+    trait = space.traits.create! property: @property, value: @value, deduced: true
+    proof = Proof.create! trait: trait, theorem: theorem, theorem_index: index
+    traits.each { |trait| proof.proof_traits.create! trait: trait }
+    trait
   end
 
   def atoms

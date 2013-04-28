@@ -9,9 +9,15 @@ h2
 
 - if @trait.deduced?
   ul
-    - @trait.proof.assumptions.each do |assumption|
+    - @trait.proof.steps.each do |assumption|
       li
         = link_to assumption.assumption_description, assumption
 
 - else
   = markdown @trait.description
+
+- if @trait.consequences.any?
+  h3 Implied Traits
+  ul
+    - @trait.consequences.includes(:trait).each do |proof|
+      li= link_to proof.trait.assumption_description, proof.trait

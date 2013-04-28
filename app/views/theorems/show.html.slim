@@ -5,8 +5,8 @@ h1= @theorem.name { |atom| link atom }.html_safe
 
 = markdown @theorem.description
 
-/ h3 Traits
-/ = bootstrap_will_paginate @traits
-/ ul
-/   - @traits.each do |trait|
-/     li= link_to "#{trait.space}: #{trait.value}", trait
+h3 Implied Traits
+= bootstrap_will_paginate @traits
+ul
+  - @traits.each do |trait|
+    li= link_to "#{trait.space.name}: #{trait.value.name}", trait
