@@ -2,6 +2,8 @@ class Formula
   class ParseError < StandardError
   end
 
+  include Enumerable
+
   attr_accessor :subformulae
 
   def initialize *subformulae
@@ -15,6 +17,10 @@ class Formula
 
   def | other
     Formula::Disjunction.new(self, other).flatten
+  end
+
+  def each
+    subformulae.each
   end
 
   # -- Common formula interface -----
@@ -34,29 +40,17 @@ class Formula
   end
 
   def to_s &block
-    '(' + subformulae.map { |s| s.to_s(&block) }.join(" #{symbol} ") + ')'
-  end
-
-  def spaces
-  end
-
-  def ~
-  end
-
-  def verify space
-  end
-
-  def force space, proof
+    '(' + map { |s| s.to_s(&block) }.join(" #{symbol} ") + ')'
   end
 
   def atoms
-    subformulae.map(&:atoms).flatten
+    map(&:atoms).flatten
   end
 
   # ----------
 
   def flatten
-    self.class.new(*subformulae.inject([]) do |fs, f|
+    self.class.new(*inject([]) do |fs, f|
       if f.class == self.class
         fs += f.subformulae
       else

@@ -3,7 +3,7 @@ class Formula::Disjunction < Formula
   # -- Common formula interface -----
 
   def spaces where=true
-    subs = subformulae.map { |sf| sf.spaces where }
+    subs = map { |sf| sf.spaces where }
     # True if any is true
     # False if all are false
     # Nil if any is nil
@@ -11,18 +11,18 @@ class Formula::Disjunction < Formula
   end
 
   def ~
-    Formula::Conjunction.new *subformulae.map(&:~)
+    Formula::Conjunction.new *map(&:~)
   end
 
   def verify space
     # FIXME: memoize this verify call
-    witness = subformulae.find { |sf| sf.verify space }
+    witness = find { |sf| sf.verify space }
     witness.nil? ? false : witness.verify(space)
   end
 
   def force space, traits, theorem, index
     unknown = nil
-    subformulae.each do |sf|
+    each do |sf|
       witnesses = (~sf).verify space
       if witnesses
         traits += witnesses

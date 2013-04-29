@@ -3,7 +3,7 @@ class Formula::Conjunction < Formula
   # -- Common formula interface -----
 
   def spaces where=true
-    subs = subformulae.map { |sf| sf.spaces where }
+    subs = map { |sf| sf.spaces where }
     # True if all are true
     # False if any is false
     # Nil if any is nil
@@ -15,11 +15,11 @@ class Formula::Conjunction < Formula
   end
 
   def verify space
-    subformulae.flat_map { |sf| sf.verify(space) or return false }
+    flat_map { |sf| sf.verify(space) or return false }
   end
 
   def force space, traits, theorem, index
-    subformulae.each { |sf| sf.force(space, traits, theorem, index) rescue nil }
+    each { |sf| sf.force(space, traits, theorem, index) rescue nil }
   end
 
   # ----------
