@@ -57,7 +57,7 @@ html, body { height: 100%; }
   stroke-width: 1.5px;
 }
 
-.link {
+.link, .arrowhead {
   stroke: #999;
   stroke-opacity: .6;
 }
