@@ -4,7 +4,19 @@ h1
   = link_to 'Edit', edit_theorem_path(@theorem), class: 'btn btn-mini'
 
 .well
-  = markdown @theorem.description
+  - if @theorem.description.empty?
+      p
+        | Unfortunately, this Theorem was added without a proof to support it. You can help by 
+        = link_to 'adding one', edit_theorem_path(@theorem)
+        | . 
+      p
+        | You can 
+        em really 
+        | help by winnowing down the 
+        = link_to 'list of all unsupported objects', unproven_path
+        | .
+  - else
+    = markdown @theorem.description
 
 h3 Implied Traits
 = bootstrap_will_paginate @traits

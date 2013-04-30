@@ -13,7 +13,19 @@ h1
           = link_to assumption.assumption_description, assumption
 
   - else
-    = markdown @trait.description
+    - if @trait.description.empty?
+      p
+        | Unfortunately, this Trait was added without a proof to support it. You can help by 
+        = link_to 'adding one', edit_trait_path(@trait)
+        | . 
+      p
+        | You can 
+        em really 
+        | help by winnowing down the 
+        = link_to 'list of all unsupported objects', unproven_path
+        | .
+    - else
+      = markdown @trait.description
 
 - if @trait.consequences.any?
   h3 Implied Traits

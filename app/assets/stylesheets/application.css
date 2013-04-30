@@ -31,6 +31,11 @@ html, body { height: 100%; }
   display: block;
 }
 
+.alert a {
+  color: #fff;
+  text-decoration: underline;
+}
+
 #proofs_pane {
   padding: 0;
   position: relative;
