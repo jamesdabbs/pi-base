@@ -19,8 +19,8 @@ class Formula
     Formula::Disjunction.new(self, other).flatten
   end
 
-  def each
-    subformulae.each
+  def each &block
+    subformulae.each &block
   end
 
   # -- Common formula interface -----

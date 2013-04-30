@@ -7,10 +7,11 @@ class Proof
     def nodes
       # FIXME: cache theorem names
       # FIXME: use rabl?
-      @nodes ||= @space.traits.includes(:property, :value, :proof => :theorem).map do |trait|
+      @nodes ||= @space.traits.includes(:property, :value, :supporters, :proof => :theorem).map do |trait|
         node = {
           name: trait.assumption_description,
-          id:   trait.id
+          id:   trait.id,
+          root: (trait.supporters.last.assumed_id rescue trait.id)
         }
         if trait.proof
           node[:theorem] = {

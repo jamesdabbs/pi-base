@@ -26,8 +26,11 @@ class Trait < ActiveRecord::Base
 
   has_one :proof
 
-  has_many :proof_traits
-  has_many :consequences, through: :proof_traits, source: :proof, class_name: 'Proof'
+  has_many :assumptions
+  has_many :consequences, through: :assumptions, source: :proof, class_name: 'Proof'
+
+  has_many :supporters, foreign_key: :implied_id
+  has_many :supports,   foreign_key: :assumed_id, class_name: 'Supporter'
 
   scope :direct,  -> { where deduced: false }
   scope :deduced, -> { where deduced: true  }

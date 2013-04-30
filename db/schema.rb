@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130428002446) do
+ActiveRecord::Schema.define(version: 20130429235212) do
 
-  create_table "proof_traits", force: true do |t|
+  create_table "assumptions", force: true do |t|
     t.integer  "proof_id"
     t.integer  "trait_id"
     t.datetime "created_at"
@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 20130428002446) do
   create_table "spaces", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "supporters", force: true do |t|
+    t.integer  "assumed_id"
+    t.integer  "implied_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

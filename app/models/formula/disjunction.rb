@@ -20,12 +20,12 @@ class Formula::Disjunction < Formula
     witness.nil? ? false : witness.verify(space)
   end
 
-  def force space, traits, theorem, index
+  def force space, assumptions, theorem, index
     unknown = nil
     each do |sf|
       witnesses = (~sf).verify space
       if witnesses
-        traits += witnesses
+        assumptions += witnesses
         index  += witnesses.length
       else
         if unknown
@@ -36,7 +36,7 @@ class Formula::Disjunction < Formula
         end
       end
     end
-    unknown.force space, traits, theorem, index
+    unknown.force space, assumptions, theorem, index
   end
 
   # ----------

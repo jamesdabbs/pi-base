@@ -43,10 +43,19 @@ class Formula::Atom < Formula
     witness.nil? ? false : [witness]
   end
 
-  def force space, traits, theorem, index
+  def force space, assumptions, theorem, index
     trait = space.traits.create! property: @property, value: @value, deduced: true
     proof = Proof.create! trait: trait, theorem: theorem, theorem_index: index
-    traits.each { |trait| proof.proof_traits.create! trait: trait }
+    assumptions.each do |assumption| 
+      proof.assumptions.create! trait: assumption
+      if assumption.supporters.empty?
+        trait.supporters.create! assumed_id: assumption.id
+      else
+        assumption.supporters.each do |supporter|
+          trait.supporters.create! assumed_id: supporter.assumed_id
+        end
+      end
+    end
     trait
   end
 

@@ -18,8 +18,8 @@ class Formula::Conjunction < Formula
     flat_map { |sf| sf.verify(space) or return false }
   end
 
-  def force space, traits, theorem, index
-    each { |sf| sf.force(space, traits, theorem, index) rescue nil }
+  def force space, assumptions, theorem, index
+    each { |sf| sf.force(space, assumptions, theorem, index) rescue nil }
   end
 
   # ----------

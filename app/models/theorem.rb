@@ -60,8 +60,8 @@ class Theorem < ActiveRecord::Base
   end
 
   def apply space
-    traits = antecedent.verify(space) or return
-    consequent.force space, traits, self, traits.length
+    assumptions = antecedent.verify(space) or return
+    consequent.force space, assumptions, self, assumptions.length
   rescue ActiveRecord::RecordInvalid
     # Presumably because it violates the uniqueness constraint, and so already exists
     false

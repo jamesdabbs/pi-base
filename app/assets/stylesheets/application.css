@@ -55,7 +55,6 @@ html, body { height: 100%; }
 .node {
   stroke: #fff;
   stroke-width: 1.5px;
-  fill: #1f77b4;
 }
 
 .link {
