@@ -4,6 +4,14 @@ class Proof
       @space = space
     end
 
+    def root_if_unique trait
+      if trait.supporters.length == 1
+        trait.supporters.first.assumed_id
+      elsif !trait.deduced?
+        trait.id
+      end
+    end
+
     def nodes
       # FIXME: cache theorem names
       # FIXME: use rabl?
@@ -11,7 +19,7 @@ class Proof
         node = {
           name: trait.assumption_description,
           id:   trait.id,
-          root: (trait.supporters.last.assumed_id rescue trait.id)
+          root: root_if_unique(trait)
         }
         if trait.proof
           node[:theorem] = {
