@@ -15,7 +15,6 @@ set :user,      "brubeck"
 set :use_sudo,  false
 
 after "deploy:restart", "deploy:cleanup"
-after "deploy:restart", "resque:restart"
 
 namespace :deploy do
   %w{ start stop restart }.each do |action|
