@@ -1,5 +1,11 @@
 h2 Sign in
 
+.alert.alert-info
+  p 
+    | Registration for this site is currently closed. If you are interested in contributing to the database, please drop me a line at 
+    = link_to 'jamesdabbs@gmail.com', 'mailto:jamesdabbs@gmail.com'
+    |  and I'll be glad to create an account for you.
+
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   .control-group
     = f.label :email
