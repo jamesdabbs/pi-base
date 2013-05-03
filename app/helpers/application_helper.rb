@@ -27,10 +27,10 @@ module ApplicationHelper
   end
 
   def link atom
-    case atom.value.name
-    when "True"
+    case atom.value
+    when Value::True
       link_to atom.property.name, atom.property
-    when "False"
+    when Value::False
       link_to "¬ #{atom.property.name}", atom.property
     else
       "#{link_to atom.property, atom.property} = #{link_to atom.value, atom.value}"

@@ -33,9 +33,7 @@ class Formula::Atom < Formula
   end
 
   def ~
-    # FIXME: handling of value negation for non-booleans
-    # FIXME: negating booleans should not require a database hit
-    Atom.new @property, Value.find(@value.compliment).first
+    Atom.new @property, ~@value
   end
 
   def verify space
@@ -67,10 +65,10 @@ class Formula::Atom < Formula
 
   # FIXME: factor out printer object
   def pretty_print
-    case value.name
-    when "True"
+    case value
+    when Value::True
       property.name
-    when "False"
+    when Value::False
       "¬ #{property.name}"
     else
       to_s
