@@ -14,7 +14,6 @@ set :deploy_to, "/srv/web/brubeck"
 set :user,      "brubeck"
 set :use_sudo,  false
 
-after "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
   %w{ start stop restart }.each do |action|
@@ -23,7 +22,16 @@ namespace :deploy do
       run "cd /srv/web/brubeck/current; bundle exec thin #{action} -C config/thin.yml"
     end
   end
+
+  desc "copy db config file"
+  task :copy_db_config do
+    run "rm #{release_path}/config/database.yml && ln -s /srv/web/brubeck/database.yml #{release_path}/config/database.yml"
+  end
 end
+
+after "deploy:update_code", "deploy:copy_db_config"
+after "deploy:restart", "resque:restart"
+after "deploy:restart", "deploy:cleanup"
 
 require "new_relic/recipes"
 after "deploy:update", "newrelic:notice_deployment"
