@@ -6,8 +6,5 @@ h1
   h1.loading Loading ...
   #info_pane
 
-/ FIXME: why isn't onload working?
-javascript:
-  $(function() {
-    new brubeck.ProofExplorer().render("#proofs_pane");
-  });
+= onload do
+  | new brubeck.ProofExplorer().render("#proofs_pane");

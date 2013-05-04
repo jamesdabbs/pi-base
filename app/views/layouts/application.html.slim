@@ -48,6 +48,12 @@ html lang="en"
                 = msg
 
         = yield
+
+        javascript:
+          $(function() {
+            #{yield :onload}
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+          })
     
       #push
 
@@ -55,11 +61,3 @@ html lang="en"
       .container
         p &copy; James Dabbs 2012 - #{Time.now.year}
 
-    javascript:
-      $(function() { MathJax.Hub.Queue(["Typeset", MathJax.Hub]) })
-
-    - if content_for?(:onload)
-      javascript:
-        $(function() {
-          #{yield :onload}
-        });
