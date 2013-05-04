@@ -14,7 +14,7 @@ class Proof
 
     def nodes
       # FIXME: use rabl?
-      @nodes ||= @space.traits.includes(:supporters, :proof => :theorem).map do |trait|
+      @nodes ||= @space.traits.includes(:supporters, :property, :value, :proof => :theorem).map do |trait|
         node = {
           name: trait.assumption_description,
           id:   trait.id,

@@ -6,8 +6,9 @@ class ObjectsController < ApplicationController
   end
 
   def show
-    @direct  = object.traits.direct.paginate  page: params[:direct],  per_page: 15
-    @deduced = object.traits.deduced.paginate page: params[:deduced], per_page: 15
+    traits = object.traits.includes(:property, :value)
+    @direct  = traits.direct.paginate  page: params[:direct],  per_page: 15
+    @deduced = traits.deduced.paginate page: params[:deduced], per_page: 15
   end
 
   def new

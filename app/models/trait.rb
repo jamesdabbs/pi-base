@@ -64,9 +64,4 @@ class Trait < ActiveRecord::Base
       end
     end
   end
-
-  def proof_tree
-    Proof::Tree.new self
-  end
-  cache_method :proof_tree
 end
