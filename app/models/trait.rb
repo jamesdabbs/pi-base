@@ -50,8 +50,12 @@ class Trait < ActiveRecord::Base
     name
   end
 
+  def to_atom
+    @atom ||= Formula::Atom.new property, value
+  end
+
   def assumption_description
-    Formula::Atom.new(property, value).pretty_print
+    to_atom.pretty_print
   end
   cache_method :assumption_description
 

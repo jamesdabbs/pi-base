@@ -1,8 +1,8 @@
 h1 
   = link_to @trait.space.name, @trait.space
   | : 
-  = link_to @trait.property.name, @trait.property
-  = " = #{@trait.value.name} "
+  = link @trait.to_atom
+  |  
   = link_to 'Edit', edit_trait_path(@trait), class: 'btn btn-mini'
 
 .well
