@@ -5,7 +5,7 @@ class SpacesController < ObjectsController
     @space = Space.find params[:space_id]
     respond_to do |format|
       format.html
-      format.json { render json: Proof::Tree.new(@space) }
+      format.json { render json: @space.proof_tree }
     end
   end
 end

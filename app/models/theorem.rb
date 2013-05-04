@@ -45,6 +45,7 @@ class Theorem < ActiveRecord::Base
   def assumption_description
     name
   end
+  cache_method :assumption_description
 
   def contrapositive
     # FIXME: make an explict reason why these can never be saved over the original

@@ -13,9 +13,8 @@ class Proof
     end
 
     def nodes
-      # FIXME: cache theorem names
       # FIXME: use rabl?
-      @nodes ||= @space.traits.includes(:property, :value, :supporters, :proof => :theorem).map do |trait|
+      @nodes ||= @space.traits.includes(:supporters, :proof => :theorem).map do |trait|
         node = {
           name: trait.assumption_description,
           id:   trait.id,
@@ -23,7 +22,7 @@ class Proof
         }
         if trait.proof
           node[:theorem] = {
-            name: trait.proof.theorem.name,
+            name: trait.proof.theorem.assumption_description,
             id:   trait.proof.theorem_id
           }
         else
@@ -49,7 +48,6 @@ class Proof
     end
 
     def as_json opts={}
-      # FIXME: cache tree by space
       { nodes: nodes, links: links }
     end
   end

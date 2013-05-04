@@ -20,7 +20,7 @@ class Trait < ActiveRecord::Base
 
   # ----------
 
-  belongs_to :space
+  belongs_to :space, touch: true
   belongs_to :property
   belongs_to :value
 
@@ -53,6 +53,7 @@ class Trait < ActiveRecord::Base
   def assumption_description
     Formula::Atom.new(property, value).pretty_print
   end
+  cache_method :assumption_description
 
   def explore
     property.theorems.each do |theorem|
@@ -63,4 +64,9 @@ class Trait < ActiveRecord::Base
       end
     end
   end
+
+  def proof_tree
+    Proof::Tree.new self
+  end
+  cache_method :proof_tree
 end
