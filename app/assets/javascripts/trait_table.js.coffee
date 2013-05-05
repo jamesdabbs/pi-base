@@ -4,7 +4,6 @@ class TraitTable
 
   render: () ->
     $.getJSON document.URL + '.json', (data) =>
-      console.log data
       @$el.html JST['trait_table'] data
 
 window.brubeck ?= {}

@@ -79,6 +79,6 @@ class Theorem < ActiveRecord::Base
   end
 
   def destroy
-    raise # FIXME: implement
+    raise # FIXME: implement destroy
   end
 end

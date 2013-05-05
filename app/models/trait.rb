@@ -43,7 +43,7 @@ class Trait < ActiveRecord::Base
   after_create :find_implied_traits
 
   def self.table
-    Rails.cache.fetch("/trait-table/#{Trait.maximum :updated_at}", expires_in: 1.day) do
+    Rails.cache.fetch "/trait-table/#{Trait.maximum :updated_at}", expires_in: 1.day do
       spaces     = Space.all.select    :id, :name
       properties = Property.all.select :id, :name
 
