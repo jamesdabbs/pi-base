@@ -20,7 +20,7 @@ class Formula::Atom < Formula
   def name
     case value
     when Value::True
-      yield property.name
+      property.name
     when Value::False
       "¬ #{property.name}"
     else
