@@ -152,7 +152,6 @@ GEM
     redis (3.0.4)
     redis-namespace (1.2.1)
       redis (~> 3.0.0)
-    redis-rails (0.0.0)
     request_store (1.0.5)
     resque (1.24.1)
       mono_logger (~> 1.0)
@@ -243,7 +242,6 @@ DEPENDENCIES
   pry
   rails
   redcarpet
-  redis-rails
   resque
   sass-rails
   slim-rails
