@@ -1,0 +1,16 @@
+%thead
+  %tr
+    %td
+    - for p in @properties
+      %td
+        %a{href: "/properties/#{p.property.id}"}= p.property.id
+%tbody
+  - for s in @spaces
+    %tr
+      %td
+        %a{href: "/spaces/#{s.space.id}"}= s.space.id
+      - for p in @properties
+        - value = @traits[s.space.id][p.property.id]
+        %td
+          - if value
+            %a{href: "/traits/#{value[0]}"}= value[1]

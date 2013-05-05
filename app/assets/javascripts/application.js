@@ -16,4 +16,5 @@
 //= require bootstrap
 //= require d3.v3
 //= require google_analytics
+//= require hamlcoffee
 //= require_tree .
