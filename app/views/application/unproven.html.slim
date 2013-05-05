@@ -8,4 +8,4 @@ h3 Traits
 = bootstrap_will_paginate @traits, param_name: :traits
 ul
   - @traits.each do |trait|
-    li= link_to "#{trait.space}: #{trait.assumption_description}", trait
+    li= link_to "#{trait.space}: #{trait.name}", trait

@@ -1,5 +1,5 @@
 h1
-  = @theorem.name { |atom| link atom }.html_safe
+  = @theorem.linked_name.html_safe
   |  
   = link_to 'Edit', edit_theorem_path(@theorem), class: 'btn btn-mini'
 
@@ -22,4 +22,4 @@ h3 Implied Traits
 = bootstrap_will_paginate @traits
 ul
   - @traits.each do |trait|
-    li= link_to "#{trait.space.name}: #{trait.assumption_description}", trait
+    li= link_to "#{trait.space}: #{trait.name}", trait

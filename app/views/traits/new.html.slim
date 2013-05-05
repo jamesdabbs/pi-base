@@ -33,7 +33,7 @@ javascript:
     $("#trait_property").typeahead({
       // FIXME: cache this lookup client side on leaving the space (or property) input
       source: function(query, process) {
-        $.getJSON("/traits/available/", { space: $("#trait_space").val() }, function(data) {
+        $.getJSON("/traits/available/", { trait: { space: $("#trait_space").val() } }, function(data) {
           process(data);
         })
       } 

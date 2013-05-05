@@ -1,7 +1,8 @@
-class TraitsController < ApplicationController
-  before_action :set_trait, only: [:show, :edit, :update]
+class TraitsController < ObjectsController
+  @object_class = Trait
 
   def index
+    # FIXME: serve as JSON and cache
     @spaces     = Space.order 'id ASC'
     @properties = Property.order 'id ASC'
 
@@ -15,61 +16,26 @@ class TraitsController < ApplicationController
   end
 
   def show
-  end
-
-  def new
-    @trait = Trait.new
-    authorize! :create, @trait
-  end
-
-  def edit
-    authorize! :edit, @trait
-  end
-
-  def create
-    @trait = Trait.new trait_params
-    authorize! :create, @trait
-    
-    [:space, :property, :value].each do |klass|
-      object = klass.to_s.camelize.constantize.where(name: params[:trait][klass]).first!
-      @trait.send "#{klass}=", object
-    end
-
-    if @trait.save
-      redirect_to @trait, notice: 'Trait created'
-    else
-      render action: 'new'
-    end
-  end
-
-  def update
-    authorize! :edit, @trait
-    if @trait.update trait_params
-      redirect_to @trait, notice: 'Trait updated'
-    else
-      render action: 'edit'
-    end
+    # Traits don't have direct / deduced related
   end
 
   def available
-    render json: if space = Space.where(name: params[:space]).first
-      ids = space.traits.pluck :property_id
-      Property.where('id NOT IN (?)', ids).pluck :name
-    elsif property = Property.where(name: params[:property]).first
-      ids = property.traits.pluck :space_id
-      Space.where('id NOT IN (?)', ids).pluck :name
-    else
-      []
-    end
+    specified = lookup(:space) || lookup(:property)
+    render json: specified ? specified.available : []
   end
 
   private #-----
 
-  def set_trait
-    @trait = Trait.find params[:id]
+  def lookup klass
+    klass.to_s.camelize.constantize.where(name: params[:trait][klass]).first
   end
 
-  def trait_params
-    params.require(:trait).permit :description
+  def create_params
+    {
+      space:       lookup(:space),
+      property:    lookup(:property),
+      value:       lookup(:value),
+      description: params[:trait][:description]
+    }
   end
 end

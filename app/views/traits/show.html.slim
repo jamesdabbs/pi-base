@@ -1,7 +1,7 @@
 h1 
   = link_to @trait.space.name, @trait.space
   | : 
-  = link @trait.to_atom
+  = AtomDecorator.new(@trait.atom).linked_name
   |  
   = link_to 'Edit', edit_trait_path(@trait), class: 'btn btn-mini'
 
@@ -10,7 +10,7 @@ h1
     ul
       - @trait.proof.steps.each do |assumption|
         li
-          = link_to assumption.assumption_description, assumption
+          = link_to assumption.name, assumption
 
   - else
     - if @trait.description.empty?
@@ -31,4 +31,4 @@ h1
   h3 Implied Traits
   ul
     - @trait.consequences.includes(:trait).each do |proof|
-      li= link_to proof.trait.assumption_description, proof.trait
+      li= link_to proof.trait.name, proof.trait

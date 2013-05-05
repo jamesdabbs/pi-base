@@ -83,6 +83,10 @@ GEM
     colorize (0.5.8)
     daemons (1.1.9)
     debug_inspector (0.0.2)
+    draper (1.2.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (1.4.0)
@@ -144,6 +148,7 @@ GEM
     redis (3.0.4)
     redis-namespace (1.2.1)
       redis (~> 3.0.0)
+    request_store (1.0.5)
     resque (1.24.1)
       mono_logger (~> 1.0)
       multi_json (~> 1.0)
@@ -223,6 +228,7 @@ DEPENDENCIES
   coffee-rails
   colorize
   devise!
+  draper
   jquery-rails
   mysql2
   newrelic_rpm

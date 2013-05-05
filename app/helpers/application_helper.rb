@@ -26,17 +26,6 @@ module ApplicationHelper
     form.text_field klass.name.downcase, opts
   end
 
-  def link atom
-    case atom.value
-    when Value::True
-      link_to atom.property.name, atom.property
-    when Value::False
-      link_to "¬ #{atom.property.name}", atom.property
-    else
-      "#{link_to atom.property, atom.property} = #{link_to atom.value, atom.value}"
-    end
-  end
-
   def example_search str
     link_to str, search_path(q: str)
   end

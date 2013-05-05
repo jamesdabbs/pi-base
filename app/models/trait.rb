@@ -42,22 +42,22 @@ class Trait < ActiveRecord::Base
   end
   after_create :find_implied_traits
 
+  # ----------
+
   def name
-    "#{space} - #{property}"
+    atom.to_s
   end
+  cache_method :name
 
   def to_s
     name
   end
 
-  def to_atom
+  # ----------
+
+  def atom
     @atom ||= Formula::Atom.new property, value
   end
-
-  def assumption_description
-    to_atom.pretty_print
-  end
-  cache_method :assumption_description
 
   def explore
     property.theorems.each do |theorem|
@@ -67,5 +67,9 @@ class Trait < ActiveRecord::Base
         theorem.contrapositive.apply space
       end
     end
+  end
+
+  def destroy
+    raise # FIXME: implement destroy
   end
 end

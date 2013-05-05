@@ -16,13 +16,13 @@ class Proof
       # FIXME: use rabl?
       @nodes ||= @space.traits.includes(:supporters, :property, :value, :proof => :theorem).map do |trait|
         node = {
-          name: trait.assumption_description,
+          name: trait.name,
           id:   trait.id,
           root: root_if_unique(trait)
         }
         if trait.proof
           node[:theorem] = {
-            name: trait.proof.theorem.assumption_description,
+            name: trait.proof.theorem.name,
             id:   trait.proof.theorem_id
           }
         else

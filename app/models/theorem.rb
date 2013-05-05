@@ -32,20 +32,19 @@ class Theorem < ActiveRecord::Base
     Resque.enqueue TheoremExploreJob, id
   end
   after_create :queue_job
+
+  # ----------
   
-  def name &block
-    block ||= Proc.new { |atom| atom.pretty_print }
-    "#{antecedent.to_s &block} ⇒ #{consequent.to_s &block}"
-  end
-  
-  def to_s
+  def name
     "#{antecedent} ⇒ #{consequent}"
   end
-
-  def assumption_description
+  cache_method :name
+  
+  def to_s
     name
   end
-  cache_method :assumption_description
+
+  # ----------
 
   def contrapositive
     # FIXME: make an explict reason why these can never be saved over the original
@@ -77,5 +76,9 @@ class Theorem < ActiveRecord::Base
   def explore
     candidates.each                { |s| apply s }
     contrapositive.candidates.each { |s| contrapositive.apply s }
+  end
+
+  def destroy
+    raise # FIXME: implement
   end
 end

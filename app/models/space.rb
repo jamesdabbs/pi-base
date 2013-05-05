@@ -18,4 +18,9 @@ class Space < ActiveRecord::Base
     Proof::Tree.new self
   end
   cache_method :proof_tree
+
+  def available
+    ids = traits.pluck :property_id
+    Property.where('id NOT IN (?)', ids).pluck :name
+  end
 end

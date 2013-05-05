@@ -13,6 +13,11 @@ class Property < ActiveRecord::Base
     name
   end
 
+  def available
+    ids = traits.pluck :space_id
+    Space.where('id NOT IN (?)', ids).pluck :name
+  end
+
   # -- Formula convenience methods -----
   def to_atom
     Formula::Atom.new self, Value::True

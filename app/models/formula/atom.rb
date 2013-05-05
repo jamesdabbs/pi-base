@@ -17,8 +17,19 @@ class Formula::Atom < Formula
     new property, value
   end
 
+  def name
+    case value
+    when Value::True
+      yield property.name
+    when Value::False
+      "¬ #{property.name}"
+    else
+      "#{property.name} = #{value.name}"
+    end
+  end
+
   def to_s &block
-    block ? block.call(self) : "#{@property.name} = #{@value.name}"
+    block ? block.call(self) : name
   end
 
   def spaces where=true
@@ -59,20 +70,6 @@ class Formula::Atom < Formula
 
   def atoms
     [self]
-  end
-
-  # ----------
-
-  # FIXME: factor out printer object
-  def pretty_print
-    case value
-    when Value::True
-      property.name
-    when Value::False
-      "¬ #{property.name}"
-    else
-      to_s
-    end
   end
 
   private # ----------
