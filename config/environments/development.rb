@@ -26,4 +26,7 @@ Brubeck::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # Try out the production cache store.
+  config.cache_store = :redis_store
 end

@@ -7,6 +7,7 @@ gem 'thin'
 gem 'slim-rails'
 gem 'mysql2'
 gem 'resque'
+gem 'redis-rails'
 gem 'newrelic_rpm'
 
 gem 'capistrano', git: 'git://github.com/capistrano/capistrano.git'
