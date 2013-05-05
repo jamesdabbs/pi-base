@@ -1,11 +1,11 @@
 %h3
   %a{href: "/traits/#{@trait.id}"}= @trait.name
-  - if @trait.theorem
-    - for link in @graph.links
-      - if l.target.index = @trait.index
-        %li
-          %a{href: "/traits/#{l.source.id}"}= l.source.name
+- if @trait.theorem
+  - for link in @graph.links
+    - if link.target.id == @trait.id
       %li
-        %a{href: "/theorems/#{trait.theorem.id}"}= trait.theorem.name
-  - else
-    @trait.description
+        %a{href: "/traits/#{link.source.id}"}= link.source.name
+  %li
+    %a{href: "/theorems/#{@trait.theorem.id}"}= @trait.theorem.name
+- else
+  %p= @trait.description
