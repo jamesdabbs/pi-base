@@ -7,14 +7,7 @@ class ProofExplorer
     Math.max min, Math.min(val, max)
 
   focus: (trait) ->
-    $("#info_pane").html('<h3><a href="/traits/' + trait.id + '">' + trait.name + '</a></h3>')
-    if trait.theorem
-      $.each @graph.links, (i, l) ->
-        if l.target.index == trait.index
-          $('#info_pane').append('<li><a href="/traits/' + l.source.id + '">' + l.source.name + '</a></li>')
-      $('#info_pane').append('<li><a href="/theorems/' + trait.theorem.id + '">' + trait.theorem.name + '<a/></li>')
-    else
-      $('#info_pane').append(trait.description)
+    $('#info_pane').html JST['info_pane'](trait: trait, graph: @graph)
     MathJax.Hub.Queue ["Typeset", MathJax.Hub]
 
   done_loading: () ->
