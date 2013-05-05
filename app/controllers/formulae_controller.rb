@@ -8,6 +8,7 @@ class FormulaeController < ApplicationController
         @q = @formula.to_s  # Standardize for re-display
       rescue Formula::ParseError => e
         @error = e
+        @results = ThinkingSphinx.search @q
       end
     end
   end

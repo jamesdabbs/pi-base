@@ -8,6 +8,12 @@ GIT
       railties (>= 4.0.0.beta, < 5.0)
 
 GIT
+  remote: git://github.com/brianmario/mysql2.git
+  revision: fcb61fa796c19dd7730f9af6c870b38a6482b75a
+  specs:
+    mysql2 (0.3.12b6)
+
+GIT
   remote: git://github.com/capistrano/capistrano.git
   revision: 9d8a94046dce4c7dfc04950d7c754bcfca82c283
   specs:
@@ -98,6 +104,7 @@ GEM
     highline (1.6.18)
     hike (1.2.2)
     i18n (0.6.4)
+    innertube (1.0.2)
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -107,11 +114,11 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.1)
+    middleware (0.1.0)
     mime-types (1.23)
     minitest (4.7.3)
     mono_logger (1.0.1)
     multi_json (1.7.2)
-    mysql2 (0.3.11)
     net-scp (1.1.0)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.1)
@@ -163,6 +170,7 @@ GEM
       redis (>= 2.0.1)
       resque (>= 1.20.0)
       rufus-scheduler
+    riddle (1.5.5)
     rufus-scheduler (2.0.18)
       tzinfo (>= 0.3.23)
     sass (3.2.8)
@@ -198,6 +206,12 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
+    thinking-sphinx (3.0.2)
+      activerecord (>= 3.1.0)
+      builder (>= 2.1.2)
+      innertube (>= 1.0.2)
+      middleware (>= 0.1.0)
+      riddle (>= 1.5.4)
     thor (0.18.1)
     thread_safe (0.1.0)
       atomic
@@ -236,7 +250,7 @@ DEPENDENCIES
   execjs
   haml_coffee_assets
   jquery-rails
-  mysql2
+  mysql2!
   newrelic_rpm
   paper_trail!
   pry
@@ -246,6 +260,7 @@ DEPENDENCIES
   sass-rails
   slim-rails
   thin
+  thinking-sphinx
   turbolinks
   uglifier
   will_paginate

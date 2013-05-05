@@ -5,7 +5,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'thin'
 gem 'slim-rails'
-gem 'mysql2'
+gem 'mysql2', git: 'git://github.com/brianmario/mysql2.git'
 gem 'resque'
 gem 'newrelic_rpm'
 
@@ -23,6 +23,8 @@ gem 'redcarpet'
 gem 'paper_trail', git: 'git://github.com/airblade/paper_trail.git', branch: 'rails4'
 
 gem 'draper'
+
+gem 'thinking-sphinx'
 
 group :assets do
   gem 'sass-rails'

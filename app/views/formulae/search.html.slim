@@ -10,22 +10,32 @@
     = link_to 'GitHub issue', 'https://github.com/jamesdabbs/brubeck/issues/3'
     |  for view planned improvements or contribute ideas.
 
-- if @formula
-  h3 
-    | You searched for 
-    = @formula.to_s { |atom| link atom }.html_safe
-
+- if @results
   h3 #{@results.count} Results
   = bootstrap_will_paginate @results
-  ul
-    - @results.each do |space|
-      li= link_to space.name, space
 
-- elsif @error
-  .alert.alert-error
-    = @error
+  - if @formula
+    h3 
+      = @formula.to_s { |atom| AtomDecorator.new(atom).linked_name }.html_safe
+      |  Spaces
+
+    ul
+      - @results.each do |result|
+        dt= link_to  result.name, result
+        dd= truncate result.description, length: 250, separator: ' '
+
+  - elsif @error
+    .alert.alert-notice
+      p Could not parse '#{@q}' as a formula (#{@error}). Searching by text.
+
+    dl
+      - @results.each do |result|
+        dt= link_to  result.name, result
+        dd= truncate result.description, length: 250, separator: ' '
 
 - else
+  - unless @q.empty?
+    h3 No Results
   .examples
     | Try a search like:
     ul
