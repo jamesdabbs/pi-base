@@ -31,6 +31,20 @@ RSpec.configure do |config|
   config.order = "random"
 end
 
+require 'simplecov'
+SimpleCov.start do
+  add_filter '/spec/'
+  add_filter '/config/'
+  add_filter '/lib/'
+  add_filter '/vendor/'
+
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Models',      'app/models'
+  add_group 'Helpers',     'app/helpers'
+  add_group 'Mailers',     'app/mailers'
+  add_group 'Views',       'app/views'
+end if ENV['COVERAGE']
+
 RSpec::Matchers.define :satisfy do |formula|
   match do |space|
     !!formula.verify(space)
@@ -39,7 +53,7 @@ RSpec::Matchers.define :satisfy do |formula|
   failure_message_for_should do |space| 
     "#{space.name} should satisfy #{formula}"
   end
-  
+
   failure_message_for_should_not do |space|
     "#{space.name} should not satisfy #{formula}"
   end
