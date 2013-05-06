@@ -1,7 +1,7 @@
 class Value < ActiveRecord::Base
   # These are so ubiquitous that we'll prefetch and store them
-  True  = where(name: 'True').first!  rescue nil
-  False = where(name: 'False').first! rescue nil
+  True  = ValueSet::Boolean.values.where(name: 'True' ).first_or_create!
+  False = ValueSet::Boolean.values.where(name: 'False').first_or_create!
 
   belongs_to :value_set
   has_many :traits

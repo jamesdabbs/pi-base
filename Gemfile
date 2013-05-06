@@ -41,3 +41,8 @@ group :development do
   gem 'colorize'
   gem 'pry'
 end
+
+gem 'rspec-rails', group: [:development, :test]
+group :test do
+  gem 'factory_girl_rails'
+end

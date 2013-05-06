@@ -19,19 +19,19 @@ class Property < ActiveRecord::Base
   end
 
   # -- Formula convenience methods -----
-  def to_atom
-    Formula::Atom.new self, Value::True
+  def atom value=Value::True
+    Formula::Atom.new self, value
   end
 
   def ~
-    ~to_atom
+    ~atom
   end
 
   def + other
-    to_atom + other.to_atom
+    atom + other.atom
   end
 
   def | other
-    to_atom | other.to_atom
+    atom | other.atom
   end
 end

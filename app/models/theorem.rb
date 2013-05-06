@@ -29,7 +29,7 @@ class Theorem < ActiveRecord::Base
   scope :unproven, -> { where description: '' }
 
   def queue_job
-    Resque.enqueue TheoremExploreJob, id
+    Brubeck::Application.enqueue TheoremExploreJob, id
   end
   after_create :queue_job
 
@@ -48,7 +48,7 @@ class Theorem < ActiveRecord::Base
 
   def contrapositive
     # FIXME: make an explict reason why these can never be saved over the original
-    @contrapositive ||= Theorem.new antecedent: ~consequent, consequent: ~antecedent, id: id
+    @contrapositive ||= (~consequent) >> antecedent
   end
 
   def examples

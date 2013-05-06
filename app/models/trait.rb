@@ -38,7 +38,7 @@ class Trait < ActiveRecord::Base
   scope :unproven, -> { where deduced: false, description: '' }
 
   def find_implied_traits
-    Resque.enqueue TraitExploreJob, id
+    Brubeck::Application.enqueue TraitExploreJob, id
   end
   after_create :find_implied_traits
 

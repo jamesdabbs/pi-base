@@ -17,15 +17,8 @@ class Formula::Atom < Formula
     new property, value
   end
 
-  def name
-    case value
-    when Value::True
-      property.name
-    when Value::False
-      "¬ #{property.name}"
-    else
-      "#{property.name} = #{value.name}"
-    end
+  def self.dump atom
+    "#{atom.property.name} = #{atom.value.name}"
   end
 
   def to_s &block
@@ -73,6 +66,17 @@ class Formula::Atom < Formula
   end
 
   private # ----------
+
+  def name
+    case value
+    when Value::True
+      property.name
+    when Value::False
+      "¬ #{property.name}"
+    else
+      "#{property.name} = #{value.name}"
+    end
+  end
 
   def self.parse_name_or_id str, klass
     str.to_i.zero? ? klass.where(name: str).first! : klass.find(str.to_i)

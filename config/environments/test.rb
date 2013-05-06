@@ -34,3 +34,10 @@ Brubeck::Application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 end
+
+class Brubeck::Application
+  # Disable async processing while testing
+  def self.enqueue job, *args
+    job.perform *args
+  end
+end

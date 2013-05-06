@@ -19,6 +19,10 @@ class Formula
     Formula::Disjunction.new(self, other).flatten
   end
 
+  def >> other
+    Theorem.new antecedent: self, consequent: other
+  end
+
   def each &block
     subformulae.each &block
   end
@@ -29,14 +33,14 @@ class Formula
     return str if str.is_a? Formula
     conj, subs = parse_parens str
     if conj.nil?
-      Formula::Atom.load str
+      Atom.load str
     else
       subs.map { |s| load s }.inject &conj.to_sym
     end
   end
 
   def self.dump formula
-    formula.to_s
+    formula.to_s { |atom| Atom.dump atom }
   end
 
   def to_s &block
