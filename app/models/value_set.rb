@@ -1,7 +1,9 @@
 class ValueSet < ActiveRecord::Base
-  Boolean = where(name: 'Boolean').first_or_create!
-
   has_many :values
+
+  def self.boolean
+    @boolean ||= where(name: 'Boolean').first
+  end
 
   def to_s
     name

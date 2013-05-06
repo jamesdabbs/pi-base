@@ -29,6 +29,13 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  # Setup basic Value objects
+  config.before :all do
+    boolean = ValueSet.create! name: 'Boolean'
+    boolean.values.create! name: 'True'
+    boolean.values.create! name: 'False'
+  end
 end
 
 require 'simplecov'

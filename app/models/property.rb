@@ -19,7 +19,7 @@ class Property < ActiveRecord::Base
   end
 
   # -- Formula convenience methods -----
-  def atom value=Value::True
+  def atom value=Value.true
     Formula::Atom.new self, value
   end
 

@@ -29,7 +29,7 @@ class Formula::Disjunction < Formula
         index  += witnesses.length
       else
         if unknown
-          warn "Unable to force #{self} - too many unknowns"
+          Rails.logger.info "Unable to force #{self} - too many unknowns"
           return
         else
           unknown = sf

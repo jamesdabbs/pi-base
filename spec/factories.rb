@@ -7,6 +7,6 @@ FactoryGirl.define do
   factory :property do
     name        'Property'
     description 'Description'
-    value_set   ValueSet::Boolean
+    value_set   { ValueSet.boolean }
   end
 end

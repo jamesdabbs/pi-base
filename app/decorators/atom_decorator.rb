@@ -3,9 +3,9 @@ class AtomDecorator < Draper::Decorator
 
   def linked_name
     case value
-    when Value::True
+    when Value.true
       h.link_to property.name, property
-    when Value::False
+    when Value.false
       h.link_to "¬ #{property.name}", property
     else
       "#{h.link_to property, property} = #{h.link_to value, value}"

@@ -69,9 +69,9 @@ class Formula::Atom < Formula
 
   def name
     case value
-    when Value::True
+    when Value.true
       property.name
-    when Value::False
+    when Value.false
       "¬ #{property.name}"
     else
       "#{property.name} = #{value.name}"

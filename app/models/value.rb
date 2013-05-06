@@ -1,10 +1,14 @@
 class Value < ActiveRecord::Base
-  # These are so ubiquitous that we'll prefetch and store them
-  True  = ValueSet::Boolean.values.where(name: 'True' ).first_or_create!
-  False = ValueSet::Boolean.values.where(name: 'False').first_or_create!
-
   belongs_to :value_set
   has_many :traits
+
+  def self.true
+    @true ||= where(name: 'True' ).first
+  end
+
+  def self.false
+    @false ||= where(name: 'False').first
+  end
 
   def to_s
     name
@@ -15,8 +19,8 @@ class Value < ActiveRecord::Base
   end
 
   def ~
-    return False if self == True
-    return True  if self == False
+    return Value.false if self == Value.true
+    return Value.true  if self == Value.false
     Value.find(compliment).first
   end
 end
