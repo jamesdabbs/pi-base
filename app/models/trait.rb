@@ -44,21 +44,7 @@ class Trait < ActiveRecord::Base
 
   def self.table
     Rails.cache.fetch "/trait-table/#{Trait.maximum :updated_at}", expires_in: 1.day do
-      spaces     = Space.all.select    :id, :name
-      properties = Property.all.select :id, :name
-
-      values = {}
-      Value.all.each { |v| values[v.id] = v.name.sub('True', '+').sub('False', '-') }
-
-      traits = Hash[ spaces.map { |s| [s.id,{}] } ]
-      select(:id, :space_id, :property_id, :value_id).each do |t|
-        traits[t.space_id][t.property_id] ||= [t.id, values[t.value_id]]
-      end
-      {
-        spaces:     spaces,
-        properties: properties,
-        traits:     traits
-      }.to_json
+      Trait::Table.new.to_json
     end
   end
 
