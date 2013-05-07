@@ -4,9 +4,7 @@ describe Trait do
   subject { FactoryGirl.create :space }
   before(:each) { theorem.save! validate: false }
 
-  [:a, :b, :c].each do |sym|
-    let(sym) { FactoryGirl.create(:property, name: sym).atom }
-  end
+  atoms :a, :b, :c
 
   context 'simple implications' do
     let(:theorem) { a >> b }

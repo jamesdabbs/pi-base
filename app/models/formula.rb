@@ -58,7 +58,7 @@ class Formula
       if f.class == self.class
         fs += f.subformulae
       else
-        fs << f.subformulae
+        fs << f
       end
     end)
   end

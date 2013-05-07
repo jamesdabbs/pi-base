@@ -2,11 +2,8 @@ require 'spec_helper'
 
 # TODO: Check entire table against Counterexamples
 describe Space do
-  let(:a) { FactoryGirl.create(:property, name: :a).atom }
-
-  [:s, :t].each do |sym|
-    let(sym) { FactoryGirl.create :space, name: sym }
-  end
+  atoms  :a
+  spaces :s, :t
 
   before(:each) do
     s <<  a
