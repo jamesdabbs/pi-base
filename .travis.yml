@@ -8,3 +8,7 @@ branches:
 notifications:
   recipients:
     - jamesdabbs@gmail.com
+services:
+  - mysql
+before_script:
+  - mysql -e 'CREATE DATABASE brubeck_test;'

@@ -9,12 +9,9 @@ development:
 
 test:
   adapter:  mysql2
-  socket:   /tmp/mysql.sock
   database: brubeck_test
   username: root
-  password:
-  pool:     5
-  timeout:  5000
+  encoding: utf8
 
 production:
   adapter:  mysql2
