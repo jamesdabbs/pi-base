@@ -1,14 +1,6 @@
 = form_tag search_path, method: 'get', class: 'form-search' do
-  = text_field_tag :q, Formula.dump(@q), class: 'input-xxlarge', autocomplete: 'off'
+  = text_field_tag :q, @q, class: 'input-xxlarge', autocomplete: 'off'
   = submit_tag 'Search', class: 'btn btn-primary'
-
-.alert.alert-info
-  a.close data-dismiss="alert"
-    | &times;
-  #search-notice
-    | Search is actively under construction. See the 
-    = link_to 'GitHub issue', 'https://github.com/jamesdabbs/brubeck/issues/3'
-    |  for view planned improvements or contribute ideas.
 
 - if @results
   h3 #{@results.count} Results
