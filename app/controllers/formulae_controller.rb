@@ -12,4 +12,8 @@ class FormulaeController < ApplicationController
       end
     end
   end
+
+  def suggest
+    render json: Formula::Parser.new(params[:q]).suggestions
+  end
 end

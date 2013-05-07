@@ -17,7 +17,8 @@ Brubeck::Application.routes.draw do
 
   get 'unproven', to: 'application#unproven'
 
-  get 'search', to: 'formulae#search'
+  get 'search',  to: 'formulae#search'
+  get 'suggest', to: 'formulae#suggest'
 
   authenticate :user, lambda { |u| u.admin? } do
     mount Resque::Server.new, at: '/resque', as: 'resque'

@@ -9,26 +9,26 @@ class Formula
     end
 
     def process
-      return [] if @scanner.eos?
-
-      until @scanner.eos?
-        if scan /\\/
-          store
-          store_escaped
-        elsif scan /[^()+|\\]+/
-          store
-        elsif scan /\(/
-          store unless @depth.zero?
-          @depth += 1
-        elsif scan /\)/
-          @depth -= 1
-          store unless @depth.zero?
-        elsif scan /[+|]/
-          @depth.zero? ? set_conjunction : store
-        end
-      end
-
+      return  [] if @scanner.eos?
+      consume until @scanner.eos?
       [@conj, @result.map(&:strip)]
+    end
+
+    def consume
+      if scan /\\/
+        store
+        store_escaped
+      elsif scan /[^()+|\\]+/
+        store
+      elsif scan /\(/
+        store unless @depth.zero?
+        @depth += 1
+      elsif scan /\)/
+        @depth -= 1
+        store unless @depth.zero?
+      elsif scan /[+|]/
+        @depth.zero? ? set_conjunction : store
+      end
     end
 
     def scan exp
