@@ -75,35 +75,6 @@ class Formula
   end
 
   def self.parse_parens str
-    stripped = str =~ /^\((.*[\+\|].*)\)$/ ? $1 : str
-    scanner  = StringScanner.new stripped
-    result   = scanner.eos? ? Array.new : [""]
-    depth    = 0
-    conj     = nil
-
-    until scanner.eos?
-      if scanner.scan(/\\/)
-        result.last << scanner.matched
-        scanner.scan(/./)
-        result.last << scanner.matched
-      elsif scanner.scan(/[^()\+\|\\]+/)
-        result.last << scanner.matched
-      elsif scanner.scan(/\(/)
-        result.last << scanner.matched unless depth.zero?
-        depth += 1
-      elsif scanner.scan(/\)/)
-        depth -= 1
-        result.last << scanner.matched unless depth.zero?
-      elsif scanner.scan(/[\+\|]/)
-        if depth.zero?
-          conj ||= scanner.matched
-          raise "Mismatched conjunction" unless conj == scanner.matched
-          result << ""
-        else
-          result.last << scanner.matched
-        end
-      end
-    end
-    [conj, result.map(&:strip)]
+    Parser.new(str).process
   end
 end
