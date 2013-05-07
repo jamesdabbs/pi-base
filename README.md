@@ -1,5 +1,6 @@
 # Brubeck Topology Database
 
+[![Build Status](https://travis-ci.org/jamesdabbs/brubeck.png)](https://travis-ci.org/jamesdabbs/brubeck)
 [![Code Climate](https://codeclimate.com/github/jamesdabbs/brubeck.png)](https://codeclimate.com/github/jamesdabbs/brubeck)
 
 ### Testing locally
