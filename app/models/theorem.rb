@@ -5,7 +5,15 @@ class Theorem < ActiveRecord::Base
 
   serialize :antecedent, Formula
   serialize :consequent, Formula
+
   validates :antecedent, :consequent, :description, presence: true
+
+  def has_no_counterexamples
+    unless counterexamples.empty?
+      errors.add :consequent, "has a counterexample: #{counterexamples.first}"
+    end
+  end
+  validate :has_no_counterexamples
 
   # ----------
 
