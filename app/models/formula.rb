@@ -30,7 +30,7 @@ class Formula
   # -- Common formula interface -----
 
   def self.load str
-    return str if str.is_a? Formula
+    return str if str.nil? || str.is_a?(Formula)
     conj, subs = parse_parens str
     if conj.nil?
       Atom.load str
