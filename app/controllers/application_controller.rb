@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   def root
   end
 
+  def help
+  end
+
   def unproven
     @theorems = Theorem.unproven.paginate page: params[:theorems], per_page: 15
     @traits   = Trait.unproven.paginate   page: params[:traits],   per_page: 30

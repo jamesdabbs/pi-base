@@ -31,6 +31,7 @@ html lang="en"
                 li= link_to "Traits", traits_path
                 li= link_to "Theorems", theorems_path
                 li= link_to "Search", search_path
+                li= link_to "Help", help_path
               ul.nav.pull-right
                 - if current_user
                   li= link_to current_user.email, edit_user_registration_path

@@ -24,5 +24,6 @@ Brubeck::Application.routes.draw do
     mount Resque::Server.new, at: '/resque', as: 'resque'
   end
 
+  get 'help', to: 'application#help'
   root to: 'application#root'
 end
