@@ -14,6 +14,10 @@ set :deploy_to, "/srv/web/brubeck"
 set :user,      "brubeck"
 set :use_sudo,  false
 
+def link file
+  path = "#{release_path}/config/#{file}"
+  run "rm -f #{path} && ln -s /srv/web/brubeck/#{File.basename file} #{path}"
+end
 
 namespace :deploy do
   %w{ start stop restart }.each do |action|
@@ -23,13 +27,15 @@ namespace :deploy do
     end
   end
 
-  desc "copy db config file"
-  task :copy_db_config do
-    run "rm #{release_path}/config/database.yml && ln -s /srv/web/brubeck/database.yml #{release_path}/config/database.yml"
+  desc "copy credentials"
+  task :copy_credentials do
+    link "database.yml"
+    link "initializers/secret_token.rb"
+    link "initializers/email_settings.rb"
   end
 end
 
-after "deploy:update_code", "deploy:copy_db_config"
+after "deploy:update_code", "deploy:copy_credentials"
 after "deploy:restart", "resque:restart"
 after "deploy:restart", "deploy:cleanup"
 
