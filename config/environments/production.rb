@@ -77,4 +77,14 @@ Brubeck::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Exception notification mailer settings
+  config.action_mailer.delivery_method = :smtp
+
+  config.middleware.use ExceptionNotifier, email: {
+    email_prefix: '[Brubeck] ',
+    sender_address: %{"Error notification" <errors@topology.jdabbs.com>},
+    exception_recipients: %w{jamesdabbs@gmail.com}
+  }
+
 end

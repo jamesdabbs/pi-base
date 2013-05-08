@@ -8,6 +8,7 @@ gem 'slim-rails'
 gem 'mysql2', git: 'git://github.com/brianmario/mysql2.git'
 gem 'resque'
 gem 'newrelic_rpm'
+gem 'exception_notification', git: 'git://github.com/smartinez87/exception_notification.git'
 
 gem 'capistrano', git: 'git://github.com/capistrano/capistrano.git'
 gem 'capistrano-resque'
