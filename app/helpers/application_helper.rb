@@ -29,4 +29,11 @@ module ApplicationHelper
   def example_search str
     link_to str, search_path(q: str)
   end
+
+  def flash_class name
+    # Translate rails conventions to bootstrap conventions
+    return :success if name == :notice
+    return :error   if name == :alert
+    return name
+  end
 end
