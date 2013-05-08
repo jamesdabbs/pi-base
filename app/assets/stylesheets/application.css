@@ -66,3 +66,11 @@ html, body { height: 100%; }
   stroke: #999;
   stroke-opacity: .6;
 }
+
+#trait-table .property a {
+  display: block;
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  writing-mode: lr-tb;
+}
