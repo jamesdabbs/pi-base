@@ -1,5 +1,6 @@
 require "bundler/capistrano"
 require "capistrano-resque"
+require "thinking_sphinx/capistrano"
 
 set :application, "brubeck"
 set :repository,  "git@github.com:jamesdabbs/brubeck.git"
