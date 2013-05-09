@@ -95,8 +95,10 @@ html, body { height: 100%; }
 
 #trait-table .true {
   color: #468847;
+  text-shadow: 1px 1px #4a4a4a;
 }
 
 #trait-table .false {
   color: #b94a48;
+  text-shadow: 1px 1px #4a4a4a;
 }
