@@ -8,10 +8,8 @@ class Trait
     end
 
     def traits
-      values = {}
-      Value.all.each { |v| values[v.id] = v.name.sub('True', '+').sub('False', '-') }
-
-      result = Hash[ spaces.map { |s| [s.id,{}] } ]
+      values = Hash[ Value.all.map { |v| [v.id, v.to_i] } ]
+      result = Hash[ spaces.map    { |s| [s.id, {}    ] } ]
       Trait.select(:id, :space_id, :property_id, :value_id).each do |t|
         result[t.space_id][t.property_id] ||= [t.id, values[t.value_id]]
       end

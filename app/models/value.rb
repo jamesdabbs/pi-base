@@ -1,3 +1,4 @@
+
 class Value < ActiveRecord::Base
   belongs_to :value_set
   has_many :traits
@@ -22,5 +23,11 @@ class Value < ActiveRecord::Base
     return Value.false if self == Value.true
     return Value.true  if self == Value.false
     Value.find(compliment).first
+  end
+
+  def to_i
+    return 1 if self == Value.true
+    return 0 if self == Value.false
+    raise "Not Implemented"
   end
 end

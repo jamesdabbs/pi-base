@@ -13,4 +13,6 @@
         - value = @traits[s.space.id][p.property.id]
         %td.value
           - if value
-            %a{href: "/traits/#{value[0]}"}= value[1]
+            - klass = if value[1] then "true" else "false"
+            - sym   = if value[1] then "✓"    else "⨯"
+            %a{href: "/traits/#{value[0]}", class: klass}= sym
