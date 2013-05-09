@@ -1,7 +1,8 @@
 = form_tag search_path, method: 'get', class: 'form-search' do
   = text_field_tag :q, @q, class: 'input-xxlarge', autocomplete: 'off'
-  = submit_tag 'Search', class: 'btn btn-primary'
-
+  = button_tag "", class: 'btn btn-primary' do
+    = icon 'search'
+    |  Search
 - if @results
   h3 #{@results.count} Results
   = bootstrap_will_paginate @results

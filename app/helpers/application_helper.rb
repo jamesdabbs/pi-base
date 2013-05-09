@@ -36,4 +36,8 @@ module ApplicationHelper
     return :error   if name == :alert
     return name
   end
+
+  def icon name
+    "<i class='icon-#{name}'></i>".html_safe
+  end
 end
