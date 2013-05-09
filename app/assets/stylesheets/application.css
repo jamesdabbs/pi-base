@@ -68,11 +68,28 @@ html, body { height: 100%; }
   stroke-opacity: .6;
 }
 
+.uncontained {
+  margin-top: 60px;
+}
+
+#trait-table {
+  margin: 100px 12px 0;
+}
+
+#trait-table td, #trait-table a {
+  width: 1.5em;
+}
+
+#trait-table .space a {
+  width: 150px;
+}
+
 #trait-table .property a {
   display: block;
-  -webkit-transform: rotate(270deg);
-  -moz-transform: rotate(270deg);
-  -o-transform: rotate(270deg);
+  white-space: nowrap;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
   writing-mode: lr-tb;
 }
 

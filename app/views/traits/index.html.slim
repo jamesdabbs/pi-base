@@ -1,10 +1,12 @@
-h3 
-  | #{Trait.count} Traits 
-  = link_to 'New', new_trait_path, class: 'btn btn-mini'
+= content_for :uncontained do
+  .container
+    h3 
+      | #{Trait.count} Traits 
+      = link_to 'New', new_trait_path, class: 'btn btn-mini'
 
-table.table.table-condensed#trait-table
-  tr
-    td Loading traits ...
+  table.table.table-condensed#trait-table
+    tr
+      td Loading traits ...
 
 = onload do
   | new brubeck.TraitTable('#trait-table').render();

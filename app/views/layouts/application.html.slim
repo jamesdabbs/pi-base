@@ -39,6 +39,10 @@ html lang="en"
                   li= link_to "Login", new_user_session_path
                 li= link_to icon('question-sign'), help_path
 
+      - if content_for? :uncontained
+        .uncontained
+          = yield :uncontained
+
       .container
         .flash
           - flash.each do |name, msg|
