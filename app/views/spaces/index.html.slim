@@ -2,8 +2,4 @@ h3
   | #{Space.count} Spaces 
   = link_to 'New', new_space_path, class: 'btn btn-mini'
 
-= bootstrap_will_paginate @spaces
-
-ul
-  - @spaces.each do |space|
-    li= link_to space.name, space
+= render 'application/definitions', list: @spaces

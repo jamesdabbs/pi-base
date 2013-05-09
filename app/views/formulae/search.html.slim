@@ -5,26 +5,19 @@
     |  Search
 - if @results
   h3 #{@results.count} Results
-  = bootstrap_will_paginate @results
 
   - if @formula
     h3 
       = @formula.to_s { |atom| AtomDecorator.new(atom).linked_name }.html_safe
       |  Spaces
 
-    ul
-      - @results.each do |result|
-        dt= link_to  result.name, result
-        dd= truncate result.description, length: 250, separator: ' '
+    = render 'application/definitions', list: @results
 
   - elsif @error
     .alert.alert-notice
       p Could not parse '#{@q}' as a formula (#{@error}). Searching by text.
 
-    dl
-      - @results.each do |result|
-        dt= link_to  result.name, result
-        dd= truncate result.description, length: 250, separator: ' '
+    = render 'application/definitions', list: @results
 
 - else
   - unless @q.nil?

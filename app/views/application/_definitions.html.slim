@@ -1,0 +1,6 @@
+= bootstrap_will_paginate list
+
+dl
+  - list.each do |item|
+    dt= link_to item.name, item
+    dd= markdown truncate item.description, length: 250, separator: ' '

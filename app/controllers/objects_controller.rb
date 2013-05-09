@@ -2,7 +2,7 @@ class ObjectsController < ApplicationController
   before_action :set_object, only: [:show, :edit, :update, :destroy]
 
   def index
-    self.objects = object_class.paginate page: params[:page], per_page: 30
+    self.objects = object_class.paginate page: params[:page], per_page: 15
   end
 
   def show

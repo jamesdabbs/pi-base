@@ -2,8 +2,4 @@ h3
   | #{Property.count} Properties 
   = link_to 'New', new_property_path, class: 'btn btn-mini'
 
-= bootstrap_will_paginate @properties
-
-ul
-  - @properties.each do |property|
-    li= link_to property.name, property
+= render 'application/definitions', list: @properties
