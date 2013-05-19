@@ -28,7 +28,8 @@ class Formula::Atom < Formula
   def spaces where=true
     if where.nil?
       set = @property.traits.pluck :space_id
-      Space.where('id NOT IN (?)', set).pluck :id
+      spaces = set.empty? ? Space : Space.where('id NOT IN (?)', set)
+      spaces.pluck :id
     elsif where
       @property.traits.where(value_id: @value.id).pluck :space_id
     else
