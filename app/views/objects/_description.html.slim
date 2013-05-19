@@ -1,0 +1,31 @@
+.row
+  .span6
+    .control-group
+      = f.label :description
+      .controls
+        = f.text_area :description, rows: 15, id: 'description-input', class: 'span6'
+  .span6
+    .control-group
+      = f.label :latex_preview
+      .controls#description-preview
+
+javascript:
+  $(function() {
+    var preview = function() {
+      text = $('#description-input').val();
+      $('#description-preview').html(text);
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub, "description-preview"]);
+    }
+
+    preview();
+
+    // Re-preview on keyup, with a timed typing buffer
+    var preview_timeout = null;
+    $('#description-input').keyup(function(e) {
+      if (preview_timeout != null) { clearTimeout(preview_timeout); }
+      preview_timeout = setTimeout(function() {
+        preview_timeout = null;
+        preview();
+      }, 300);
+    });
+  });

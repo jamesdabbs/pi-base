@@ -8,10 +8,23 @@ class Theorem < ActiveRecord::Base
 
   validates :antecedent, :consequent, :description, presence: true
 
+  def formulae_are_valid
+    [:antecedent, :consequent].each do |f|
+      begin
+        Formula.load send f
+      rescue => e
+        errors.add f, "could not be parsed as a formula: #{e}"
+      end
+    end
+  end
+  validate :formulae_are_valid
+
   def has_no_counterexamples
     unless counterexamples.empty?
       errors.add :consequent, "has a counterexample: #{counterexamples.first}"
     end
+  rescue Formula::ParseError => e
+    # Will be handled by another validation
   end
   validate :has_no_counterexamples
 

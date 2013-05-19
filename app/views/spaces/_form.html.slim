@@ -10,8 +10,7 @@
     = f.label :name
     .controls
       = f.text_field :name, class: 'span12'
-  .control-group
-    = f.label :description
-    .controls
-      = f.text_area :description, rows: 15, class: 'span12'
+  
+  = render 'objects/description', f: f
+
   .actions = f.submit 'Save', class: 'btn btn-primary'

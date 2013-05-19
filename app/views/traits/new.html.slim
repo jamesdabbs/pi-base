@@ -22,10 +22,9 @@ h1 New Trait
     = f.label :value
     .controls
       = typeahead f, Value, class: 'span12'
-  .control-group
-    = f.label :description
-    .controls
-      = f.text_area :description, rows: 15, class: 'span12', autocomplete: false
+
+  = render 'objects/description', f: f
+
   .actions = f.submit 'Save', class: 'btn btn-primary'
 
 javascript:
