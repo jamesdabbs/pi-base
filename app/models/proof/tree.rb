@@ -4,6 +4,8 @@ class Proof
       @space = space
     end
 
+    # -- Proof trace rendering tools -----
+
     def root_if_unique trait
       if trait.supporters.length == 1
         trait.supporters.first.assumed_id
@@ -49,6 +51,24 @@ class Proof
 
     def as_json opts={}
       { nodes: nodes, links: links }
+    end
+
+    # -- Trait deletion tools -----
+
+    def excise trait_id
+      trait = @space.traits.find trait_id
+      raise "You must excise the root (manually input) trait" if trait.deduced?
+
+      supports = trait.supports.includes(implied: { property: :theorems })
+      theorems = supports.flat_map { |t| t.implied.property.theorems }.uniq
+
+      supports.delete_all
+      trait.delete
+
+      theorems.each do |t|
+        t.apply                @space
+        t.contrapositive.apply @space
+      end
     end
   end
 end
