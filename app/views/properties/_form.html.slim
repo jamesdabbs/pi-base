@@ -6,6 +6,7 @@
         - @property.errors.full_messages.each do |message|
           li = message
 
+  = f.hidden_field :value_set_id, value: Value::true.value_set_id
   .control-group
     = f.label :name
     .controls
