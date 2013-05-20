@@ -43,7 +43,13 @@ html lang="en"
         .uncontained
           = yield :uncontained
 
+
       .container
+        noscript
+          div class="alert alert-notice"
+            h4 Javascript Disabled!
+            p It looks like Javascript is disabled in your browser. Some features on this site will not work correctly unless you re-enable it. #{link_to "Click here", "http://www.enable-javascript.com/"} for more information.
+        
         .flash
           - flash.each do |name, msg|
             div class="alert alert-#{flash_class name}"
