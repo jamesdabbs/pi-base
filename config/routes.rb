@@ -4,6 +4,7 @@ Brubeck::Application.routes.draw do
   devise_for :users
 
   resources :spaces do
+    get :related
     get :proofs
   end
 

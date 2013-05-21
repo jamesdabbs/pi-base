@@ -1,0 +1,13 @@
+.tabbable
+  %ul.nav.nav-tabs
+    - for name, group of @traits
+      %li{ class: group.class }
+        %a{ href: "#" + group.id, "data-toggle" => "tab" } #{name}
+  .tab-content
+    - for name, group of @traits
+      .tab-pane{class: group.class, id: group.id}
+        %ul
+          - for trait in group.members
+            %li
+              %a{ href: "/traits/" + trait.id }
+                = trait.id

@@ -1,4 +1,4 @@
-class ProofExplorer
+window.brubeck.ProofExplorer = class ProofExplorer
   constructor: () ->
     @w = 600
     @h = 600
@@ -8,7 +8,7 @@ class ProofExplorer
 
   focus: (trait) ->
     $('#info_pane').html JST['info_pane'](trait: trait, graph: @graph)
-    MathJax.Hub.Queue ["Typeset", MathJax.Hub]
+    brubeck.render_latex()
 
   done_loading: () ->
     $(".loading").remove()
@@ -74,6 +74,3 @@ class ProofExplorer
             .attr("y1", (d) -> d.source.y)
             .attr("x2", (d) -> d.target.x)
             .attr("y2", (d) -> d.target.y)
-
-window.brubeck ?= {}
-window.brubeck.ProofExplorer = ProofExplorer

@@ -63,12 +63,12 @@ html lang="en"
         javascript:
           $(function() {
             #{yield :onload}
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            brubeck.render_latex();
           })
     
       #push
 
     footer
       .container
-        p &copy; James Dabbs 2012 - #{Time.now.year}
+        p &copy; #{link_to 'James Dabbs', 'http://jdabbs.com'} 2012 - #{Time.now.year}
 

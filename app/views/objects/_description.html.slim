@@ -14,7 +14,7 @@ javascript:
     var preview = function() {
       text = $('#description-input').val();
       $('#description-preview').html(text);
-      MathJax.Hub.Queue(["Typeset", MathJax.Hub, "description-preview"]);
+      brubeck.render_latex("description-preview");
     }
 
     preview();

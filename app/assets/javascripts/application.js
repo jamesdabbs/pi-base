@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require underscore
 //= require d3.v3
 //= require google_analytics
 //= require hamlcoffee
+//= require ./brubeck
 //= require_tree .

@@ -1,4 +1,4 @@
-class FormulaTypeahead
+window.brubeck.FormulaTypeahead = class FormulaTypeahead
   constructor: (selector, properties, values) ->
     @$el        = $(selector)
     @properties = properties
@@ -29,6 +29,3 @@ class FormulaTypeahead
           ws = current.match /^\s+/
           prefix += ws[0] if ws
           $.map @properties, (p) -> prefix + p
-
-window.brubeck ?= {}
-window.brubeck.FormulaTypeahead = FormulaTypeahead
