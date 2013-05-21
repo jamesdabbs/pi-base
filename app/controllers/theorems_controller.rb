@@ -2,6 +2,7 @@ class TheoremsController < ObjectsController
   @object_class = Theorem
 
   def show
+    @converse_counters = @theorem.converse.counterexamples
   end
 
   def related

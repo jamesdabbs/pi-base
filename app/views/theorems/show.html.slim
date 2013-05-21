@@ -18,6 +18,17 @@ h1
   - else
     = markdown @theorem.description
 
+- if @converse_counters
+  p This implication does not reverse, as evidenced by
+  ul
+    - if @converse_counters.length > 4
+      - @converse_counters.first(3).each do |ex|
+        li= link_to ex.name, ex
+      li and #{@converse_counters.length - 3} others
+    - else
+      - @converse_counters.each do |ex|
+        li= link_to ex.name, ex
+
 #traits
 = onload do
   | new brubeck.RelatedTraits('#traits', true);

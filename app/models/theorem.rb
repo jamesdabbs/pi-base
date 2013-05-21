@@ -72,6 +72,10 @@ class Theorem < ActiveRecord::Base
     @contrapositive ||= (~consequent) >> ~antecedent
   end
 
+  def converse
+    @converse ||= consequent >> antecedent
+  end
+
   def examples
     @examples ||= Space.by_formula antecedent => true, consequent => true
   end
