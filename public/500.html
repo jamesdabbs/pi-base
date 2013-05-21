@@ -1,26 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>We're sorry, but something went wrong (500)</title>
-  <style>
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-  </style>
-</head>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>500 | Brubeck</title>
 
-<body>
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <h1>We're sorry, but something went wrong.</h1>
-  </div>
-  <p>If you are the application owner check the logs for more information.</p>
-</body>
+    <!--Le HTML5 shim, for IE6-8 support of HTML elements-->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script>
+    <![endif]-->
+    <link href="/assets/application.css?body=1" media="all" rel="stylesheet" />
+    <link href="/assets/bootstrap.css?body=1" media="all" rel="stylesheet" />
+    <link href="/assets/darkstrap.css?body=1" media="all" rel="stylesheet" />
+    <link href="/assets/font-awesome.css?body=1" media="all" rel="stylesheet" />
+
+    <style type="text/css">
+      .hero-unit {
+        margin-top: 120px;
+      }
+
+      .hero-unit h1 {
+        margin-bottom: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="container">
+        <div class="hero-unit">
+          <h1>Uh-oh <small>Something went wrong</small></h1>
+          <p>These errors should automatically generate an email notification, but feel free to <a href="mailto:jamesdabbs+brubeck@gmail.com">email me</a> or <a href="https://github.com/jamesdabbs/brubeck/issues">open a bug report</a> if the problem persists.</p>
+          <input type="button" onclick="history.back();" class="btn btn-primary" value="&larr; Go Back">
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
