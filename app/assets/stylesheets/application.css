@@ -122,3 +122,11 @@ html, body { height: 100%; }
 #revisions .description > td {
   padding-bottom: 2em;
 }
+
+ins.differ {
+  color: #468847;
+}
+
+del.differ {
+  color: #b94a48;
+}

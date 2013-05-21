@@ -22,4 +22,4 @@ table#revisions.table.table-condensed.table-striped
         td= v.event.capitalize
         td= link_to item.name, item
       tr.description
-        td{ colspan=3 }= markdown item.description
+        td{ colspan=3 }= word_diff v

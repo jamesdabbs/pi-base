@@ -98,6 +98,7 @@ GEM
     daemons (1.1.9)
     debug_inspector (0.0.2)
     diff-lcs (1.2.4)
+    differ (0.1.2)
     draper (1.2.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -275,6 +276,7 @@ DEPENDENCIES
   coffee-rails
   colorize
   devise!
+  differ
   draper
   exception_notification!
   execjs

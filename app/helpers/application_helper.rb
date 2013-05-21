@@ -40,4 +40,12 @@ module ApplicationHelper
   def icon name
     "<i class='icon-#{name}'></i>".html_safe
   end
+
+  def word_diff version
+    # FIXME: what about name changes?
+    from, to = version.changeset[:description]
+    Differ.diff_by_word(to, from).format_as(:html).html_safe
+  rescue
+    version.reify.description rescue nil
+  end
 end
