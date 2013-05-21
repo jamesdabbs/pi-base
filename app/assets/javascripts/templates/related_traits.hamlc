@@ -1,13 +1,19 @@
 .tabbable
+  %form.form-search.pull-right
+    %input{ type: "text", class: "search-query", placeholder: "Type to filter " }
+
   %ul.nav.nav-tabs
+    %li.header.disabled
+      %a Traits:
     - for name, group of @traits
       %li{ class: group.class }
         %a{ href: "#" + group.id, "data-toggle" => "tab" } #{name}
+
   .tab-content
     - for name, group of @traits
       .tab-pane{class: group.class, id: group.id}
         %ul
           - for trait in group.members
-            %li
+            %li{ "data-name" => trait.name.toLowerCase() }
               %a{ href: "/traits/" + trait.id }
                 = trait.name

@@ -1,6 +1,8 @@
 window.brubeck.RelatedTraits = class RelatedTraits
-  constructor: () ->
-    @fetch_traits (traits) ->
+  constructor: (selector) ->
+    @$el = $(selector || '#traits')
+
+    @fetch_traits (traits) =>
       i = 0
       _.each _(traits).keys(), (group) ->
         members = traits[group]
@@ -13,7 +15,11 @@ window.brubeck.RelatedTraits = class RelatedTraits
           class:   if i == 0 then "active" else ""
           id:      "related-" + i
         i += 1
-      $('#traits').html JST['related_traits'] traits:traits
+      @$el.html JST['related_traits'] traits:traits
+
+      @$el.find('.form-search').keyup (e) =>
+        brubeck.delay 200, () =>
+          @filter @$el.find('.form-search input').val()
 
   fetch_traits: (cb) ->
     $.ajax 
@@ -21,3 +27,12 @@ window.brubeck.RelatedTraits = class RelatedTraits
       success: cb
       error: (xhr, text, err) ->
         console.log "Could not fetch related traits:", text, err
+
+  filter: (val) ->
+    # TODO: make this a Backbone view
+    @$el.find('.tab-pane li').each (i, li) ->
+      $li = $(li)
+      if $li.data('name').indexOf(val) == -1
+        $li.hide()
+      else
+        $li.show()

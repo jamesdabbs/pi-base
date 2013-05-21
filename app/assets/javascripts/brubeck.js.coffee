@@ -4,3 +4,10 @@ window.brubeck =
       MathJax.Hub.Queue ["Typeset", MathJax.Hub, el]
     else
       MathJax.Hub.Queue ["Typeset", MathJax.Hub]
+
+  delay: (() ->
+    timer = 0
+    (ms, cb) ->
+      clearTimeout timer
+      timer = setTimeout cb, ms
+  )()

@@ -16,6 +16,7 @@
  */
 html, body { height: 100%; }
 
+/* Sticky footer */
 #wrap {
   min-height: 100%;
   height: auto !important;
@@ -37,6 +38,7 @@ html, body { height: 100%; }
   text-decoration: underline;
 }
 
+/* Proof explorer */
 #proofs_pane {
   padding: 0;
   position: relative;
@@ -68,6 +70,7 @@ html, body { height: 100%; }
   stroke-opacity: .6;
 }
 
+/* Trait table */
 .uncontained {
   margin-top: 60px;
 }
@@ -101,4 +104,15 @@ html, body { height: 100%; }
 #trait-table .false {
   color: #b94a48;
   text-shadow: 1px 1px #4a4a4a;
+}
+
+/* Related trait tabs */
+.nav > .disabled.header > a, .nav > .disabled.header > a:hover {
+  font-size: 18px;
+  color: #c6c6c6;
+  font-weight: bold;
+}
+
+.tabbable .form-search {
+  margin-bottom: 0;
 }
