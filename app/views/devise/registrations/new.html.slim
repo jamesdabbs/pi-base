@@ -1,4 +1,4 @@
-h2 Sign in
+h2 Sign up
 
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   .control-group
@@ -11,10 +11,11 @@ h2 Sign in
     .controls
       = f.password_field :password
 
-  - if devise_mapping.rememberable?
-    = f.check_box :remember_me
-    = f.label :remember_me
+  .control-group
+    = f.label :password_confirmation
+    .controls
+      = f.password_field :password_confirmation
 
-  = f.submit 'Sign in', class: 'btn btn-primary'
+  = f.submit 'Sign up', class: 'btn btn-primary'
 
-p Forgot your password? #{link_to 'Recover it', new_user_password_path}.
+p Already have an account? #{link_to 'Sign in', new_user_session_path}.
