@@ -4,16 +4,22 @@ Brubeck::Application.routes.draw do
   devise_for :users
 
   resources :spaces do
+    get :related
     get :proofs
   end
 
-  resources :properties
+  resources :properties do
+    get :related
+  end
   
   resources :traits, except: [:delete] do
+    get :related
     collection { get :available }
   end
   
-  resources :theorems, except: [:delete]
+  resources :theorems, except: [:delete] do
+    get :related
+  end
 
   get 'unproven', to: 'application#unproven'
 

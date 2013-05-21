@@ -59,6 +59,10 @@ class Trait < ActiveRecord::Base
     name
   end
 
+  def as_json opts={}
+    super.merge name: opts[:add_space] ? "#{space}: #{name}" : name
+  end
+
   # ----------
 
   def atom

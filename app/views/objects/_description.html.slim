@@ -14,18 +14,12 @@ javascript:
     var preview = function() {
       text = $('#description-input').val();
       $('#description-preview').html(text);
-      MathJax.Hub.Queue(["Typeset", MathJax.Hub, "description-preview"]);
+      brubeck.render_latex("description-preview");
     }
 
     preview();
 
-    // Re-preview on keyup, with a timed typing buffer
-    var preview_timeout = null;
     $('#description-input').keyup(function(e) {
-      if (preview_timeout != null) { clearTimeout(preview_timeout); }
-      preview_timeout = setTimeout(function() {
-        preview_timeout = null;
-        preview();
-      }, 300);
+      brubeck.delay(300, preview);
     });
   });

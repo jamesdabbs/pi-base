@@ -6,19 +6,6 @@ h1
 .well
   = markdown @space.description
 
-h3 
-  | Traits 
-  = link_to 'All', space_proofs_path(@space), class: 'btn btn-mini'
-.row
-  .span6
-    h4 Manually Added
-    = bootstrap_will_paginate @direct, param_name: :direct
-    ul
-      - @direct.each do |trait|
-        li= link_to trait.name, trait
-  .span6
-    h4 Automatically Generated
-    = bootstrap_will_paginate @deduced, param_name: :deduced
-    ul
-      - @deduced.each do |trait|
-        li= link_to trait.name, trait
+#traits
+= onload do
+  | new brubeck.RelatedTraits('#traits');
