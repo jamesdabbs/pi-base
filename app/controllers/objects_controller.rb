@@ -1,14 +1,11 @@
 class ObjectsController < ApplicationController
-  before_action :set_object, only: [:show, :edit, :update, :destroy]
+  before_action :set_object, only: [:show, :edit, :update, :destroy, :related]
 
   def index
     self.objects = object_class.paginate page: params[:page], per_page: 15
   end
 
   def show
-    traits   = object.traits.includes :property, :value
-    @direct  = traits.direct.paginate  page: params[:direct],  per_page: 15
-    @deduced = traits.deduced.paginate page: params[:deduced], per_page: 15
   end
 
   def new
@@ -57,6 +54,10 @@ class ObjectsController < ApplicationController
     object_class.model_name.singular
   end
 
+  def object_id
+    params[:id] || params[:"#{object_name}_id"]
+  end
+
   def objects= objs
     instance_variable_set :"@#{object_class.model_name.plural}", objs
   end
@@ -70,7 +71,7 @@ class ObjectsController < ApplicationController
   end
 
   def set_object
-    self.object = object_class.find params[:id]
+    self.object = object_class.find object_id
   end
 
   def create_params

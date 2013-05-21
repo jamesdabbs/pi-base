@@ -18,8 +18,6 @@ h1
   - else
     = markdown @theorem.description
 
-h3 Implied Traits
-= bootstrap_will_paginate @traits
-ul
-  - @traits.each do |trait|
-    li= link_to "#{trait.space}: #{trait.name}", trait
+#traits
+= onload do
+  | new brubeck.RelatedTraits('#traits', true);

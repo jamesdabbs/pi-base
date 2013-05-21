@@ -12,16 +12,6 @@ ul
   - @theorems.each do |theorem|
     li= link_to theorem.name, theorem
 
-.row
-  .span6
-    h4 Manually Added Traits
-    = bootstrap_will_paginate @direct, param_name: :direct
-    ul
-      - @direct.each do |trait|
-        li= link_to "#{trait.space.name}: #{trait.value.name}", trait
-  .span6
-    h4 Automatically Generated Traits
-    = bootstrap_will_paginate @deduced, param_name: :deduced
-    ul
-      - @deduced.each do |trait|
-        li= link_to "#{trait.space.name}: #{trait.value.name}", trait
+#traits
+= onload do
+  | new brubeck.RelatedTraits('#traits', true);

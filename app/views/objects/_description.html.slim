@@ -19,13 +19,7 @@ javascript:
 
     preview();
 
-    // Re-preview on keyup, with a timed typing buffer
-    var preview_timeout = null;
     $('#description-input').keyup(function(e) {
-      if (preview_timeout != null) { clearTimeout(preview_timeout); }
-      preview_timeout = setTimeout(function() {
-        preview_timeout = null;
-        preview();
-      }, 300);
+      brubeck.delay(300, preview);
     });
   });

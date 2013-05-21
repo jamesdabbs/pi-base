@@ -14,6 +14,7 @@
       .tab-pane{class: group.class, id: group.id}
         %ul
           - for trait in group.members
-            %li{ "data-name" => trait.name.toLowerCase() }
+            - trait_name = trait.name.replace "#{@trim}: ", ''
+            %li{ "data-name" => trait_name.toLowerCase() }
               %a{ href: "/traits/" + trait.id }
-                = trait.name
+                = trait_name

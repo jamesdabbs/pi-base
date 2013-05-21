@@ -9,7 +9,18 @@ class TraitsController < ObjectsController
   end
 
   def show
-    # Traits don't have direct / deduced related
+  end
+
+  def related
+    traits = @trait.consequences.includes trait: [:property, :value]
+    render json: { "Implied" => traits }
+  end
+
+  def related
+    consequences = Trait.find(params[:trait_id]).consequences.includes(:trait).map &:trait
+    render json: {
+      "Automatically Generated" => consequences
+    }
   end
 
   def available

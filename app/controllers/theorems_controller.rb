@@ -2,7 +2,11 @@ class TheoremsController < ObjectsController
   @object_class = Theorem
 
   def show
-    @traits = @theorem.traits.includes(:space, :property, :value).paginate page: params[:page], per_page: 20
+  end
+
+  def related
+    traits = @theorem.traits.includes :space, :property, :value
+    render json: { "Implied" => traits }.as_json(add_space: true)
   end
 
   private #-----

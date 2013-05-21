@@ -27,8 +27,7 @@ h1
     - else
       = markdown @trait.description
 
-- if @trait.consequences.any?
-  h3 Implied Traits
-  ul
-    - @trait.consequences.includes(:trait).each do |proof|
-      li= link_to proof.trait.name, proof.trait
+
+#traits
+= onload do
+  | new brubeck.RelatedTraits('#traits');

@@ -8,13 +8,18 @@ Brubeck::Application.routes.draw do
     get :proofs
   end
 
-  resources :properties
+  resources :properties do
+    get :related
+  end
   
   resources :traits, except: [:delete] do
+    get :related
     collection { get :available }
   end
   
-  resources :theorems, except: [:delete]
+  resources :theorems, except: [:delete] do
+    get :related
+  end
 
   get 'unproven', to: 'application#unproven'
 
