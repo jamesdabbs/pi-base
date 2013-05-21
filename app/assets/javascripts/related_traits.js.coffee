@@ -2,6 +2,8 @@ window.brubeck.RelatedTraits = class RelatedTraits
   constructor: (selector, @spaces) ->
     @$el = $(selector || '#traits')
 
+    @$el.html $ '<p>Loading related Traits <i class="icon-spinner icon-spin"></i>'
+
     @fetch_traits (traits) =>
       i = 0
       _.each _(traits).keys(), (group) ->
