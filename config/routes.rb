@@ -21,6 +21,8 @@ Brubeck::Application.routes.draw do
     get :related
   end
 
+  resources :users, only: [:show]
+
   get 'unproven', to: 'application#unproven'
 
   get 'search',  to: 'formulae#search'

@@ -117,3 +117,8 @@ html, body { height: 100%; }
 .tabbable .form-search {
   margin-bottom: 0;
 }
+
+/* Revision list */
+#revisions .description > td {
+  padding-bottom: 2em;
+}

@@ -1,0 +1,25 @@
+h1
+  = @user.email
+  - if @user.id == current_user.id
+    '
+    = link_to 'Edit', edit_user_registration_path, class: 'btn btn-mini'
+
+p User since #{@user.created_at.to_date}
+
+h3= pluralize @edits.count, "Edit"
+= bootstrap_will_paginate @edits
+table#revisions.table.table-condensed.table-striped
+  thead
+    tr
+      th Time
+      th Action
+      th Object
+  tbody
+    - @edits.each do |v|
+      - item = v.item
+      tr
+        td #{time_ago_in_words v.created_at} ago
+        td= v.event.capitalize
+        td= link_to item.name, item
+      tr.description
+        td{ colspan=3 }= markdown item.description
