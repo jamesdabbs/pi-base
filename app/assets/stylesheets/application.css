@@ -29,6 +29,7 @@ html, body { height: 100%; }
 }
 
 #push, footer {
+  margin-top: 30px;
   height: 60px;
   display: block;
 }
