@@ -10,4 +10,4 @@
           - for trait in group.members
             %li
               %a{ href: "/traits/" + trait.id }
-                = trait.id
+                = trait.name

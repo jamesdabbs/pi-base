@@ -59,6 +59,10 @@ class Trait < ActiveRecord::Base
     name
   end
 
+  def as_json opts={}
+    super.merge name: name
+  end
+
   # ----------
 
   def atom
