@@ -36,6 +36,9 @@ class Trait < ActiveRecord::Base
   scope :deduced, -> { where deduced: true  }
 
   scope :unproven, -> { where deduced: false, description: '' }
+  def unproven?
+    !deduced? && description.blank?
+  end
 
   def find_implied_traits
     Brubeck::Application.enqueue TraitExploreJob, id

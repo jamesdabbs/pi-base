@@ -7,11 +7,15 @@ class PropertiesController < ObjectsController
   end
 
   def related
-    traits = @property.traits.includes :space, :property, :value
+    deduced, direct = @property.traits.
+      includes(:space, :property, :value).
+      sort_by { |t| t.space.name }.
+      partition { |t| t.deduced? }
+
     render json: {
-      "Manually Added"          => traits.direct,
-      "Automatically Generated" => traits.deduced,
-      "Needing Proofs"          => traits.unproven
+      "Manually Added"          => direct,
+      "Automatically Generated" => deduced,
+      "Needing Proofs"          => direct.select(&:unproven?)
     }.as_json(add_space: true)
   end
 

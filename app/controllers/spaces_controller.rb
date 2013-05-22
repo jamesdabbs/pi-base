@@ -2,11 +2,15 @@ class SpacesController < ObjectsController
   @object_class = Space
 
   def related
-    traits = @space.traits.includes :property, :value
+    deduced, direct = @space.traits.
+      includes(:property, :value).
+      sort_by { |t| t.property.name }.
+      partition { |t| t.deduced? }
+
     render json: {
-      "Manually Added"          => traits.direct,
-      "Automatically Generated" => traits.deduced,
-      "Needing Proofs"          => traits.unproven
+      "Manually Added"          => direct,
+      "Automatically Generated" => deduced,
+      "Needing Proofs"          => direct.select(&:unproven?)
     }
   end
 

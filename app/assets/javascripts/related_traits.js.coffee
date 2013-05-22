@@ -1,5 +1,5 @@
 window.brubeck.RelatedTraits = class RelatedTraits
-  constructor: (selector, @spaces) ->
+  constructor: (selector) ->
     @$el = $(selector || '#traits')
 
     @$el.html $ '<p>Loading related Traits <i class="icon-spinner icon-spin"></i>'
@@ -27,7 +27,6 @@ window.brubeck.RelatedTraits = class RelatedTraits
   fetch_traits: (cb) ->
     $.ajax 
       url: window.location.pathname + "/related.json"
-      data: { 'spaces': @spaces }
       success: cb
       error: (xhr, text, err) ->
         console.log "Could not fetch related traits:", text, err

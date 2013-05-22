@@ -6,7 +6,10 @@ class TheoremsController < ObjectsController
   end
 
   def related
-    traits = @theorem.traits.includes :space, :property, :value
+    traits = @theorem.traits.
+      includes(:space, :property, :value).
+      sort_by { |t| [t.space.name, t.property.name] }
+
     render json: { "Implied" => traits }.as_json(add_space: true)
   end
 
