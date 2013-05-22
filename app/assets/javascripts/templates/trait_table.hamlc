@@ -3,14 +3,14 @@
     %td
     - for p in @properties
       %td.property
-        %a{href: "/properties/#{p.property.id}"}= p.property.name
+        %a{href: "/properties/#{p.id}"}= p.name
 %tbody
   - for s in @spaces
     %tr
       %td.space
-        %a{href: "/spaces/#{s.space.id}"}= s.space.name
+        %a{href: "/spaces/#{s.id}"}= s.name
       - for p in @properties
-        - value = @traits[s.space.id][p.property.id]
+        - value = @traits[s.id][p.id]
         %td.value
           - if value
             - klass = if value[1] then "true" else "false"
