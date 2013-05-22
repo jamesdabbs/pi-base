@@ -54,7 +54,7 @@ class ObjectsController < ApplicationController
     object_class.model_name.singular
   end
 
-  def object_id
+  def object_param_key
     params[:id] || params[:"#{object_name}_id"]
   end
 
@@ -71,7 +71,7 @@ class ObjectsController < ApplicationController
   end
 
   def set_object
-    self.object = object_class.find object_id
+    self.object = object_class.find object_param_key
   end
 
   def create_params
