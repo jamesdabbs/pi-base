@@ -4,7 +4,7 @@
 
   %ul.nav.nav-tabs
     %li.header.disabled
-      %a Traits:
+      %a Traits
     - for name, group of @traits
       %li{ class: group.class }
         %a{ href: "#" + group.id, "data-toggle" => "tab" } #{name}
@@ -18,3 +18,4 @@
             %li{ "data-name" => trait_name.toLowerCase() }
               %a{ href: "/traits/" + trait.id }
                 = trait_name
+        - brubeck.render_latex(group.id)

@@ -18,7 +18,7 @@ window.brubeck.RelatedTraits = class RelatedTraits
           id:      "related-" + i
         i += 1
       @$el.html JST['related_traits'] traits:traits
-      brubeck.delay 1000, brubeck.render_latex()
+      brubeck.render_latex()
       
       @$el.find('.form-search').keyup (e) =>
         brubeck.delay 200, () =>
