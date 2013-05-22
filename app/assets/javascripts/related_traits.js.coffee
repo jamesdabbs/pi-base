@@ -14,22 +14,24 @@ window.brubeck.RelatedTraits = class RelatedTraits
 
         traits[group] =
           members: members
-          class:   if i == 0 then "active" else ""
-          id:      "related-" + i
+          id:      'related-' + i
         i += 1
       @$el.html JST['related_traits'] traits:traits
-      brubeck.render_latex()
       
       @$el.find('.form-search').keyup (e) =>
         brubeck.delay 200, () =>
           @filter @$el.find('.form-search input').val()
 
+      @$el.find('a[data-toggle="tab"]').on('shown', (e) ->
+        brubeck.render_latex('related_traits_tab')
+      ).first().click()
+
   fetch_traits: (cb) ->
     $.ajax 
-      url: window.location.pathname + "/related.json"
+      url: window.location.pathname + '/related.json'
       success: cb
       error: (xhr, text, err) ->
-        console.log "Could not fetch related traits:", text, err
+        console.log 'Could not fetch related traits:', text, err
 
   filter: (val) ->
     # TODO: make this a Backbone view. Paginate?
