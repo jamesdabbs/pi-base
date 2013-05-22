@@ -81,8 +81,4 @@ class Trait < ActiveRecord::Base
       end
     end
   end
-
-  def destroy
-    raise # FIXME: implement destroy
-  end
 end

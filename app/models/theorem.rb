@@ -102,8 +102,4 @@ class Theorem < ActiveRecord::Base
     candidates.each                { |s| apply s }
     contrapositive.candidates.each { |s| contrapositive.apply s }
   end
-
-  def destroy
-    raise # FIXME: implement destroy
-  end
 end
