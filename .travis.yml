@@ -11,4 +11,4 @@ notifications:
 services:
   - mysql
 before_script:
-  - mysql -e 'CREATE DATABASE brubeck_test;'
+  - 'rake db:setup RAILS_ENV=test'
