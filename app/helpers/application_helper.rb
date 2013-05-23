@@ -43,7 +43,7 @@ module ApplicationHelper
 
   def word_diff version
     # FIXME: what about name changes?
-    from, to = version.changeset[:description]
+    from, to = version.changeset[:description].map { |s| h(s) }
     Differ.diff_by_word(to, from).format_as(:html).html_safe
   rescue
     version.reify.description rescue nil

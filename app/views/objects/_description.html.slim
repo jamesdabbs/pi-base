@@ -13,7 +13,7 @@ javascript:
   $(function() {
     var preview = function() {
       text = $('#description-input').val();
-      $('#description-preview').html(text);
+      $('#description-preview').text(text);
       brubeck.render_latex("description-preview");
     }
 
