@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Brubeck : A Rails rewrite of the Django Brubeck project - https://github.com/jamesdabbs/brubeck.py" />
+    <meta name="description" content="Brubeck : Live at topology.jdabbs.com" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -19,7 +19,7 @@
           <a id="forkme_banner" href="https://github.com/jamesdabbs/brubeck">View on GitHub</a>
 
           <h1 id="project_title">Brubeck</h1>
-          <h2 id="project_tagline">A Rails rewrite of the Django Brubeck project - https://github.com/jamesdabbs/brubeck.py</h2>
+          <h2 id="project_tagline">Live at topology.jdabbs.com</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/jamesdabbs/brubeck/zipball/master">Download this project as a .zip file</a>
@@ -31,32 +31,38 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>Welcome to GitHub Pages.</h3>
+        <h3>Testing locally</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>To run locally, you will need to install the following dependencies:</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<ul>
+<li>mysql</li>
+<li>ruby 2.0 (recommended through <a href="https://github.com/sstephenson/rbenv/">rbenv</a>)</li>
+<li>redis</li>
+</ul><p>Then run the following:</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git clone git@github.com:jamesdabbs/brubeck.git
+<span class="nv">$ </span><span class="nb">cd </span>brubeck
+<span class="nv">$ </span>bundle          <span class="c"># Installs gem packages as specified in the Gemfile</span>
+<span class="nv">$ </span>rake db:setup   <span class="c"># Creates the database, with its required tables</span>
+</pre></div>
 
-<h3>Designer Templates</h3>
+<p>At this point you should be set up to use any of these commands:</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<div class="highlight"><pre><span class="nv">$ </span>rails c           <span class="c"># Starts an interactive rails console session</span>
+<span class="nv">$ </span>rails s           <span class="c"># Spins up a rails server at localhost:3000</span>
+<span class="nv">$ </span>rake resque:work  <span class="c"># Starts a background worker (for automated proof generation, etc.)</span>
+</pre></div>
 
-<h3>Rather Drive Stick?</h3>
+<p>If you have other gems installed on your system, you may need to prefix <code>rake</code> and <code>rails</code> commands with <code>bundle exec</code>.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Feel free to email me if you have any trouble getting things up and running.</p>
 
-<h3>Authors and Contributors</h3>
+<h3>Contributing</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>I would <em>love</em> bug reports and feature requests. Feel free to submit those in the <a href="https://github.com/jamesdabbs/brubeck/issues">GitHub issues</a>.</p>
 
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>If you want to push up code, open up a pull request. I'll review it, merge it in, and push it live once it's good to go.</p>
       </section>
     </div>
 
