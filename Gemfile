@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails'
 gem 'jquery-rails'
-gem 'turbolinks'
 gem 'thin'
 gem 'slim-rails'
 gem 'mysql2', git: 'git://github.com/brianmario/mysql2.git'
