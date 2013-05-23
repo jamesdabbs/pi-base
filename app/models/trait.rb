@@ -24,7 +24,7 @@ class Trait < ActiveRecord::Base
   belongs_to :property
   belongs_to :value
 
-  has_one :proof
+  has_one :proof, dependent: :destroy
 
   has_many :assumptions
   has_many :consequences, through: :assumptions, source: :proof, class_name: 'Proof'

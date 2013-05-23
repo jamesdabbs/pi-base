@@ -5,4 +5,4 @@ window.brubeck.TraitTable = class TraitTable
   render: () ->
     $.getJSON document.URL + '.json', (data) =>
       @$el.html JST['trait_table'] data
-      brubeck.render_latex()
+      brubeck.render_latex @$el[0]

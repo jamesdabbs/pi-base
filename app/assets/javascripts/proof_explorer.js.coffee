@@ -2,17 +2,18 @@ window.brubeck.ProofExplorer = class ProofExplorer
   constructor: () ->
     @w = 600
     @h = 600
+    @$pane = $ '#info_pane'
 
   bound: (val, min, max) ->
     Math.max min, Math.min(val, max)
 
   focus: (trait) ->
-    $('#info_pane').html JST['info_pane'](trait: trait, graph: @graph)
-    brubeck.render_latex()
+    @$pane.html JST['info_pane'] trait:trait, graph:@graph
+    brubeck.render_latex @$pane[0]
 
   done_loading: () ->
     $(".loading").remove()
-    $("#info_pane").html $ "<h3>Proof Explorer</h3><p>Mouse over a node to the left for a description of that trait.</p>"
+    @$pane.html $ "<h3>Proof Explorer</h3><p>Mouse over a node to the left for a description of that trait.</p>"
 
   render: (selector) ->
     force = d3.layout.force()

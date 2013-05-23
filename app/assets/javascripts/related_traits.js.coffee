@@ -17,14 +17,13 @@ window.brubeck.RelatedTraits = class RelatedTraits
           id:      'related-' + i
         i += 1
       @$el.html JST['related_traits'] traits:traits
+      brubeck.render_latex @$el[0]
       
       @$el.find('.form-search').keyup (e) =>
         brubeck.delay 200, () =>
           @filter @$el.find('.form-search input').val()
 
-      @$el.find('a[data-toggle="tab"]').on('shown', (e) ->
-        brubeck.render_latex('related_traits_tab')
-      ).first().click()
+      @$el.find('a[data-toggle="tab"]').first().click()
 
   fetch_traits: (cb) ->
     $.ajax 
