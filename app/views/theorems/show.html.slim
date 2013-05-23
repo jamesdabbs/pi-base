@@ -18,7 +18,7 @@ h1
   - else
     = markdown @theorem.description
 
-- if @converse_counters
+- if @converse_counters.any?
   p This implication does not reverse, as evidenced by
   ul
     - if @converse_counters.length > 4
