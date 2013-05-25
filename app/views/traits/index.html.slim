@@ -1,12 +1,21 @@
+= content_for :scripts do
+  = javascript_include_tag "http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"
+
 = content_for :uncontained do
   .container
     h3 
       | #{Trait.count} Traits 
       = link_to 'New', new_trait_path, class: 'btn btn-mini'
 
-  table.table.table-condensed#trait-table
-    tr
-      td Loading traits ...
+      form.form-search#table-filter-box
+
+  table.table.table-condensed.table-striped#trait-table
+    thead
+      tr
+        th Space
+        - @properties.each do |p|
+          td.property= link_to p, p
+    tbody
 
 = onload do
   | new brubeck.TraitTable('#trait-table').render();

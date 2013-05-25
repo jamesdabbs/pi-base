@@ -47,7 +47,7 @@ class Trait < ActiveRecord::Base
 
   def self.table
     Rails.cache.fetch "/trait-table/#{Trait.maximum :updated_at}", expires_in: 1.day do
-      Trait::Table.new.to_json
+      Trait::Table.new.aaData
     end
   end
 

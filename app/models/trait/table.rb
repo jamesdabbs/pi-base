@@ -10,47 +10,67 @@ class Trait
     end
 
     def traits
+      return @traits if @traits
       values = Hash[ Value.all.map { |v| [v.id, v.to_i] } ]
       result = Hash[ spaces.map    { |s| [s.id, {}    ] } ]
-      Trait.select(:id, :space_id, :property_id, :value_id).each do |t|
-        result[t.space_id][t.property_id] ||= [t.id, values[t.value_id]]
+      Trait.
+        where(space_id: spaces.pluck(:id), property_id: properties.pluck(:id)).
+        select(:id, :space_id, :property_id, :value_id).each do |t|
+          result[t.space_id][t.property_id] ||= [t.id, values[t.value_id]]
       end
-      result
+      @traits = result
     end
 
-    def to_json
-      {
-        spaces:     spaces,
-        properties: properties,
-        traits:     traits
-      }.to_json
+    def link_trait v
+      return "" unless v
+      klass = v[1] == 1 ? "true" : "false"
+      sym   = v[1] == 1 ? "✓"    : "⨯"
+      "<a href='/traits/#{v[0]}' class='#{klass}'>#{sym}</a>"
+    end
+
+    def aaData
+      spaces.map do |s|
+        ["<a href='/spaces/#{s.id}'>#{s.name}</a>"] + properties.map { |p| link_trait traits[s.id][p.id] }
+      end
+    end
+
+    # -- Checking against Counterexamples -----
+    def read_csv! path=nil
+      @csv = CSV.read Rails.root.join(path || 'counterexamples.csv')
+      @space_map    = Hash[ @csv.each_with_index.map { |r,i| [r[0], i] } ]
+      @property_map = Hash[ @csv.first.each_with_index.map { |c,i| [c, i] } ]
+    end
+
+    def value_map
+      value_map = { "0" => "False", "1" => "True" }
+    end
+
+    def traits_to_check
+      sids, pids = [], []
+      @skips = {}
+      spaces.each     { |s| @space_map[s.name]    ? sids << s.id : @skips[s.name] = 1 }
+      properties.each { |p| @property_map[p.name] ? pids << p.id : @skips[p.name] = 1 }
+
+      Trait.where space_id: sids, property_id: pids
     end
 
     def check
-      csv = CSV.read Rails.root.join 'counterexamples.csv'
-      space_map    = Hash[ csv.each_with_index.map { |r,i| [r[0], i] } ]
-      property_map = Hash[ csv.first.each_with_index.map { |c,i| [c, i] } ]
-      value_map    = { "0" => "False", "1" => "True" }
+      read_csv!
 
-      space_ids    = @spaces.map &:id
-      property_ids = @properties.map &:id
-      traits = Trait.
-        where(space_id: space_ids, property_id: property_ids).
-        includes(:space, :property, :value).
-        order(:space_id)
-
-      traits.each do |t|
-        # Look up trait value in table and check
-        row = space_map[t.space.name]
-        col = property_map[t.property.name]
+      traits_to_check.includes(:space, :property, :value).map do |t|
+        row = @space_map[t.space.name]
+        col = @property_map[t.property.name]
         next unless row && col
-        csv_val  = csv[row][col]
-        expected = value_map[csv_val]
+        expected = value_map[ @csv[row][col] ]
         if expected && t.value.name != expected
-          puts "#{t.space.name} has #{t.property.name} #{t.value.name}, expected #{expected}"
+          [t.space.name, t.name, expected]
         end
-      end
-      nil
+      end.compact
     end
+
+    def skipped
+      @skips.keys
+    end
+
   end
 end

@@ -72,15 +72,28 @@ html, body { height: 100%; }
 }
 
 /* Trait table */
-.uncontained {
+ .uncontained {
   margin-top: 60px;
+  padding: 0 3%;
+}
+
+.dataTables_scrollHead table {
+  margin-bottom: 0;
+}
+
+.dataTables_scrollHead table td {
+  vertical-align: bottom;
 }
 
 #trait-table {
-  margin: 100px 12px 0;
+  width: 94%;
 }
 
-#trait-table td, #trait-table a {
+#table-filter-box {
+  float: right;
+}
+
+/* #trait-table td, #trait-table a {
   width: 1.5em;
 }
 
@@ -88,14 +101,14 @@ html, body { height: 100%; }
   width: 150px;
 }
 
-#trait-table .property a {
+.dataTables_scrollHead .property a {
   display: block;
   white-space: nowrap;
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   writing-mode: lr-tb;
-}
+} */
 
 #trait-table .true {
   color: #468847;

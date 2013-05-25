@@ -2,9 +2,12 @@ class TraitsController < ObjectsController
   @object_class = Trait
 
   def index
+    @properties = Property.all
     respond_to do |format|
       format.html
-      format.json { render json: Trait.table }
+      format.json { render json: {
+        aaData: Trait.table
+      } }
     end
   end
 
