@@ -1,6 +1,6 @@
 = link_to 'Back', :back, class: 'btn'
 
-h1 Editing '#{@trait.name}'
+h1 Editing '#{link_to @trait.space, @trait.space}: #{AtomDecorator.new(@trait.atom).linked_name}'
 
 = form_for @trait do |f|
   - if @trait.errors.any?
@@ -10,8 +10,12 @@ h1 Editing '#{@trait.name}'
         - @trait.errors.full_messages.each do |message|
           li = message
 
+  - if @trait.deduced?
+    p This trait was automatically generated from the following assumptions:
+    = render 'proof', trait: @trait
+
   .control-group
-    = f.label :description
+    = f.label @trait.deduced? ? :supplemental_proof : :proof
     .controls
       = f.text_area :description, rows: 15, class: 'span12'
   .actions = f.submit 'Save', class: 'btn btn-primary'

@@ -5,27 +5,28 @@ h1
   |  
   = link_to 'Edit', edit_trait_path(@trait), class: 'btn btn-mini'
 
-.well
-  - if @trait.deduced?
-    ul
-      - @trait.proof.steps.each do |assumption|
-        li
-          = link_to assumption.name, assumption
+- if @trait.deduced?
+  .well
+    = render 'proof', trait: @trait
 
-  - else
-    - if @trait.description.empty?
-      p
-        | Unfortunately, this Trait was added without a proof to support it. You can help by 
-        = link_to 'adding one', edit_trait_path(@trait)
-        | . 
-      p
-        | You can 
-        em really 
-        | help by winnowing down the 
-        = link_to 'list of all unsupported objects', unproven_path
-        | .
-    - else
-      = markdown @trait.description
+- elsif @trait.unproven?
+  .well
+    p
+      | Unfortunately, this Trait was added without a proof to support it. You can help by 
+      = link_to 'adding one', edit_trait_path(@trait)
+      | . 
+    p
+      | You can 
+      em really 
+      | help by winnowing down the 
+      = link_to 'list of all unsupported objects', unproven_path
+      | .
+
+- if @trait.description.present?
+  - if @trait.deduced?
+    h5 Alternative proof
+  .well
+    = markdown @trait.description
 
 
 #traits
