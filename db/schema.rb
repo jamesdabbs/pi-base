@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130521121258) do
+ActiveRecord::Schema.define(version: 20130526003151) do
 
   create_table "assumptions", force: true do |t|
     t.integer  "proof_id"

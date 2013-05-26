@@ -11,6 +11,8 @@ class Formula::Atom < Formula
   # -- Common formula interface -----
 
   def self.load str
+    # This should only be necessary for migrating to the new delimeters
+    str.gsub! /\\\(|\\\)/, '$'
     p,v = str.split('=').map &:strip
     property = Atom.parse_name_or_id p, Property
     value    = Atom.parse_name_or_id v, Value

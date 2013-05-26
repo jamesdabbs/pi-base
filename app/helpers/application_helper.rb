@@ -13,8 +13,7 @@ module ApplicationHelper
   def markdown text
     # FIXME: better XSS protection with spec
     # FIXME: scan the string and escape contextually depending on if we're in math tags
-    text.gsub! /<.*?>/, ''
-    text.gsub! '\\', '\\\\\\\\' # Ugh ...
+    text = h text
     text.gsub! '_', '\_'
     Markdown.render(text).html_safe
   end
