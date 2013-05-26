@@ -8,7 +8,7 @@ describe Formula do
   atoms :a, :b, :c, :d, :e
 
   let :f do
-    FactoryGirl.create(:property, name: 'Escaped \(\sigma\)-math').atom
+    FactoryGirl.create(:property, name: 'Escaped $\sigma$-math').atom
   end
 
   def preserves f
