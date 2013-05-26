@@ -9,7 +9,7 @@ gem 'resque'
 gem 'newrelic_rpm'
 gem 'exception_notification', git: 'git://github.com/smartinez87/exception_notification.git'
 
-gem 'capistrano', git: 'git://github.com/capistrano/capistrano.git'
+gem 'capistrano'
 gem 'capistrano-resque'
 
 gem 'devise', git: 'git://github.com/plataformatec/devise.git', branch: 'rails4'
