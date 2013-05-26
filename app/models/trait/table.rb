@@ -22,10 +22,10 @@ class Trait
     end
 
     def trait_map
-      return @trait_map if @trait_map 
+      return @trait_map if @trait_map
       @trait_map = Hash[ spaces.map { |s| [s.id, {}] } ]
       traits.each do |t|
-        @trait_map[t.space_id][t.property_id] ||= [t.id, values[t.value_id]]
+        @trait_map[t.space_id][t.property_id] ||= [t.id, value_map[t.value_id]]
       end
       @trait_map
     end
@@ -39,7 +39,7 @@ class Trait
 
     def aaData
       spaces.map do |s|
-        ["<a href='/spaces/#{s.id}'>#{s.name}</a>"] + properties.map { |p| link_trait traits[s.id][p.id] }
+        ["<a href='/spaces/#{s.id}'>#{s.name}</a>"] + properties.map { |p| link_trait trait_map[s.id][p.id] }
       end
     end
 
