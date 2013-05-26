@@ -31,12 +31,13 @@ class Formula
 
   def self.load str
     return str if str.nil? || str.is_a?(Formula)
-    conj, subs = parse_parens str
-    if conj.nil?
+    p = Parser.new str
+    f = if p.conjunction.nil?
       Atom.load str
     else
-      subs.map { |s| load s }.inject &conj.to_sym
+      p.subformulae.map { |s| load s }.inject &p.conjunction.to_sym
     end
+    p.negated? ? ~f : f
   end
 
   def self.dump formula

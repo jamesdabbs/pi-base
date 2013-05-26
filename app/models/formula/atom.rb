@@ -1,22 +1,21 @@
 class Formula::Atom < Formula
   attr_reader :property, :value
 
-  def initialize property, value
+  def initialize property, value, negated=false
     # TODO: coerce these between ints, bools & models on demand
     @property    = property
-    @value       = value
+    @value       = negated ? ~value : value
     @subformulae = self
   end
 
   # -- Common formula interface -----
 
   def self.load str
-    # This should only be necessary for migrating to the new delimeters
-    str.gsub! /\\\(|\\\)/, '$'
-    p,v = str.split('=').map &:strip
+    negated  = str =~ /~\s*/
+    p,v      = str.gsub(/~\s*/, '').split('=').map &:strip
     property = Atom.parse_name_or_id p, Property
-    value    = Atom.parse_name_or_id v, Value
-    new property, value
+    value    = Atom.parse_name_or_id v, Value, Value.true
+    new property, value, negated
   end
 
   def self.dump atom
@@ -81,9 +80,10 @@ class Formula::Atom < Formula
     end
   end
 
-  def self.parse_name_or_id str, klass
+  def self.parse_name_or_id str, klass, default=nil
+    return default if !str.present? && default
     str.to_i.zero? ? klass.where(name: str).first! : klass.find(str.to_i)
-  rescue => e
+  rescue ActiveRecord::RecordNotFound => e
     raise ParseError.new "Unrecognized #{klass}: #{str}"
   end
 end

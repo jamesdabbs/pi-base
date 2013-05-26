@@ -1,17 +1,32 @@
 class Formula
   class Parser
+    attr_accessor :conjunction
+
     def initialize str
-      stripped = str =~ /^\((.*[\+\|].*)\)$/ ? $1 : str
-      @scanner = StringScanner.new stripped
-      @result  = [""]
-      @depth   = 0
-      @conj    = nil
+      str = str.strip
+      if str =~ /^~\s*\(/
+        @negated = true
+        str.gsub! /^~\s*/, ''
+      end
+      str = $1 if str =~ /^\((.*[\+\|].*)\)$/
+
+      @scanner = StringScanner.new str
+      @result, @depth, @conjuntion = [""], 0, nil
+
+      process!
     end
 
-    def process
-      return  [] if @scanner.eos?
+    def process!
+      return [] if @scanner.eos?
       consume until @scanner.eos?
-      [@conj, @result.map(&:strip)]
+    end
+
+    def subformulae
+      @result.map &:strip
+    end
+
+    def negated?
+      @negated
     end
 
     def consume
@@ -45,8 +60,8 @@ class Formula
     end
 
     def set_conjunction
-      @conj ||= @scanner.matched
-      raise "Mismatched conjunction" unless @conj == @scanner.matched
+      @conjunction ||= @scanner.matched
+      raise "Mismatched conjunction" unless @conjunction == @scanner.matched
       @result << ""
     end
   end
