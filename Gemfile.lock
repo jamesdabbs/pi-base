@@ -108,6 +108,8 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
+    foreigner (1.4.1)
+      activerecord (>= 3.0.0)
     haml_coffee_assets (1.12.0)
       coffee-script (>= 1.0.0)
       sprockets (>= 2.0.3)
@@ -279,6 +281,7 @@ DEPENDENCIES
   exception_notification!
   execjs
   factory_girl_rails
+  foreigner
   haml_coffee_assets
   jquery-rails
   letter_opener

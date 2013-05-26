@@ -11,4 +11,4 @@ notifications:
 services:
   - mysql
 before_script:
-  - 'rake db:migrate RAILS_ENV=test'
+  - 'rake db:setup RAILS_ENV=test'

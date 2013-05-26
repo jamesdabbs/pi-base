@@ -27,6 +27,8 @@ gem 'draper'
 
 gem 'thinking-sphinx'
 
+gem 'foreigner'
+
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'

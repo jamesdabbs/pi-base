@@ -35,7 +35,7 @@ class Theorem < ActiveRecord::Base
 
   # ----------
 
-  has_many :theorem_properties
+  has_many :theorem_properties, dependent: :destroy
   has_many :properties, through: :theorem_properties
 
   def associate_properties!

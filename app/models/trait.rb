@@ -26,7 +26,7 @@ class Trait < ActiveRecord::Base
 
   has_one :proof, dependent: :destroy
 
-  has_many :assumptions
+  has_many :assumptions, dependent: :destroy
   has_many :consequences, through: :assumptions, source: :proof, class_name: 'Proof'
 
   has_many :supporters, foreign_key: :implied_id
