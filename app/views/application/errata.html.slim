@@ -1,0 +1,15 @@
+h1 
+  | Errata 
+  small to Counterexamples in Topology
+
+p As noted in #{link_to 'the FAQ', help_path}, this site deliberately diverges from Counterexamples in Topology in its definition of the separation axioms.
+
+p Aside from those defitions, the following values differ from the table in the back of Counterexamples.
+
+dl
+  - @traits.each do |t|
+    dt= link_to "#{t.space.name}: #{t.name}", t
+    - if t.deduced?
+      dd= render 'traits/proof', trait: t
+    - else
+      dd= markdown t.description

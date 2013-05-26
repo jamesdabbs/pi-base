@@ -65,6 +65,7 @@ class Trait
         expected = value_map[ @csv[row][col] ]
         if expected && t.value.name != expected
           [t.space.name, t.name, expected]
+          t.id
         end
       end.compact
     end

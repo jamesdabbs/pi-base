@@ -23,8 +23,6 @@ Brubeck::Application.routes.draw do
 
   resources :users, only: [:show]
 
-  get 'unproven', to: 'application#unproven'
-
   get 'search',  to: 'formulae#search'
   get 'suggest', to: 'formulae#suggest'
 
@@ -32,6 +30,8 @@ Brubeck::Application.routes.draw do
     mount Resque::Server.new, at: '/resque', as: 'resque'
   end
 
-  get 'help', to: 'application#help'
+  [:unproven, :errata, :help].each do |action|
+    get action, to: "application##{action}"
+  end
   root to: 'application#root'
 end
