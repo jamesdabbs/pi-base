@@ -37,8 +37,9 @@ class Trait
     # -- Checking against Counterexamples -----
     def read_csv! path=nil
       @csv = CSV.read Rails.root.join(path || 'counterexamples.csv')
-      @space_map    = Hash[ @csv.each_with_index.map { |r,i| [r[0], i] } ]
-      @property_map = Hash[ @csv.first.each_with_index.map { |c,i| [c, i] } ]
+
+      @property_map = Hash[ @csv[2].each_with_index.map { |c,i| [c.to_i, i] } ]
+      @space_map    = Hash[ @csv.each_with_index.map { |r,i| [r[2].to_i, i] } ]
     end
 
     def value_map
@@ -48,8 +49,8 @@ class Trait
     def traits_to_check
       sids, pids = [], []
       @skips = {}
-      spaces.each     { |s| @space_map[s.name]    ? sids << s.id : @skips[s.name] = 1 }
-      properties.each { |p| @property_map[p.name] ? pids << p.id : @skips[p.name] = 1 }
+      spaces.each     { |s| @space_map[s.id]    ? sids << s.id : @skips[s.name] = 1 }
+      properties.each { |p| @property_map[p.id] ? pids << p.id : @skips[p.name] = 1 }
 
       Trait.where space_id: sids, property_id: pids
     end
@@ -57,9 +58,9 @@ class Trait
     def check
       read_csv!
 
-      traits_to_check.includes(:space, :property, :value).map do |t|
-        row = @space_map[t.space.name]
-        col = @property_map[t.property.name]
+      traits_to_check.order(:space_id).includes(:space, :property, :value).map do |t|
+        row = @space_map[t.space_id]
+        col = @property_map[t.property_id]
         next unless row && col
         expected = value_map[ @csv[row][col] ]
         if expected && t.value.name != expected
