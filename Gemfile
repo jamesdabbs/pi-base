@@ -40,6 +40,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'colorize'
+  gem 'letter_opener'
   gem 'pry'
 end
 

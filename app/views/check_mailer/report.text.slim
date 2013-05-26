@@ -1,0 +1,6 @@
+| Found #{@diffs.count} discrepancies
+'
+- @diffs.each do |trait, expected|
+  | * #{trait.space.name}: #{trait.name} - expected "#{expected}" (#{trait_path(trait)})
+'
+| Checked at #{Time.now}

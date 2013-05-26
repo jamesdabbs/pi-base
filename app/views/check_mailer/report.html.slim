@@ -1,0 +1,10 @@
+h3 Found #{@diffs.count} discrepancies
+
+ul
+  - @diffs.each do |trait, expected|
+    li
+      = link_to "#{trait.space.name}: #{trait.name}", trait
+      '  - expected 
+      i= expected
+
+p Checked at #{Time.now}

@@ -89,7 +89,7 @@ class Trait
           next unless row && col
           expected = value_map[ @csv[row][col] ]
           if expected && t.value.name != expected
-            [t.space.name, t.name, expected]
+            [t, expected]
           end
         end.compact
       end

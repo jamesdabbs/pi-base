@@ -29,4 +29,7 @@ Brubeck::Application.configure do
 
   # Try out the production cache store.
   # config.cache_store = :redis_store
+
+  # Preview emails in the browser
+  config.action_mailer.delivery_method = :letter_opener
 end
