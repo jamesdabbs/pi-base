@@ -3,9 +3,7 @@ class TheoremDecorator < Draper::Decorator
 
   def linked_name
     [antecedent, consequent].map do |formula|
-      formula.to_s do |atom|
-        AtomDecorator.new(atom).linked_name
-      end
+      formula.to_s { |atom| AtomDecorator.new(atom).linked_name }
     end.join ' ⇒ '
   end
 end

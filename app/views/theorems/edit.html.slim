@@ -1,6 +1,9 @@
 = link_to 'Back', :back, class: 'btn'
 
-h1 Editing '#{@theorem.linked_name}'
+h1 
+  | Editing '
+  = @theorem.linked_name.html_safe
+  | '
 
 = form_for @theorem do |f|
   - if @theorem.errors.any?
@@ -10,8 +13,6 @@ h1 Editing '#{@theorem.linked_name}'
         - @theorem.errors.full_messages.each do |message|
           li = message
 
-  .control-group
-    = f.label :description
-    .controls
-      = f.text_area :description, rows: 15, class: 'span12'
+  = render 'objects/description', f: f
+
   .actions = f.submit 'Save', class: 'btn btn-primary'

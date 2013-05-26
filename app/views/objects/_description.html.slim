@@ -4,6 +4,7 @@
       = f.label :description
       .controls
         = f.text_area :description, rows: 15, id: 'description-input', class: 'span6'
+        = render 'application/markdown_help'
   .span6
     .control-group
       = f.label :latex_preview
