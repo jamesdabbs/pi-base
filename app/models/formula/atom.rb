@@ -13,8 +13,7 @@ class Formula::Atom < Formula
   def self.load str
     negated  = str =~ /~\s*/
     p,v      = str.gsub(/~\s*/, '').split('=').map &:strip
-    # TODO: remove this once we're all migrated and stable
-    property = Atom.parse_name_or_id p.gsub(/\\\(|\\\)/, '$'), Property
+    property = Atom.parse_name_or_id p, Property
     value    = Atom.parse_name_or_id v, Value, Value.true
     new property, value, negated
   end
