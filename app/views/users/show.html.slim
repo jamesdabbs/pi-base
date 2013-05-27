@@ -1,6 +1,6 @@
 h1
   = @user.email
-  - if @user.id == current_user.id
+  - if current_user && @user.id == current_user.id
     '
     = link_to 'Edit', edit_user_registration_path, class: 'btn btn-mini'
 
@@ -16,7 +16,8 @@ table#revisions.table.table-condensed.table-striped
       th Object
   tbody
     - @edits.each do |v|
-      - item = v.item
+      / FIXME: destroy old versions on delete
+      - next unless item = v.item
       tr
         td #{time_ago_in_words v.created_at} ago
         td= v.event.capitalize
