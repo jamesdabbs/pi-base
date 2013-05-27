@@ -1,6 +1,10 @@
 class TheoremsController < ObjectsController
   @object_class = Theorem
 
+  def index
+    @theorems = Theorem.paginate page: params[:page], per_page: 15
+  end
+
   def show
     @converse_counters = @theorem.converse.counterexamples
   end
