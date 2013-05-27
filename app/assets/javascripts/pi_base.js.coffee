@@ -1,4 +1,4 @@
-window.brubeck =
+window.pi_base =
   render_latex: (el) ->
     if el
       MathJax.Hub.Queue ["Typeset", MathJax.Hub, el]

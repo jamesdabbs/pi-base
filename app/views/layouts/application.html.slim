@@ -4,7 +4,7 @@ html lang="en"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= content_for?(:title) ? yield(:title) : "Brubeck"
+    title= content_for?(:title) ? yield(:title) : "𝜋-Base"
     = csrf_meta_tags
 
     = javascript_include_tag "application"
@@ -29,7 +29,7 @@ html lang="en"
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            = link_to "Brubeck", root_path, class: :brand
+            = link_to "𝜋-Base", root_path, class: :brand
             .container.nav-collapse
               ul.nav
                 li= link_to "Spaces", spaces_path

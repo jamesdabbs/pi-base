@@ -50,7 +50,7 @@ class Theorem < ActiveRecord::Base
   scope :unproven, -> { where description: '' }
 
   def queue_job
-    Brubeck::Application.enqueue TheoremExploreJob, id
+    PiBase::Application.enqueue TheoremExploreJob, id
   end
   after_create :queue_job
 

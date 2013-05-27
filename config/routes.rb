@@ -1,6 +1,6 @@
 require 'resque/server'
 
-Brubeck::Application.routes.draw do
+PiBase::Application.routes.draw do
   devise_for :users
 
   resources :spaces do

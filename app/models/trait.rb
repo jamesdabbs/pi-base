@@ -41,7 +41,7 @@ class Trait < ActiveRecord::Base
   end
 
   def find_implied_traits
-    Brubeck::Application.enqueue TraitExploreJob, id
+    PiBase::Application.enqueue TraitExploreJob, id
   end
   after_create :find_implied_traits
 

@@ -1,4 +1,4 @@
-Brubeck::Application.configure do
+PiBase::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -82,7 +82,7 @@ Brubeck::Application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.middleware.use ExceptionNotifier, email: {
-    email_prefix: '[Brubeck] ',
+    email_prefix: '[𝜋-Base] ',
     sender_address: %{"Error notification" <errors@topology.jdabbs.com>},
     exception_recipients: %w{jamesdabbs@gmail.com}
   }

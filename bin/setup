@@ -12,18 +12,14 @@ bundle exec rake db:schema:load
 RAILS_ENV=test bundle exec rake db:schema:load
 
 echo '
-==> Configuring teloga.dev'
+==> Configuring pi-base.dev'
 if [ -d ~/.pow ]; then
-  if [ ! -e ~/.pow/brubeck ]; then
-    ln -s $PWD ~/.pow/brubeck
+  if [ ! -e ~/.pow/pi-base ]; then
+    ln -s $PWD ~/.pow/pi-base
   fi
 else
   echo 'Pow not set up. See: http://pow.cx/'
 fi
-
-echo '
-==> Setting up babar'
-babar install
 
 echo '
 ==> Setup complete

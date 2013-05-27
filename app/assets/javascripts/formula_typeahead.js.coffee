@@ -24,7 +24,7 @@ parse = (query, properties, values) ->
   [prefix.replace(/([+&|=])\s*$/g, '$1 '), objs]
 
 
-window.brubeck.FormulaTypeahead = class FormulaTypeahead
+window.pi_base.FormulaTypeahead = class FormulaTypeahead
   constructor: (selector, properties, values) ->
     $(selector).typeahead
       source: (query, process) =>

@@ -1,4 +1,4 @@
-Brubeck::Application.configure do
+PiBase::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's
@@ -35,7 +35,7 @@ Brubeck::Application.configure do
   config.active_support.deprecation = :stderr
 end
 
-class Brubeck::Application
+class PiBase::Application
   # Disable async processing while testing
   def self.enqueue job, *args
     job.perform *args

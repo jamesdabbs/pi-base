@@ -1,4 +1,4 @@
-window.brubeck.ProofExplorer = class ProofExplorer
+window.pi_base.ProofExplorer = class ProofExplorer
   constructor: () ->
     @w = 600
     @h = 600
@@ -9,7 +9,7 @@ window.brubeck.ProofExplorer = class ProofExplorer
 
   focus: (trait) ->
     @$pane.html JST['info_pane'] trait:trait, graph:@graph
-    brubeck.render_latex @$pane[0]
+    pi_base.render_latex @$pane[0]
 
   done_loading: () ->
     $(".loading").remove()

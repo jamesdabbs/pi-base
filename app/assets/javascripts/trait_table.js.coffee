@@ -1,4 +1,4 @@
-window.brubeck.TraitTable = class TraitTable
+window.pi_base.TraitTable = class TraitTable
   constructor: (selector) ->
     @$el = $(selector)
 
@@ -27,4 +27,4 @@ window.brubeck.TraitTable = class TraitTable
           # Move search bar into place
           $('.form-search').prepend filter.parent()
         else
-          brubeck.render_latex @$el.find('tbody')[0]
+          pi_base.render_latex @$el.find('tbody')[0]

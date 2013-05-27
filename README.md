@@ -1,9 +1,9 @@
-# Brubeck Topology Database
+# PiBase
 
 See the live site at [topology.jdabbs.com](http://topology.jdabbs.com).
 
-[![Build Status](https://travis-ci.org/jamesdabbs/brubeck.png)](https://travis-ci.org/jamesdabbs/brubeck)
-[![Code Climate](https://codeclimate.com/github/jamesdabbs/brubeck.png)](https://codeclimate.com/github/jamesdabbs/brubeck)
+[![Build Status](https://travis-ci.org/jamesdabbs/pi-base.png)](https://travis-ci.org/jamesdabbs/pi-base)
+[![Code Climate](https://codeclimate.com/github/jamesdabbs/pi-base.png)](https://codeclimate.com/github/jamesdabbs/pi-base)
 
 ### Testing locally
 
@@ -16,8 +16,8 @@ To run locally, you will need to install the following dependencies:
 Then run the following:
 
 ```bash
-$ git clone git@github.com:jamesdabbs/brubeck.git
-$ cd brubeck
+$ git clone git@github.com:jamesdabbs/pi-base.git
+$ cd pi-base
 $ bundle          # Installs gem packages as specified in the Gemfile
 $ rake db:setup   # Creates the database, with its required tables
 ```
@@ -36,6 +36,6 @@ Feel free to email me if you have any trouble getting things up and running.
 
 ### Contributing
 
-I would _love_ bug reports and feature requests. Feel free to submit those in the [GitHub issues](https://github.com/jamesdabbs/brubeck/issues).
+I would _love_ bug reports and feature requests. Feel free to submit those in the [GitHub issues](https://github.com/jamesdabbs/pi-base/issues).
 
 If you want to push up code, open up a pull request. I'll review it, merge it in, and push it live once it's good to go.

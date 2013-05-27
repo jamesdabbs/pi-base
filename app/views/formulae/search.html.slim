@@ -30,4 +30,4 @@
       li= example_search 'First Countable = True + Separable = True + Second Countable = False'
 
 = onload do
-  | new brubeck.FormulaTypeahead('#q', #{Property.pluck(:name).to_json.html_safe}, #{Value.pluck(:name).to_json.html_safe});
+  | new pi_base.FormulaTypeahead('#q', #{Property.pluck(:name).to_json.html_safe}, #{Value.pluck(:name).to_json.html_safe});

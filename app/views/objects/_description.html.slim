@@ -15,12 +15,12 @@ javascript:
     var preview = function() {
       text = $('#description-input').val();
       $('#description-preview').text(text);
-      brubeck.render_latex("description-preview");
+      pi_baserender_latex("description-preview");
     }
 
     preview();
 
     $('#description-input').keyup(function(e) {
-      brubeck.delay(300, preview);
+      pi_basedelay(300, preview);
     });
   });
