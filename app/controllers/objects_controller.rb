@@ -18,7 +18,7 @@ class ObjectsController < ApplicationController
   end
 
   def create
-    self.object = object_class.new object_params
+    self.object = object_class.new create_params
     authorize! :create, object
 
     if object.save
@@ -30,7 +30,7 @@ class ObjectsController < ApplicationController
 
   def update
     authorize! :edit, object
-    if object.update object_params
+    if object.update update_params
       redirect_to object, notice: "#{object_name.capitalize} updated"
     else
       render action: 'edit'
@@ -74,7 +74,11 @@ class ObjectsController < ApplicationController
     self.object = object_class.find object_param_key
   end
 
-  def object_params
+  def create_params
+    params.require(object_name).permit :name, :description
+  end
+
+  def update_params
     params.require(object_name).permit :name, :description
   end
 end
