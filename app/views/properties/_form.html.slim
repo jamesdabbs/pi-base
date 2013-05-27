@@ -7,10 +7,10 @@
           li = message
 
   = f.hidden_field :value_set_id, value: Value::true.value_set_id
-  .control-group
-    = f.label :name
-    .controls
-      = f.text_field :name, class: 'span12'
+  / .control-group
+  /   = f.label :name
+  /   .controls
+  /     = f.text_field :name, class: 'span12'
 
   = render 'objects/description', f: f
 

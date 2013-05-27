@@ -24,4 +24,8 @@ class PropertiesController < ObjectsController
   def create_params
     params.require(object_name).permit :name, :description, :value_set_id
   end
+
+  def update_params
+    params.require(object_name).permit :description
+  end
 end
