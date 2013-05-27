@@ -5,7 +5,6 @@ class FormulaeController < ApplicationController
         @formula = Formula.load @q.gsub /\&/, '+'
         @results = Space.where(id: @formula.spaces).paginate(
           page: params[:page], per_page: 30)
-        @q = Formula.dump @formula  # Standardize for re-display
       rescue Formula::ParseError => e
         @error = e
         @results = ThinkingSphinx.search @q

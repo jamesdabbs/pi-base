@@ -40,25 +40,26 @@ html, body { height: 100%; }
 }
 
 /* Proof explorer */
-#proofs_pane {
-  padding: 0;
-  position: relative;
+#proofs_pane .row > div {
+  margin: 0;
 }
 
 #proofs_pane .loading {
-  position: absolute;
-  top: 200px;
-  left: 0;
-  width: 920px;
   text-align: center;
 }
 
 #info_pane {
-  height: 600px;
-  width: 320px;
-  position: absolute;
-  top: 5;
-  right: 0;
+  height: 100%;
+  padding-bottom: 1em;
+  overflow: hidden;
+}
+
+#info_pane svg {
+  height: 76px;
+}
+
+#info_pane svg text {
+  fill: #c6c6c6;
 }
 
 .node {

@@ -2,18 +2,17 @@ window.pi_base.ProofExplorer = class ProofExplorer
   constructor: () ->
     @w = 600
     @h = 600
-    @$pane = $ '#info_pane'
+    @$preview = $ '#info_pane .content'
 
   bound: (val, min, max) ->
     Math.max min, Math.min(val, max)
 
   focus: (trait) ->
-    @$pane.html JST['info_pane'] trait:trait, graph:@graph
-    pi_base.render_latex @$pane[0]
+    @$preview.html JST['info_pane'] trait:trait, graph:@graph
+    pi_base.render_latex @$preview[0]
 
   done_loading: () ->
     $(".loading").remove()
-    @$pane.html $ "<h3>Proof Explorer</h3><p>Mouse over a node to the left for a description of that trait.</p>"
 
   render: (selector) ->
     force = d3.layout.force()

@@ -1,10 +1,28 @@
 h1
-  = @space.name 
-  |  
-  = link_to "View", space_path(@space), class: 'btn btn-mini'
+  = link_to @space.name, @space
 #proofs_pane.well
-  h1.loading Loading ...
-  #info_pane
+  .row
+    #svg_pane.span8
+      h1.loading 
+        ' Loading
+        i.icon-spinner.icon-spin
+
+    #info_pane.span4
+      .key
+        h5 Proof Explorer Key
+        svg
+          circle.node r=10 cx=12 cy=12 fill='#1f77b4'
+          text x=28 y=16
+            | Manually added property P
+          circle.node r=6  cx=12 cy=38 fill='#1f77b4'
+          text x=28 y=42
+            | Follows directly from P
+          circle.node r=6  cx=12 cy=62 fill='#202020'
+          text x=28 y=66
+            | Automatically deduced
+        p Mouse over a node to preview it.
+      hr
+      .content
 
 = onload do
-  | new pi_base.ProofExplorer().render("#proofs_pane");
+  | new pi_base.ProofExplorer().render("#svg_pane");

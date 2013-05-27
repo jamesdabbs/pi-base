@@ -1,4 +1,4 @@
-# PiBase
+# 𝜋-Base
 
 See the live site at [topology.jdabbs.com](http://topology.jdabbs.com).
 

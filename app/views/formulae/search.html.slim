@@ -26,8 +26,8 @@
     | Try a search like:
     ul
       li= example_search 'Hyperconnected = True'
-      li= example_search 'Regular = True | Lindelof = True'
-      li= example_search 'First Countable = True + Separable = True + Second Countable = False'
+      li= example_search 'Regular | Lindelof'
+      li= example_search 'First Countable + Separable + ~Second Countable'
 
 = onload do
   | new pi_base.FormulaTypeahead('#q', #{Property.pluck(:name).to_json.html_safe}, #{Value.pluck(:name).to_json.html_safe});

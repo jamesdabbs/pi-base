@@ -1,7 +1,10 @@
 .hero-unit
   h1 
     | Welcome to the 𝜋-Base
-  p An automated, searchable, fully relational store of topological information.
+  p 
+    ' A
+    strong community maintained 
+    ' database of topological examples featuring #{link_to 'automated deduction', space_proofs_path(1)} and #{link_to 'powerful search', search_path(q: 'Compact + Connected + $T_2$ + ~Metrizable')}.
 
 .alert.alert-info
   | This site is under active development. Get involved on 
@@ -12,4 +15,4 @@ h3 For Researchers
 p Suppose you are interested in a property P and have shown that #{link_to 'Perfectly Normal', property_path(15)} ⇒ P, #{link_to 'CCC', property_path(29)} ⇒ P, and P ⇒ #{link_to 'Completely Regular', property_path(12)}. Here, you simply #{link_to 'add', theorem_path(127)} #{link_to 'those', theorem_path(128)} #{link_to 'theorems', theorem_path(126)}, let the site deduce what it can about the #{link_to 'spaces', spaces_path} it knows, and then #{link_to 'search', search_path} for spaces where P is still indeterminate. This streamlines time-consuming literature study and allows researchers to benefit from pooling their knowledge of exotic examples.
 
 h3 For Students
-p Every piece of information in the database should be traceable back to first principles, so students can #{link_to 'search for an interesting example', search_path(q: 'First Countable = True + Separable = True + Second Countable = False')} and then #{link_to 'follow along', space_proofs_path(76)} with deriving its properties. Admittedly, there are currently #{link_to 'several traits missing proofs', unproven_path} - consider those your homework assignment.
+p Every piece of information in the database should be traceable back to first principles, so students can #{link_to 'search for an interesting example', search_path(q: 'First Countable + Separable + ~Second Countable')} and then #{link_to 'follow along', space_proofs_path(76)} with deriving its properties. Admittedly, there are currently #{link_to 'several traits missing proofs', unproven_path} - consider those your homework assignment.
