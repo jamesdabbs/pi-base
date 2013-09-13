@@ -1,3 +1,4 @@
+# FIXME: refactor so that this only requires spec_helper_min
 require 'spec_helper'
 
 def Formula.ld str
@@ -16,7 +17,7 @@ describe Formula do
   end
 
   def preserves f
-    d   = Formula.dump f
+    d = Formula.dump f
     expect( d ).to eq standardize d
   end
 

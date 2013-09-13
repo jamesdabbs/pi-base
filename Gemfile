@@ -27,6 +27,8 @@ gem 'draper'
 
 gem 'foreigner'
 
+gem 'tire'
+
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
