@@ -202,6 +202,8 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+  
+  config.secret_key = '0a0d4253ca5f26a2e6ad0462a9057b50fdaf25d216267c9ea04fed13bf09eef0cd717343718a2d113a92c6143a367b6a2c2860f5e3e6bad44a36bb403f2cedd8'
 end
 
 Warden::Manager.after_set_user do |user, auth, opts|

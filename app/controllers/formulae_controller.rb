@@ -7,7 +7,7 @@ class FormulaeController < ApplicationController
           page: params[:page], per_page: 30)
       rescue Formula::ParseError => e
         @error = e
-        @results = ThinkingSphinx.search @q
+        # @results = ThinkingSphinx.search @q
       end
     end
   end

@@ -18,7 +18,7 @@ RSpec::Matchers.define :satisfy do |formula|
     !!formula.verify(space)
   end
 
-  failure_message_for_should do |space| 
+  failure_message_for_should do |space|
     "#{space.name} should satisfy #{formula}"
   end
 
@@ -27,8 +27,8 @@ RSpec::Matchers.define :satisfy do |formula|
   end
 end
 
-Space.define_method :<<  do |atom|
-  traits.create! property: atom.property, value: atom.value, description: 'Test'  
+Space.send :define_method, :<<  do |atom|
+  traits.create! property: atom.property, value: atom.value, description: 'Test'
 end
 
 module Helpers
