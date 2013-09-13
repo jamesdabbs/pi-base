@@ -43,11 +43,13 @@ group :development do
   gem 'binding_of_caller'
   gem 'colorize'
   gem 'letter_opener'
-  gem 'pry'
 end
 
+gem 'pry',         group: [:development, :test]
 gem 'rspec-rails', group: [:development, :test]
 group :test do
   gem 'factory_girl_rails'
   gem 'simplecov'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end

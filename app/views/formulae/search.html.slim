@@ -4,10 +4,11 @@
     = icon 'search'
     |  Search
 - if @results
-  h3 #{@results.count} Results
+  h3#result-count
+    = pluralize @results.count, 'Result'
 
   - if @formula
-    h3 
+    h3
       = @formula.to_s { |atom| AtomDecorator.new(atom).linked_name }.html_safe
       |  Spaces
 
