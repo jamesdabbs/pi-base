@@ -16,7 +16,6 @@ Feature: Full Text Search
 
   Scenario: in descriptions
     When I search for "appert"
-    Then show me the page
     Then I should see 1 result: "A"
 
   Scenario: in tags
