@@ -4,6 +4,8 @@ class Space < ActiveRecord::Base
   validates :name, :description, presence: true
 
   has_many :traits, dependent: :destroy
+  
+  serialize :meta, JSON
 
   def self.by_formula fs
     ids = fs.map { |f, val| Formula.load(f).spaces(val) }.inject &:&

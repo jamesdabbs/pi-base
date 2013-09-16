@@ -1,5 +1,12 @@
-def find_result name, results
-  expect( results ).to have_link name
+Given(/^an empty search index$/) do
+  # Doing a remove by query to drop all the records is noticeably faster than
+  # deleting and re-creating the index, but isn't well supported in Tire.
+  # See: https://github.com/karmi/tire/issues/90
+  Tire::Configuration.client.delete "#{Tire::Configuration.url}/properties/property/_query?q=*:*"
+end
+
+Given(/^that the indices have synced$/) do
+  Property.index.refresh
 end
 
 When(/^I search for "(.*?)"$/) do |query|
@@ -8,10 +15,9 @@ When(/^I search for "(.*?)"$/) do |query|
 end
 
 Then(/^I should see (\d+ results?)(.*)$/) do |count, expectations|
-  results = find '#result-count'
-  expect( results.text ).to match /^#{count}$/i
+  expect( find('#result-count').text ).to match /^#{count}$/i
 
-  expectations.scan(/"(.*?)"/).each do |name|
-    expect( results ).to have_link name[1 .. -2]
+  expectations.scan /".*?"/ do |name|
+    expect( find '#definitions' ).to have_link name[1 .. -2]
   end
 end

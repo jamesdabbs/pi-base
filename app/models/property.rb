@@ -9,6 +9,16 @@ class Property < ActiveRecord::Base
   has_many :theorem_properties
   has_many :theorems, through: :theorem_properties
 
+  serialize :meta, JSON
+
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
+  def to_indexed_json
+    h = as_json
+    h.merge(h.delete 'meta').to_json
+  end
+
   def to_s
     name
   end

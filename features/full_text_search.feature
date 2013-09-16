@@ -4,14 +4,16 @@ Feature: Full Text Search
   I want to be able to search for text
 
   Background:
-    Given the following spaces
+    Given an empty search index
+    And the following spaces
       | name | description    | meta |
       | A    | lindelof thing | {}   |
-    Given the following properties
+    And the following properties
       | name | description | meta                                       |
       | P    | hausdorff   | { tags: ['separation'], aliases: ['T_2'] } |
       | Q    | regular     | { tags: ['separation'], aliases: ['T_3'] } |
       | R    | lindelof    | { tags: ['compactness'] }                  |
+    Given that the indices have synced
     When I go to the search page
 
   Scenario: in descriptions

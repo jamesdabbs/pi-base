@@ -1,14 +1,20 @@
 class FormulaeController < ApplicationController
   def search
     if @q = params[:q]
-      r = begin
+      @results = begin
         @formula = Formula.load @q.gsub /\&/, '+'
-        Space.where id: @formula.spaces
+        Space.where(id: @formula.spaces).paginate pagination
       rescue Formula::ParseError => e
         @error = e
-        @results = Space.all # FIXME: full text search
+        Property.search @q, pagination
       end
-      @results &&= @results.paginate page: params[:page], per_page: 30
+      @results &&= @results
     end
+  end
+
+  private #----------
+
+  def pagination
+    { page: params[:page], per_page: 30 }
   end
 end
