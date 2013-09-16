@@ -17,7 +17,7 @@ Feature: Full Text Search
     When I go to the search page
 
   Scenario: in descriptions
-    When I search for "appert"
+    When I search for "thing"
     Then I should see 1 result: "A"
 
   Scenario: in tags
@@ -30,4 +30,4 @@ Feature: Full Text Search
 
   Scenario: accross types
     When I search for "lindelof"
-    Then I should see 2 results: "A" and "Q"
+    Then I should see 2 results: "A" and "R"

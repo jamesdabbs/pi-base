@@ -13,6 +13,7 @@ class Property < ActiveRecord::Base
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
+  index_name "full"
 
   def to_indexed_json
     h = as_json
