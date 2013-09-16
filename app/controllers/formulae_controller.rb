@@ -6,22 +6,22 @@ class FormulaeController < ApplicationController
         Space.where(id: @formula.spaces).paginate pagination
       rescue Formula::ParseError => e
         @error = e
-        text_search @q
+        text_search @q, pagination
       end
     end
   end
 
   private #----------
 
-  def text_search q
-    # FIXME: pagination
+  def text_search q, opts={}
     Tire::Search::Search.new 'full' do
       query { string q }
-      size  30
+      size  opts[:per_page]
+      from  opts[:per_page] * (opts[:page] - 1)
     end.results
   end
 
   def pagination
-    { page: params[:page], per_page: 30 }
+    { page: params[:page] || 1, per_page: 30 }
   end
 end

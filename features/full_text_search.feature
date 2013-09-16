@@ -31,3 +31,6 @@ Feature: Full Text Search
   Scenario: accross types
     When I search for "lindelof"
     Then I should see 2 results: "A" and "R"
+
+  @wip
+  Scenario: paginated full text search
