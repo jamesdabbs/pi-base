@@ -5,16 +5,7 @@ class Space < ActiveRecord::Base
 
   has_many :traits, dependent: :destroy
 
-  serialize :meta, JSON
-
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
-  index_name "full"
-
-  def to_indexed_json
-    h = as_json
-    h.merge(h.delete 'meta').to_json
-  end
+  include SearchObject
 
   def self.by_formula fs
     ids = fs.map { |f, val| Formula.load(f).spaces(val) }.inject &:&
