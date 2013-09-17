@@ -153,12 +153,9 @@ ActiveRecord::Schema.define(version: 20130913202931) do
   add_foreign_key "theorem_properties", "theorems", name: "theorem_properties_theorems_fk"
 
   add_foreign_key "traits", "properties", name: "traits_properties_fk"
-  add_foreign_key "traits", "properties", name: "traits_property_id_fk"
-  add_foreign_key "traits", "spaces", name: "traits_space_id_fk"
   add_foreign_key "traits", "spaces", name: "traits_spaces_fk"
   add_foreign_key "traits", "values", name: "traits_values_fk"
 
-  add_foreign_key "values", "value_sets", name: "values_value_set_id_fk"
   add_foreign_key "values", "value_sets", name: "values_value_sets_fk"
 
 end

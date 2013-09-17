@@ -1,0 +1,56 @@
+require 'csv'
+require 'import_buffer'
+
+# Backs up the database to a folder of CSV files. Useful when porting from one
+# db backend to another.
+
+cmd  = ARGV.shift
+Path = File.realpath ARGV.shift
+
+models = [
+  Assumption,
+  Proof,
+  Property,
+  Space,
+  Supporter,
+  TheoremProperty,
+  Theorem,
+  Trait,
+  User,
+  ValueSet,
+  Value,
+  Version
+]
+
+def path model
+  "#{Path}/#{model.model_name.plural}.csv"
+end
+
+def dump model
+  print "Dumping #{model.count} `#{model}` objects -----> "
+  CSV.open path(model), 'w' do |csv|
+    csv << model.new.attributes.keys
+
+    model.find_in_batches do |batch|
+      batch.each do |obj|
+        csv << obj.attributes.values
+      end
+    end
+  end
+  puts "Done"
+end
+
+def load model
+  print "Loading `#{model}` objects -----> "
+  raise "Can't load over existing table" unless model.count.zero?
+  
+  ImportBuffer.new do |buffer|
+    CSV.foreach path(model), headers: true do |attrs|
+      buffer << model.new(attrs.to_hash)
+    end
+  end
+
+  puts "#{model.count} loaded"
+end
+
+models.each { |obj| send cmd, obj }
