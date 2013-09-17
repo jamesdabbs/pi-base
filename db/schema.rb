@@ -141,21 +141,4 @@ ActiveRecord::Schema.define(version: 20130913202931) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
-  add_foreign_key "assumptions", "proofs", name: "assumptions_proofs_fk"
-  add_foreign_key "assumptions", "traits", name: "assumptions_traits_fk"
-
-  add_foreign_key "proofs", "theorems", name: "proofs_theorems_fk"
-  add_foreign_key "proofs", "traits", name: "proofs_traits_fk"
-
-  add_foreign_key "properties", "value_sets", name: "properties_value_sets_fk"
-
-  add_foreign_key "theorem_properties", "properties", name: "theorem_properties_properties_fk"
-  add_foreign_key "theorem_properties", "theorems", name: "theorem_properties_theorems_fk"
-
-  add_foreign_key "traits", "properties", name: "traits_properties_fk"
-  add_foreign_key "traits", "spaces", name: "traits_spaces_fk"
-  add_foreign_key "traits", "values", name: "traits_values_fk"
-
-  add_foreign_key "values", "value_sets", name: "values_value_sets_fk"
-
 end

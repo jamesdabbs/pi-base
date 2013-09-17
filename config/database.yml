@@ -1,5 +1,5 @@
 development:
-  adapter:  mysql2
+  adapter:  postgresql
   socket:   /tmp/mysql.sock
   database: brubeck
   username: root
@@ -8,18 +8,10 @@ development:
   timeout:  5000
 
 test: &test
-  adapter:  mysql2
+  adapter:  postgresql
   database: brubeck_test
   username: root
   encoding: utf8
-
-production:
-  adapter:  mysql2
-  database: brubeck_prod
-  username: root
-  password: OETuqwNbTNcsKGs2RAgJJ0E3
-  pool:     5
-  timeout:  5000
 
 cucumber:
   <<: *test

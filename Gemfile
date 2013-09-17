@@ -1,16 +1,13 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
+
+
+gem 'pg'
 gem 'rails'
 gem 'jquery-rails'
-gem 'thin'
 gem 'slim-rails'
-gem 'mysql2'
 gem 'resque'
-gem 'newrelic_rpm'
-gem 'exception_notification'
-
-gem 'capistrano'
-gem 'capistrano-resque'
 
 gem 'devise'
 gem 'cancan'
@@ -25,9 +22,10 @@ gem 'differ'
 
 gem 'draper'
 
-gem 'foreigner'
-
 gem 'tire'
+
+gem 'activerecord-import'
+
 
 group :assets do
   gem 'sass-rails'
@@ -38,7 +36,6 @@ group :assets do
 end
 
 group :development do
-  gem 'activerecord-import'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'colorize'
@@ -52,4 +49,10 @@ group :test do
   gem 'simplecov'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
+end
+
+group :production do
+  gem 'unicorn'
+  gem 'rails_12factor'
+  gem 'newrelic_rpm'
 end

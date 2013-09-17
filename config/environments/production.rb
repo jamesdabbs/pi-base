@@ -81,10 +81,4 @@ PiBase::Application.configure do
   # Exception notification mailer settings
   config.action_mailer.delivery_method = :smtp
 
-  config.middleware.use ExceptionNotifier, email: {
-    email_prefix: '[𝜋-Base] ',
-    sender_address: %{"Error notification" <errors@topology.jdabbs.com>},
-    exception_recipients: %w{jamesdabbs@gmail.com}
-  }
-
 end

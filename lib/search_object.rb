@@ -8,8 +8,10 @@ module SearchObject
     base.serialize :meta, JSON
 
     def to_indexed_json
-      h = as_json
-      h.merge(h.delete 'meta').to_json
+      as_json.tap do |h|
+        meta = h.delete 'meta'
+        h.merge! meta if meta
+      end.to_json
     end
   end
 end
