@@ -1,16 +1,17 @@
 = form_for @property do |f|
   - if @property.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@property.errors.count, "error")} prohibited this space from being saved:"
+      h2 = "#{pluralize(@property.errors.count, "error")} prohibited this property from being saved:"
       ul
         - @property.errors.full_messages.each do |message|
           li = message
 
   = f.hidden_field :value_set_id, value: Value::true.value_set_id
-  / .control-group
-  /   = f.label :name
-  /   .controls
-  /     = f.text_field :name, class: 'span12'
+
+  .control-group
+    = f.label :name
+    .controls
+      = f.text_field :name, class: 'span12'
 
   = render 'objects/description', f: f
 
