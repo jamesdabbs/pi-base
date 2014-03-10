@@ -45,5 +45,4 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 * Move Sphinx -> Elasticsearch
 * Get running on Heroku (with Resque and Elasticsearch)
 * Check on styling, icons, etc.
-* Working traits
 * Fixed footer
