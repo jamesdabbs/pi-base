@@ -1,18 +1,18 @@
 source 'https://rubygems.org'
 
-gem 'rails'
+gem 'rails', '~> 4.1.0.beta1'
 gem 'jquery-rails'
 gem 'thin'
 gem 'slim-rails'
-gem 'mysql2', git: 'git://github.com/brianmario/mysql2.git'
+gem 'mysql2'
 gem 'resque'
 gem 'newrelic_rpm'
-gem 'exception_notification', git: 'git://github.com/smartinez87/exception_notification.git'
+gem 'exception_notification'
 
 gem 'capistrano'
 gem 'capistrano-resque'
 
-gem 'devise', git: 'git://github.com/plataformatec/devise.git', branch: 'rails4'
+gem 'devise'
 gem 'cancan'
 
 gem 'will_paginate'
@@ -20,14 +20,12 @@ gem 'will_paginate-bootstrap'
 
 gem 'redcarpet'
 
-gem 'paper_trail', git: 'git://github.com/airblade/paper_trail.git', branch: 'rails4'
+gem 'paper_trail'
 gem 'differ'
 
 gem 'draper'
 
 gem 'thinking-sphinx'
-
-gem 'foreigner'
 
 group :assets do
   gem 'sass-rails'
