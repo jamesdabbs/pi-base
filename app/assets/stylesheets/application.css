@@ -9,30 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap
- *= require darkstrap
- *= require font-awesome
  *= require_tree .
  */
 html, body { height: 100%; }
-
-/* Sticky footer */
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -60px;
-}
-
-#wrap > .container {
-  padding-top: 60px;
-}
-
-#push, footer {
-  margin-top: 30px;
-  height: 60px;
-  display: block;
-}
 
 .alert a {
   color: #fff;

@@ -39,3 +39,11 @@ Feel free to email me if you have any trouble getting things up and running.
 I would _love_ bug reports and feature requests. Feel free to submit those in the [GitHub issues](https://github.com/jamesdabbs/pi-base/issues).
 
 If you want to push up code, open up a pull request. I'll review it, merge it in, and push it live once it's good to go.
+
+### TODO
+
+* Move Sphinx -> Elasticsearch
+* Get running on Heroku (with Resque and Elasticsearch)
+* Check on styling, icons, etc.
+* Working traits
+* Fixed footer

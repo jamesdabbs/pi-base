@@ -7,6 +7,7 @@ html lang="en"
     title= content_for?(:title) ? yield(:title) : "𝜋-Base"
     = csrf_meta_tags
 
+    = javascript_include_tag "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
     = javascript_include_tag "application"
     /! Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
@@ -18,64 +19,60 @@ html lang="en"
           inlineMath: [ ['$','$'], ['\\(','\\)'] ]
         }
       });
+    = stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+    = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
     = stylesheet_link_tag "application", media: "all"
 
   body
-    #wrap
-      .navbar.navbar-fixed-top
-        .navbar-inner
-          .container
-            a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            = link_to "𝜋-Base", root_path, class: :brand
-            .container.nav-collapse
-              ul.nav
-                li= link_to "Spaces", spaces_path
-                li= link_to "Properties", properties_path
-                li= link_to "Traits", traits_path
-                li= link_to "Theorems", theorems_path
-                li= link_to "Search", search_path
-              ul.nav.pull-right
-                - if current_user
-                  li= link_to "#{icon('user')} #{current_user.email}".html_safe, user_path(current_user)
-                  li= link_to "Logout", destroy_user_session_path, method: :delete
-                - else
-                  li= link_to "Login", new_user_session_path
-                  li= link_to "Register", new_user_registration_path
-                li= link_to icon('question-sign'), help_path
-
-      - if content_for? :uncontained
-        .uncontained
-          = yield :uncontained
-
-
+    nav.navbar.navbar-default
       .container
-        noscript
-          div class="alert alert-notice"
-            h4 Javascript Disabled!
-            p It looks like Javascript is disabled in your browser. Some features on this site will not work correctly unless you re-enable it. #{link_to "Click here", "http://www.enable-javascript.com/"} for more information.
-        
-        .flash
-          - flash.each do |name, msg|
-            div class="alert alert-#{flash_class name}"
-              a.close data-dismiss="alert"
-                | &times;
-              div id="flash_#{flash_class name}"
-                = msg
+        .navbar-header
+          = link_to "𝜋-Base", root_path, class: :"navbar-brand"
 
-        = yield
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li= link_to "Spaces", spaces_path
+            li= link_to "Properties", properties_path
+            li= link_to "Traits", traits_path
+            li= link_to "Theorems", theorems_path
+            li= link_to "Search", search_path
+          ul.nav.navbar-nav.pull-right
+            - if current_user
+              li= link_to "#{icon('user')} #{current_user.email}".html_safe, user_path(current_user)
+              li= link_to "Logout", destroy_user_session_path, method: :delete
+            - else
+              li= link_to "Login", new_user_session_path
+              li= link_to "Register", new_user_registration_path
+            li= link_to icon('question-sign'), help_path
 
-        = yield :scripts
+    - if content_for? :uncontained
+      .uncontained
+        = yield :uncontained
 
-        javascript:
-          $(function() {
-            #{yield :onload}
-          })
+
+    .container
+      noscript
+        div class="alert alert-notice"
+          h4 Javascript Disabled!
+          p It looks like Javascript is disabled in your browser. Some features on this site will not work correctly unless you re-enable it. #{link_to "Click here", "http://www.enable-javascript.com/"} for more information.
+      
+      .flash
+        - flash.each do |name, msg|
+          div class="alert alert-#{flash_class name}"
+            a.close data-dismiss="alert"
+              | &times;
+            div id="flash_#{flash_class name}"
+              = msg
+
+      = yield
+
+      = yield :scripts
+
+      javascript:
+        $(function() {
+          #{yield :onload}
+        })
     
-      #push
-
     footer
       .container
         p &copy; #{link_to 'James Dabbs', 'http://jdabbs.com'} 2012 - #{Time.now.year}
