@@ -16,8 +16,6 @@ ActiveRecord::Schema.define(version: 20130526220534) do
   create_table "assumptions", force: true do |t|
     t.integer  "proof_id"
     t.integer  "trait_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   add_index "assumptions", ["proof_id"], name: "assumptions_proofs_fk"
@@ -54,15 +52,11 @@ ActiveRecord::Schema.define(version: 20130526220534) do
   create_table "supporters", force: true do |t|
     t.integer  "assumed_id"
     t.integer  "implied_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "theorem_properties", force: true do |t|
     t.integer  "theorem_id"
     t.integer  "property_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   add_index "theorem_properties", ["property_id"], name: "theorem_properties_properties_fk"
@@ -136,22 +130,5 @@ ActiveRecord::Schema.define(version: 20130526220534) do
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
-
-  add_foreign_key "assumptions", "proofs", :name => "assumptions_proofs_fk"
-  add_foreign_key "assumptions", "traits", :name => "assumptions_traits_fk"
-
-  add_foreign_key "proofs", "theorems", :name => "proofs_theorems_fk"
-  add_foreign_key "proofs", "traits", :name => "proofs_traits_fk"
-
-  add_foreign_key "properties", "value_sets", :name => "properties_value_sets_fk"
-
-  add_foreign_key "theorem_properties", "properties", :name => "theorem_properties_properties_fk"
-  add_foreign_key "theorem_properties", "theorems", :name => "theorem_properties_theorems_fk"
-
-  add_foreign_key "traits", "properties", :name => "traits_properties_fk"
-  add_foreign_key "traits", "spaces", :name => "traits_spaces_fk"
-  add_foreign_key "traits", "values", :name => "traits_values_fk"
-
-  add_foreign_key "values", "value_sets", :name => "values_value_sets_fk"
 
 end

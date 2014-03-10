@@ -4,13 +4,11 @@ gem 'rails', '~> 4.1.0.beta1'
 gem 'jquery-rails'
 gem 'thin'
 gem 'slim-rails'
-gem 'mysql2'
 gem 'resque'
 gem 'newrelic_rpm'
 gem 'exception_notification'
 
-gem 'capistrano'
-gem 'capistrano-resque'
+gem 'pg'
 
 gem 'devise'
 gem 'cancan'
@@ -35,10 +33,13 @@ group :assets do
   gem 'execjs'
 end
 
+group :legacy do
+  gem 'activerecord-import'
+  gem 'mysql2'
+end
+
 group :development do
   gem 'activerecord-import'
-  gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'colorize'
   gem 'letter_opener'
   gem 'pry'
