@@ -1,11 +1,9 @@
 default: &default
   adapter:  postgresql
-  host:     localhost
   encoding: unicode
-  username: brubeck
-  password:
   pool:     5
   timeout:  5000
+  password:
 
 development:
   <<: *default
@@ -14,6 +12,10 @@ development:
 test:
   <<: *default
   database: brubeck_test
+
+production:
+  <<: *default
+  database: brubeck_prod
 
 legacy:
   adapter:  mysql2

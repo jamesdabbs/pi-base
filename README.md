@@ -9,7 +9,7 @@ See the live site at [topology.jdabbs.com](http://topology.jdabbs.com).
 
 To run locally, you will need to install the following dependencies:
 
-* mysql
+* postgres
 * ruby 2.0 (recommended through [rbenv](https://github.com/sstephenson/rbenv/))
 * redis
 
@@ -43,6 +43,6 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 ### TODO
 
 * Move Sphinx -> Elasticsearch
-* Get running on Heroku (with Resque and Elasticsearch)
 * Check on styling, icons, etc.
 * Fixed footer
+* Check on exception notifications

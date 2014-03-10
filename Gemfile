@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
+ruby "2.1.1"
+
 gem 'rails', '~> 4.1.0.beta1'
 gem 'jquery-rails'
 gem 'thin'
 gem 'slim-rails'
 gem 'resque'
 gem 'newrelic_rpm'
-gem 'exception_notification'
+# gem 'exception_notification'
 
 gem 'pg'
 
@@ -33,16 +35,15 @@ group :assets do
   gem 'execjs'
 end
 
-group :legacy do
-  gem 'activerecord-import'
-  gem 'mysql2'
-end
-
 group :development do
   gem 'colorize'
   gem 'letter_opener'
   gem 'pry'
   gem 'quiet_assets'
+
+  # Legacy importer
+  gem 'activerecord-import'
+  gem 'mysql2'
 end
 
 group :development, :test do
@@ -52,4 +53,9 @@ end
 group :test do
   gem 'factory_girl_rails'
   gem 'simplecov'
+end
+
+group :production do
+  gem 'passenger'
+  gem 'rails_12factor'
 end
