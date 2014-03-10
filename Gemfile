@@ -42,6 +42,7 @@ group :development do
   gem 'colorize'
   gem 'letter_opener'
   gem 'pry'
+  gem 'quiet_assets'
 end
 
 group :development, :test do
