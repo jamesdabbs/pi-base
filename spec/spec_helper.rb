@@ -1,7 +1,6 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -18,17 +17,17 @@ RSpec::Matchers.define :satisfy do |formula|
     !!formula.verify(space)
   end
 
-  failure_message_for_should do |space| 
+  failure_message do |space|
     "#{space.name} should satisfy #{formula}"
   end
 
-  failure_message_for_should_not do |space|
+  failure_message_when_negated do |space|
     "#{space.name} should not satisfy #{formula}"
   end
 end
 
-Space.define_method :<<  do |atom|
-  traits.create! property: atom.property, value: atom.value, description: 'Test'  
+Space.send :define_method, :<<  do |atom|
+  traits.create! property: atom.property, value: atom.value, description: 'Test'
 end
 
 module Helpers
@@ -61,7 +60,6 @@ RSpec.configure do |config|
   config.order = "random"
 
   # Allow focusing on specs
-  config.treat_symbols_as_metadata_keys_with_true_values = true
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
 

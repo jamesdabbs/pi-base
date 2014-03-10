@@ -39,13 +39,15 @@ group :legacy do
 end
 
 group :development do
-  gem 'activerecord-import'
   gem 'colorize'
   gem 'letter_opener'
   gem 'pry'
 end
 
-gem 'rspec-rails', group: [:development, :test]
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta1'
+end
+
 group :test do
   gem 'factory_girl_rails'
   gem 'simplecov'
