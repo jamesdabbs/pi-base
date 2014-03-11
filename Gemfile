@@ -8,7 +8,6 @@ gem 'thin'
 gem 'slim-rails'
 gem 'resque'
 gem 'newrelic_rpm'
-# gem 'exception_notification'
 
 gem 'pg'
 
