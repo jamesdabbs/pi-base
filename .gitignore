@@ -18,10 +18,5 @@
 # Ignore the wiki repo
 /wiki
 
-# Sphinx files
-config/development.sphinx.conf
-log/development.sphinx.pid
-db/sphinx
-
 # Test coverage
 coverage

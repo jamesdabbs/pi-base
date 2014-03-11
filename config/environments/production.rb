@@ -78,14 +78,18 @@ PiBase::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Exception notification mailer settings
+  config.action_mailer.default_url_options = { host: "counterexamples.info" }
+
   config.action_mailer.delivery_method = :smtp
 
-  config.smtp_settings = {
-    address: "smtp.mandrillapp.com",
-    port:    587,
-    user_name: ENV["MANDRILL_USERNAME"],
-    password:  ENV["MANDRILL_APIKEY"]
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => ENV['SENDGRID_USERNAME'],
+    :password       => ENV['SENDGRID_PASSWORD'],
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
   }
 
 end
