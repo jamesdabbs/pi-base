@@ -2,31 +2,33 @@ source 'https://rubygems.org'
 
 ruby "2.1.1"
 
+# Data
+gem 'pg'
+gem 'kaminari'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
+# Infrastructure
 gem 'rails', '~> 4.1.0.beta1'
 gem 'jquery-rails'
 gem 'thin'
 gem 'slim-rails'
-gem 'resque'
-gem 'exceptiontrap'
+gem 'sucker_punch'
 
-gem 'pg'
-
+# Auth
 gem 'devise'
 gem 'cancan'
 
+# Presentation
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
-
 gem 'redcarpet'
-
 gem 'paper_trail'
 gem 'differ'
-
 gem 'draper'
 
-gem 'kaminari'
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+# Monitoring
+gem 'exceptiontrap'
 
 group :assets do
   gem 'sass-rails'
