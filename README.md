@@ -42,7 +42,8 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 
 ### TODO
 
+* Check on exception notifications
 * Move Sphinx -> Elasticsearch
+* Move to sucker_punch, better background processing
 * Check on styling, icons, etc.
 * Fixed footer
-* Check on exception notifications

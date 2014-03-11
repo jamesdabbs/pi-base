@@ -7,7 +7,7 @@ gem 'jquery-rails'
 gem 'thin'
 gem 'slim-rails'
 gem 'resque'
-gem 'newrelic_rpm'
+gem 'exceptiontrap'
 
 gem 'pg'
 
@@ -23,8 +23,6 @@ gem 'paper_trail'
 gem 'differ'
 
 gem 'draper'
-
-gem 'thinking-sphinx'
 
 group :assets do
   gem 'sass-rails'
