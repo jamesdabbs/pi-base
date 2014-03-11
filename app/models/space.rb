@@ -5,8 +5,7 @@ class Space < ActiveRecord::Base
 
   has_many :traits, dependent: :destroy
 
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include Search
 
   def self.by_formula fs
     ids = fs.map { |f, val| Formula.load(f).spaces(val) }.inject &:&

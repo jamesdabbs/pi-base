@@ -1,8 +1,7 @@
 class Theorem < ActiveRecord::Base
   has_paper_trail only: [:description]
 
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include Search
 
   # ----------
 

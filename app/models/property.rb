@@ -1,6 +1,6 @@
 class Property < ActiveRecord::Base
   has_paper_trail only: [:name, :description]
-  
+
   validates :name, :description, :value_set, presence: true
 
   has_many :traits, dependent: :destroy
@@ -9,8 +9,7 @@ class Property < ActiveRecord::Base
   has_many :theorem_properties
   has_many :theorems, through: :theorem_properties
 
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include Search
 
   def to_s
     name
