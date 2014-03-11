@@ -1,6 +1,9 @@
 class Trait < ActiveRecord::Base
   has_paper_trail only: [:description]
 
+  # TODO: we should index traits, but there are more than we can fit in our ES plan
+  #       can we only index non-deduced ones?
+
   # ----------
 
   validates :space, :property, :value, presence: true

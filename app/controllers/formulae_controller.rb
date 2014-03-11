@@ -7,7 +7,8 @@ class FormulaeController < ApplicationController
           page: params[:page], per_page: 30)
       rescue Formula::ParseError => e
         @error = e
-        @results = ThinkingSphinx.search @q
+        # Search elasticsearch ... TODO: search across indices
+        @results = Space.search(@q).page(params[:page]).records
       end
     end
   end

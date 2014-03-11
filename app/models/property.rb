@@ -9,6 +9,9 @@ class Property < ActiveRecord::Base
   has_many :theorem_properties
   has_many :theorems, through: :theorem_properties
 
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   def to_s
     name
   end

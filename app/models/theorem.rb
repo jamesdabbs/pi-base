@@ -1,6 +1,9 @@
 class Theorem < ActiveRecord::Base
   has_paper_trail only: [:description]
 
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   # ----------
 
   serialize :antecedent, Formula
@@ -55,12 +58,12 @@ class Theorem < ActiveRecord::Base
   after_create :queue_job
 
   # ----------
-  
+
   def name
     "#{antecedent} ⇒ #{consequent}"
   end
   cache_method :name
-  
+
   def to_s
     name
   end

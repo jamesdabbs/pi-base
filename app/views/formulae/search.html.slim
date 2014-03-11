@@ -7,7 +7,7 @@
   h3 #{@results.count} Results
 
   - if @formula
-    h3 
+    h3
       = @formula.to_s { |atom| AtomDecorator.new(atom).linked_name }.html_safe
       |  Spaces
 

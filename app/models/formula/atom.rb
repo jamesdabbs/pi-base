@@ -5,7 +5,6 @@ class Formula::Atom < Formula
     # TODO: coerce these between ints, bools & models on demand
     @property    = property
     @value       = negated ? ~value : value
-    @subformulae = self
   end
 
   # -- Common formula interface -----
@@ -65,6 +64,10 @@ class Formula::Atom < Formula
 
   def atoms
     [self]
+  end
+
+  def as_json opts={}
+    { property: @property, value: @value }
   end
 
   private # ----------

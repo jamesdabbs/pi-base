@@ -24,6 +24,10 @@ gem 'differ'
 
 gem 'draper'
 
+gem 'kaminari'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
@@ -35,11 +39,11 @@ end
 group :development do
   gem 'colorize'
   gem 'letter_opener'
-  gem 'pry'
+  gem 'pry-rails'
   gem 'quiet_assets'
 
   # Legacy importer
-  gem 'activerecord-import'
+  gem 'activerecord-import', require: false
   gem 'mysql2'
 end
 

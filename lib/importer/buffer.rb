@@ -1,3 +1,5 @@
+require 'activerecord-import'
+
 class Importer
   class Buffer
     def initialize klass, size: 500

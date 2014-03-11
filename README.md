@@ -42,8 +42,13 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 
 ### TODO
 
-* Move Sphinx -> Elasticsearch
-* Move to sucker_punch, better background processing
+* Move to sucker_punch, better background processing, index es docs async
+* Fix please-change-me-at-devise, host names
+* ES
+  - Connect credentials from ENV for Heroku, then import
+  - More specific scoring, indexing, boost name > description, theorem names
+  - Search across all indices
+  - Test callbacks
 * Styling
   - Check icons, general checking
   - Fixed footer
