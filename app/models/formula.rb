@@ -24,7 +24,7 @@ class Formula
   end
 
   def each &block
-    subformulae.each &block
+    subformulae.each(&block)
   end
 
   # -- Common formula interface -----

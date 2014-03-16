@@ -1,7 +1,11 @@
 class TraitExploreJob
-  @queue = :trait
+  include SuckerPunch::Job
 
-  def self.perform id
-    Trait.find(id).explore
+  def perform ids
+    ActiveRecord::Base.connection_pool.with_connection do
+      while id = ids.shift
+        ids += Trait.find(id).explore.map(&:id)
+      end
+    end
   end
 end

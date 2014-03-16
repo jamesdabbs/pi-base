@@ -39,14 +39,15 @@ class Trait < ActiveRecord::Base
   scope :deduced, -> { where deduced: true  }
 
   scope :unproven, -> { where deduced: false, description: '' }
-  def unproven?
-    !deduced? && description.blank?
-  end
+  def unproven?;  !deduced? && description.blank?; end
 
-  def find_implied_traits
-    PiBase::Application.enqueue TraitExploreJob, id
+  # ----------
+
+  def self.assert! space, property, value: Value.true, description: ""
+    t = space.traits.create! property: property, value: value, description: description
+    TraitExploreJob.new.async.perform [t.id]
+    t
   end
-  after_create :find_implied_traits
 
   def self.table
     Rails.cache.fetch "/trait-table/#{Trait.maximum :updated_at}", expires_in: 1.day do
@@ -56,14 +57,8 @@ class Trait < ActiveRecord::Base
 
   # ----------
 
-  def name
-    atom.to_s
-  end
-  cache_method :name
-
-  def to_s
-    name
-  end
+  cache_method def name; atom.to_s; end
+  def to_s; name; end
 
   def as_json opts={}
     super.merge name: opts[:add_space] ? "#{space}: #{name}" : name
@@ -76,12 +71,12 @@ class Trait < ActiveRecord::Base
   end
 
   def explore
-    property.theorems.each do |theorem|
+    property.theorems.map do |theorem|
       if theorem.antecedent.verify space
         theorem.apply space
       elsif (~theorem.consequent).verify space
         theorem.contrapositive.apply space
       end
-    end
+    end.compact
   end
 end

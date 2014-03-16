@@ -2,10 +2,8 @@ class ValueSet < ActiveRecord::Base
   has_many :values
 
   def self.boolean
-    @boolean ||= where(name: 'Boolean').first
+    @boolean ||= where(name: 'Boolean').first_or_create!
   end
 
-  def to_s
-    name
-  end
+  def to_s; name; end
 end

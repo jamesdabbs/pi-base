@@ -27,7 +27,6 @@ At this point you should be set up to use any of these commands:
 ```bash
 $ rails c           # Starts an interactive rails console session
 $ rails s           # Spins up a rails server at localhost:3000
-$ rake resque:work  # Starts a background worker (for automated proof generation, etc.)
 ```
 
 If you have other gems installed on your system, you may need to prefix `rake` and `rails` commands with `bundle exec`.
@@ -42,8 +41,9 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 
 ### TODO
 
-* Move to sucker_punch, better background processing, index es docs async
-* Fix please-change-me-at-devise, host names
+* Prefetch all relevant traits when checking a theorem against a space
+* Index es documents async
+* Test sucker_punch
 * ES
   - More specific scoring, indexing, boost name > description, theorem names
   - Search across all indices

@@ -22,7 +22,7 @@ module PiBase
     config.autoload_paths += Dir["#{config.root}/lib/"]
 
     def self.enqueue job, *args
-      Resque.enqueue job, *args
+      raise NotImplemented
     end
   end
 end

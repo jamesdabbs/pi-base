@@ -9,6 +9,10 @@ class Formula::Atom < Formula
 
   # -- Common formula interface -----
 
+  def == other
+    property == other.property && value == other.value
+  end
+
   def self.load str
     negated  = str =~ /~\s*/
     p,v      = str.gsub(/~\s*/, '').split('=').map &:strip
@@ -49,7 +53,7 @@ class Formula::Atom < Formula
   def force space, assumptions, theorem, index
     trait = space.traits.create! property: @property, value: @value, deduced: true
     proof = Proof.create! trait: trait, theorem: theorem, theorem_index: index
-    assumptions.each do |assumption| 
+    assumptions.each do |assumption|
       proof.assumptions.create! trait: assumption
       if assumption.supporters.empty?
         trait.supporters.create! assumed_id: assumption.id

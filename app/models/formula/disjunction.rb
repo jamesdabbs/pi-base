@@ -2,6 +2,10 @@ class Formula::Disjunction < Formula
 
   # -- Common formula interface -----
 
+  def == other
+    self.class == other.class && subformulae.sort == other.subformulae.sort
+  end
+
   def spaces where=true
     subs = map { |sf| sf.spaces where }
     # True if any is true
@@ -22,7 +26,7 @@ class Formula::Disjunction < Formula
 
   def force space, assumptions, theorem, index
     unknown = nil
-    each do |sf|
+    map do |sf|
       witnesses = (~sf).verify space
       if witnesses
         assumptions += witnesses
@@ -40,7 +44,7 @@ class Formula::Disjunction < Formula
   end
 
   # ----------
-  
+
   def symbol
     '|'
   end

@@ -4,16 +4,14 @@ class Value < ActiveRecord::Base
   has_many :traits
 
   def self.true
-    @true ||= where(name: 'True' ).first
+    @true ||= ValueSet.boolean.values.where(name: 'True').first_or_create!
   end
 
   def self.false
-    @false ||= where(name: 'False').first
+    @false ||= ValueSet.boolean.values.where(name: 'False').first_or_create!
   end
 
-  def to_s
-    name
-  end
+  def to_s; name; end
 
   def compliment
     value_set.values.pluck(:id).reject { |v| v == id }

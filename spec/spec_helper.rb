@@ -2,6 +2,9 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 
+require 'pry'
+require 'sucker_punch/testing/inline'
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -26,28 +29,9 @@ RSpec::Matchers.define :satisfy do |formula|
   end
 end
 
-Space.send :define_method, :<<  do |atom|
-  traits.create! property: atom.property, value: atom.value, description: 'Test'
-end
-
-module Helpers
-  def atoms *syms
-    syms.each { |sym| let(sym) { FactoryGirl.create(:property, name: sym).atom } }
-  end
-
-  def spaces *syms
-    syms.each { |sym| let(sym) { FactoryGirl.create :space, name: sym } }
-  end
-end
-
 # -- RSpec configuration -----
 
 RSpec.configure do |config|
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  config.use_transactional_fixtures = true
-
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
@@ -63,13 +47,22 @@ RSpec.configure do |config|
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
 
-  config.extend Helpers
+  # Typing `FactoryGirl` is just too arduous
+  config.include FactoryGirl::Syntax::Methods
 
-  # Setup basic Value objects
+  # Need to make sure these exist to that e.g. formulae can deserialize them
   config.before :all do
-    boolean = ValueSet.create! name: 'Boolean'
-    boolean.values.create! name: 'True'
-    boolean.values.create! name: 'False'
+    Value.true.save!
+    Value.false.save!
+  end
+
+  # Make sure we're cleaning compatibly with sucker_punch
+  config.before :all, :job do
+    [Space, Property, Trait, Theorem].each &:delete_all
+  end
+  config.around :each, job: false do |ex|
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.cleaning { ex.run }
   end
 end
 

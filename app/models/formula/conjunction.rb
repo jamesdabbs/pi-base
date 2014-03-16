@@ -2,6 +2,10 @@ class Formula::Conjunction < Formula
 
   # -- Common formula interface -----
 
+  def == other
+    self.class == other.class && subformulae.sort == other.subformulae.sort
+  end
+
   def spaces where=true
     subs = map { |sf| sf.spaces where }
     # True if all are true
@@ -19,7 +23,7 @@ class Formula::Conjunction < Formula
   end
 
   def force space, assumptions, theorem, index
-    each { |sf| sf.force(space, assumptions, theorem, index) rescue nil }
+    map { |sf| sf.force(space, assumptions, theorem, index) rescue nil }
   end
 
   # ----------

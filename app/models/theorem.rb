@@ -51,10 +51,14 @@ class Theorem < ActiveRecord::Base
 
   scope :unproven, -> { where description: '' }
 
-  def queue_job
-    PiBase::Application.enqueue TheoremExploreJob, id
+  # ----------
+
+  def self.assert! formula, description: ""
+    a,c = formula.split('=>').map { |f| Formula.load f.strip }
+    t = create! antecedent: a, consequent: c, description: description
+    TheoremExploreJob.new.async.perform t.id
+    t
   end
-  after_create :queue_job
 
   # ----------
 
@@ -63,9 +67,7 @@ class Theorem < ActiveRecord::Base
   end
   cache_method :name
 
-  def to_s
-    name
-  end
+  def to_s; name; end
 
   # ----------
 
@@ -91,7 +93,7 @@ class Theorem < ActiveRecord::Base
     consequent.force space, assumptions, self, assumptions.length
   rescue ActiveRecord::RecordInvalid
     # Presumably because it violates the uniqueness constraint, and so already exists
-    false
+    nil
   end
 
   # -- Exploration tools --
@@ -101,7 +103,9 @@ class Theorem < ActiveRecord::Base
   end
 
   def explore
-    candidates.each                { |s| apply s }
-    contrapositive.candidates.each { |s| contrapositive.apply s }
+    # FIXME: make sure this returns the right stuff
+    added =  candidates.map                { |s| apply s }
+    added += contrapositive.candidates.map { |s| contrapositive.apply s }
+    added.compact
   end
 end
