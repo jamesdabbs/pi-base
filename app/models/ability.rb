@@ -8,8 +8,8 @@ class Ability
 
     if user && user.admin?
       can :manage, :all
-    elsif user && !read_only
-      can :create, :all
+    elsif user
+      can :create, :all unless read_only
       can :edit, :all
     end
   end
