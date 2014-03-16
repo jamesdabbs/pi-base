@@ -41,16 +41,15 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 
 ### TODO
 
-* Index es documents async
 * Launch with description editing only
+
+* Migrate to storing formulae as JSON
 
 * Figure out why trait specs are failing when run en masse, but not individually
 * Prefetch all relevant traits when checking a theorem against a space
 * Test sucker_punch
 * ES
   - More specific scoring, indexing, boost name > description, theorem names
-  - Search across all indices
-  - Test callbacks
 * Styling
   - Check icons, general checking
   - Fixed footer

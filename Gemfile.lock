@@ -185,6 +185,7 @@ GEM
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
+    sequel (4.8.0)
     simplecov (0.8.2)
       docile (~> 1.1.0)
       multi_json
@@ -266,6 +267,7 @@ DEPENDENCIES
   redcarpet
   rspec-rails (~> 3.0.0.beta1)
   sass-rails
+  sequel
   simplecov
   slim-rails
   sucker_punch

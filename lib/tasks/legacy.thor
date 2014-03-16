@@ -27,6 +27,13 @@ class Legacy < Thor
     say "Cannot connect to database - Please make sure it has been loaded", :red
   end
 
+  desc "index", "Index freshly imported data into elasticsearch"
+  def index
+    boot!
+    [Space, Property, Theorem, Trait].each do |model|
+      model.pluck(:id).each { |id| IndexJob.new.perform :create, model.name, id }
+    end
+  end
 
   no_tasks do
 

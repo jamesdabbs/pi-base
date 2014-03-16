@@ -45,8 +45,9 @@ group :development do
   gem 'quiet_assets'
 
   # Legacy importer
-  gem 'activerecord-import', require: false
+  gem 'activerecord-import'
   gem 'mysql2'
+  gem 'sequel'
 end
 
 group :development, :test do

@@ -7,8 +7,8 @@ class FormulaeController < ApplicationController
           page: params[:page], per_page: 30)
       rescue Formula::ParseError => e
         @error = e
-        # Search elasticsearch ... TODO: use Search.search once implemented
-        @results = Space.search(@q).page(params[:page]).records
+        @results = Search.query(@q).paginate(
+          page: params[:page], per_page: 30)
       end
     end
   end

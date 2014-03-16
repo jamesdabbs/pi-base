@@ -10,13 +10,15 @@ class Importer
     end
 
     def << attrs
-      @buffer << @klass.new(attrs)
+      @buffer << attrs
       flush if @buffer.size == @size
     end
 
     def flush
       return if @buffer.empty?
-      @klass.import @buffer, validate: false
+      cols = @buffer.first.keys
+      vals = @buffer.map { |row| row.values_at *cols }
+      @klass.import_without_validations_or_callbacks cols, vals
       @buffer = []
     end
   end
