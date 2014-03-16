@@ -3,7 +3,7 @@ h1
   | : 
   = AtomDecorator.new(@trait.atom).linked_name
   |  
-  = link_to 'Edit', edit_trait_path(@trait), class: 'btn btn-mini'
+  = link_to 'Edit', edit_trait_path(@trait), class: 'btn btn-mini btn-default'
 
 - if @trait.deduced?
   .well

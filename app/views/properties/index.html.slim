@@ -1,6 +1,6 @@
 h3
   | #{Property.count} Properties 
   - if can? :create, Property
-    = link_to 'New', new_property_path, class: 'btn btn-mini'
+    = link_to 'New', new_property_path, class: 'btn btn-mini btn-default'
 
 = render 'application/definitions', list: @properties

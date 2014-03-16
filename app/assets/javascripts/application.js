@@ -17,3 +17,18 @@
 //= require hamlcoffee
 //= require ./pi_base
 //= require_tree .
+
+// FIXME: restructure this
+$(function() {
+  var preview = function(input) {
+    var text = input.find('.form-control').val();
+    var pv = input.find('.preview');
+    $(pv).text(text);
+    pi_base.render_latex();
+  }
+
+  $('.markdown-input .form-control').keyup(function(e) {
+    var input = $(this).closest('.markdown-input');
+    pi_base.delay(300, preview, input);
+  }).keyup();
+});

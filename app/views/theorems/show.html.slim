@@ -1,7 +1,7 @@
 h1
   = @theorem.linked_name.html_safe
   |  
-  = link_to 'Edit', edit_theorem_path(@theorem), class: 'btn btn-mini'
+  = link_to 'Edit', edit_theorem_path(@theorem), class: 'btn btn-mini btn-default'
 
 .well
   - if @theorem.description.empty?

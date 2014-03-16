@@ -42,15 +42,14 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 ### TODO
 
 * Get proof tracing visualization working
-* Finish updating styling throughout
-  - Login pages
-  - Description edit pages
-  - Live filters
-  - Sticky footer
-  - Search box
+* Fix links on the home page
 
 * Migrate to storing formulae as JSON
 
+* Finish updating styling throughout
+  - Trait index
+  - Sticky footer
+  - Search box
 * Figure out why trait specs are failing when run en masse, but not individually
 * Prefetch all relevant traits when checking a theorem against a space
 * Stress test sucker_punch

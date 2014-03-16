@@ -2,7 +2,7 @@ h1
   = @user.email
   - if current_user && @user.id == current_user.id
     '
-    = link_to 'Edit', edit_user_registration_path, class: 'btn btn-mini'
+    = link_to 'Edit', edit_user_registration_path, class: 'btn btn-mini btn-default'
 
 p User since #{@user.created_at.to_date}
 

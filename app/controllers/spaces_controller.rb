@@ -21,4 +21,10 @@ class SpacesController < ObjectsController
       format.json { render json: @space.proof_tree }
     end
   end
+
+  private #-----
+
+  def update_params
+    params.require(:space).permit :name, :description, :proof_of_topology
+  end
 end

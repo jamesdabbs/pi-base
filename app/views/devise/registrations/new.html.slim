@@ -1,23 +1,23 @@
 h2 Sign up
 
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form-horizontal'}) do |f|
+
   = devise_error_messages!
 
-  .control-group
-    = f.label :email
-    .controls
-      = f.email_field :email, autofocus: true
+  .form-group
+    = f.label :email, class: 'col-md-2'
+    .col-md-6
+      = f.email_field :email, autofocus: true, class: 'form-control'
 
-  .control-group
-    = f.label :password
-    .controls
-      = f.password_field :password
+  .form-group
+    = f.label :password, class: 'col-md-2'
+    .col-md-6
+      = f.password_field :password, class: 'form-control'
 
-  .control-group
-    = f.label :password_confirmation
-    .controls
-      = f.password_field :password_confirmation
+  .form-group
+    = f.label :password_confirmation, class: 'col-md-2'
+    .col-md-6
+      = f.password_field :password_confirmation, class: 'form-control'
 
   = f.submit 'Sign up', class: 'btn btn-primary'
 

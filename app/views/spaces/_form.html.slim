@@ -6,11 +6,11 @@
         - @space.errors.full_messages.each do |message|
           li = message
 
-  .control-group
+  .form-group
     = f.label :name
-    .controls
-      = f.text_field :name, class: 'span12'
-  
+    = f.text_field :name, class: 'form-control'
+
   = render 'objects/description', f: f
+  = render 'objects/description', f: f, field: :proof_of_topology
 
   .actions = f.submit 'Save', class: 'btn btn-primary'

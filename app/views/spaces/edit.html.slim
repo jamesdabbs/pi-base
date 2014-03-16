@@ -1,4 +1,4 @@
-= link_to 'Back', :back, class: 'btn'
+= link_to 'Back', :back, class: 'btn btn-default'
 - if can? :manage, @space
   = link_to 'Delete', @space, class: 'btn btn-danger', confirm: 'Are you sure?', method: :delete
 

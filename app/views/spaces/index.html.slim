@@ -1,6 +1,6 @@
 h3
   | #{Space.count} Spaces 
   - if can? :create, Space
-    = link_to 'New', new_space_path, class: 'btn btn-mini'
+    = link_to 'New', new_space_path, class: 'btn btn-mini btn-default'
 
 = render 'application/definitions', list: @spaces

@@ -9,7 +9,7 @@ module ApplicationHelper
     opts[:renderer] = BootstrapPagination::Rails
     will_paginate list, opts
   end
-  
+
   def markdown text
     # FIXME: better XSS protection with spec
     # FIXME: scan the string and escape contextually depending on if we're in math tags

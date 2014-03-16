@@ -1,10 +1,7 @@
-#related_traits_tab.tabbable
-  %form.form-search.pull-right
-    %input{ type: "text", class: "search-query", placeholder: "Type to filter " }
+%h3 Traits
 
+#related_traits_tab
   %ul.nav.nav-tabs
-    %li.header.disabled
-      %a Traits
     - for name, group of @traits
       %li
         %a{ href: "#" + group.id, "data-toggle" => "tab" } #{name}
@@ -12,9 +9,14 @@
   .tab-content
     - for name, group of @traits
       .tab-pane{id: group.id}
-        %ul
-          - for trait in group.members
-            - trait_name = trait.name.replace "#{@trim}: ", ''
-            %li{ "data-name" => trait_name.toLowerCase() }
-              %a{ href: "/traits/" + trait.id }
-                = trait_name
+        %table.table.table-hover
+          %thead
+            %tr
+              %td &nbsp;
+          %tbody
+            - for trait in group.members
+              %tr
+                - trait_name = trait.name.replace "#{@trim}: ", ''
+                %td{ "data-name" => trait_name.toLowerCase() }
+                  %a{ href: "/traits/" + trait.id }
+                    = trait_name

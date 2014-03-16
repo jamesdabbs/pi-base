@@ -7,7 +7,9 @@ window.pi_base =
 
   delay: (() ->
     timer = 0
-    (ms, cb) ->
+    (ms, cb, args...) ->
       clearTimeout timer
-      timer = setTimeout cb, ms
+      timer = setTimeout ->
+        cb(args...)
+      , ms
   )()

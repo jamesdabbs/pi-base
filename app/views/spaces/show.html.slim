@@ -3,10 +3,13 @@ h1
   '
   = link_to 'Explore', space_proofs_path(@space), class: 'btn btn-mini btn-success'
   '
-  = link_to 'Edit', edit_space_path(@space), class: 'btn btn-mini'
+  = link_to 'Edit', edit_space_path(@space), class: 'btn btn-mini btn-default'
 
 .well
   = markdown @space.description
+  hr
+  h4 Proof of Topology
+  = markdown @space.proof_of_topology
 
 #traits
 = onload do
