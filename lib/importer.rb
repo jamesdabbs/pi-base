@@ -83,10 +83,8 @@ class Importer
 
     process :assumptions, Assumption do |a|
       {
-        proof_id:   lookup(Proof, a[:proof_id]),
-        trait_id:   lookup(Trait, a[:trait_id]),
-        created_at: :created_at,
-        updated_at: :updated_at
+        proof_id: lookup(Proof, a[:proof_id]),
+        trait_id: lookup(Trait, a[:trait_id])
       }
     end
 

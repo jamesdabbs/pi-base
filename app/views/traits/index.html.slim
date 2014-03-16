@@ -3,9 +3,10 @@
 
 = content_for :uncontained do
   .container
-    h3 
+    h3
       | #{Trait.count} Traits 
-      = link_to 'New', new_trait_path, class: 'btn btn-mini'
+      - if can? :create, Trait
+        = link_to 'New', new_trait_path, class: 'btn btn-mini'
 
       form.form-search#table-filter-box
 
