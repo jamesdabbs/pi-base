@@ -63,13 +63,13 @@ describe "Chained deduction", :job do
   end
 
   it "knows its assumptions" do
-    traits = [@q, @r].map { |p| @t.traits.where(property: p).first! }
-    expect( @st.assumptions ).to eq traits + [Theorem.first]
+    q, r = [@q, @r].map { |p| @t.traits.where(property: p).first! }
+    expect( @st.proof.steps.sort ).to eq [r, q, Theorem.first].sort
   end
 
-  it "knows its root assumptions" do
+  it "knows its supporters" do
     traits = [@p, @r].map { |p| @t.traits.where(property: p).first! }
-    expect( @st.root_assumptions ).to eq traits + Theorem.all
+    expect( @st.supporters.map &:assumed ).to eq traits
   end
 
   it "can follow contrapositives" do

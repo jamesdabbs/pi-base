@@ -6,8 +6,8 @@ describe Space do
   spaces :s, :t
 
   before(:each) do
-    s <<  a
-    t << ~a
+    assert! s, a
+    assert! t, ~a
   end
 
   it 'can look up by formula' do

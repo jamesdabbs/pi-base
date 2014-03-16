@@ -29,6 +29,20 @@ RSpec::Matchers.define :satisfy do |formula|
   end
 end
 
+module Helpers
+  def atoms *syms
+    syms.each { |sym| let(sym) { FactoryGirl.create(:property, name: sym).atom } }
+  end
+
+  def spaces *syms
+    syms.each { |sym| let(sym) { FactoryGirl.create :space, name: sym } }
+  end
+end
+
+def assert! space, atom
+  Trait.assert! space, atom.property, value: atom.value, description: "-"
+end
+
 # -- RSpec configuration -----
 
 RSpec.configure do |config|
@@ -49,6 +63,7 @@ RSpec.configure do |config|
 
   # Typing `FactoryGirl` is just too arduous
   config.include FactoryGirl::Syntax::Methods
+  config.extend Helpers
 
   # Need to make sure these exist to that e.g. formulae can deserialize them
   config.before :all do

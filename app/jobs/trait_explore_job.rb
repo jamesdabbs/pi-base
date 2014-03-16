@@ -4,7 +4,8 @@ class TraitExploreJob
   def perform ids
     ActiveRecord::Base.connection_pool.with_connection do
       while id = ids.shift
-        ids += Trait.find(id).explore.map(&:id)
+        nts = Trait.find(id).explore
+        ids += [nts].flatten.compact.map(&:id)
       end
     end
   end

@@ -5,8 +5,8 @@ describe Theorem do
   spaces :s
 
   before(:each) do
-    s << a
-    s << ~b
+    assert! s, a
+    assert! s, ~b
   end
 
   it 'does not allow a disprovable theorem to be added' do

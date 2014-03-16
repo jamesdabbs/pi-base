@@ -1,8 +1,11 @@
 require 'spec_helper'
 
-describe Trait do
-  subject { FactoryGirl.create :space }
-  before(:each) { theorem.save! validate: false }
+describe Trait, :job do
+  subject { create :space }
+  before(:each) do
+    [Theorem, Trait].map &:delete_all
+    theorem.save! validate: false
+  end
 
   atoms :a, :b, :c
 
@@ -10,12 +13,12 @@ describe Trait do
     let(:theorem) { a >> b }
 
     it 'checks directly' do
-      subject << a
+      assert! subject, a
       expect( subject ).to satisfy b
     end
 
     it 'checks the contrapositive' do
-      subject << ~b
+      assert! subject, ~b
       expect( subject ).to satisfy ~a
     end
   end
@@ -24,19 +27,19 @@ describe Trait do
     let(:theorem) { a >> (b | c ) }
 
     it 'checks directly' do
-      subject << a
-      subject << ~c
+      assert! subject, a
+      assert! subject, ~c
       expect( subject ).to satisfy b
     end
 
     it 'checks the contrapositive' do
-      subject << ~b
-      subject << ~c
+      assert! subject, ~b
+      assert! subject, ~c
       expect( subject ).to satisfy ~a
     end
 
     it 'only forces disjunctions when known' do
-      subject << a
+      assert! subject, a
       expect( subject ).not_to satisfy b
     end
   end
@@ -45,12 +48,12 @@ describe Trait do
     let(:theorem) { a >> (b + c) }
 
     it 'checks directly' do
-      subject << a
+      assert! subject, a
       expect( subject ).to satisfy (b + c)
     end
 
     it 'checks the contrapositive' do
-      subject << ~c
+      assert! subject, ~c
       expect( subject ).to satisfy ~a
     end
   end
