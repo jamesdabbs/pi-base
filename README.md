@@ -41,15 +41,20 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 
 ### TODO
 
-* Launch with description editing only
+* Get proof tracing visualization working
+* Finish updating styling throughout
+  - Login pages
+  - Description edit pages
+  - Live filters
+  - Sticky footer
+  - Search box
 
 * Migrate to storing formulae as JSON
 
 * Figure out why trait specs are failing when run en masse, but not individually
 * Prefetch all relevant traits when checking a theorem against a space
-* Test sucker_punch
-* ES
-  - More specific scoring, indexing, boost name > description, theorem names
+* Stress test sucker_punch
+* Score ES name hits higher than description hits
 * Styling
   - Check icons, general checking
   - Fixed footer
