@@ -41,7 +41,7 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 
 ### TODO
 
-* Get proof tracing visualization working
+* Get proof tracing visualization working and enabled
 * Fix links on the home page
 
 * Migrate to storing formulae as JSON
