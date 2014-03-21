@@ -31,6 +31,7 @@ class Formula
 
   def self.load str
     return str if str.nil? || str.is_a?(Formula)
+    return load_json str if str[0] == "{"
     p = Parser.new str
     f = if p.conjunction.nil?
       Atom.load str
@@ -40,8 +41,25 @@ class Formula
     p.negated? ? ~f : f
   end
 
+  def self.load_json str
+    return str if str.nil? || str.is_a?(Formula)
+    d = JSON.parse str
+    type = d.delete("_type")
+    case type.to_sym
+    when :atom
+      Atom.new Property.find(d["property"]), Value.find(d["value"])
+    when :conjunction
+      Conjunction.new d["subformulae"]
+    when :disjunction
+      Disjunction.new d["subformulae"]
+    else
+      raise Error, "Unrecognized type: #{type}"
+    end
+  end
+
   def self.dump formula
-    formula.to_s { |atom| Atom.dump atom }
+    #formula.to_s { |atom| Atom.dump atom }
+    formula.to_json
   end
 
   def to_s &block

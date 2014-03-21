@@ -71,7 +71,7 @@ class Formula::Atom < Formula
   end
 
   def as_json opts={}
-    { property: @property, value: @value }
+    { _type: :atom, property: @property.id, value: @value.id }
   end
 
   private # ----------

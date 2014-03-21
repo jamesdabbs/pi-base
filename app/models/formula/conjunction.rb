@@ -26,6 +26,10 @@ class Formula::Conjunction < Formula
     map { |sf| sf.force(space, assumptions, theorem, index) rescue nil }
   end
 
+  def as_json opts={}
+    { _type: :conjunction, subformulae: subformulae.map(&:as_json) }
+  end
+
   # ----------
 
   def symbol

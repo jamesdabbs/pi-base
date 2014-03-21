@@ -43,6 +43,7 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 
 * Get proof tracing visualization working and enabled
 * Fix links on the home page
+* Resolve DNS
 
 * Migrate to storing formulae as JSON
 

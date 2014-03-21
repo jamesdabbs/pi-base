@@ -43,6 +43,10 @@ class Formula::Disjunction < Formula
     unknown.force space, assumptions, theorem, index
   end
 
+  def as_json opts={}
+    { _type: :disjunction, subformulae: subformulae.map(&:as_json) }
+  end
+
   # ----------
 
   def symbol
