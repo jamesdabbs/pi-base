@@ -31,21 +31,8 @@ class Formula
 
   def self.load str
     return str if str.nil? || str.is_a?(Formula)
-    return load_json str if str[0] == "{"
-    p = Parser.new str
-    f = if p.conjunction.nil?
-      Atom.load str
-    else
-      p.subformulae.map { |s| load s }.inject &p.conjunction.to_sym
-    end
-    p.negated? ? ~f : f
-  end
-
-  def self.load_json str
-    return str if str.nil? || str.is_a?(Formula)
     d = JSON.parse str
-    type = d.delete("_type")
-    case type.to_sym
+    case d.delete("_type").to_sym
     when :atom
       Atom.new Property.find(d["property"]), Value.find(d["value"])
     when :conjunction
@@ -58,7 +45,6 @@ class Formula
   end
 
   def self.dump formula
-    #formula.to_s { |atom| Atom.dump atom }
     formula.to_json
   end
 

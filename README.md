@@ -45,8 +45,6 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 * Fix links on the home page
 * Resolve DNS
 
-* Migrate to storing formulae as JSON
-
 * Finish updating styling throughout
   - Trait index
   - Sticky footer
