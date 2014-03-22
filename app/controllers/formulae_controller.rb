@@ -2,7 +2,7 @@ class FormulaeController < ApplicationController
   def search
     if @q = params[:q]
       begin
-        @formula = Formula.load @q.gsub /\&/, '+'
+        @formula = Formula.parse_text @q
         @results = Space.where(id: @formula.spaces).paginate(
           page: params[:page], per_page: 30)
       rescue Formula::ParseError => e

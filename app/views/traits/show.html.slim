@@ -1,4 +1,6 @@
-h1 
+- content_for(:title) { @trait.name }
+
+h1
   = link_to @trait.space.name, @trait.space
   | : 
   = AtomDecorator.new(@trait.atom).linked_name

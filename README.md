@@ -41,14 +41,16 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 
 ### TODO
 
-* Get proof tracing visualization working and enabled
-* Fix links on the home page
+* Fix display of conjunctions
+* Get proof tracing visualization working and enabled (and fix link on homepage)
+  - "automated deduction" and "follow along"
 * Resolve DNS
 
 * Finish updating styling throughout
   - Trait index
   - Sticky footer
   - Search box
+* Develop and support ?/Unknown search syntax; update example on frontpage ("search")
 * Figure out why trait specs are failing when run en masse, but not individually
 * Prefetch all relevant traits when checking a theorem against a space
 * Stress test sucker_punch

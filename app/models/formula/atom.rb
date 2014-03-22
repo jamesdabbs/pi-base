@@ -13,7 +13,7 @@ class Formula::Atom < Formula
     property == other.property && value == other.value
   end
 
-  def self.load str
+  def self.parse_text str
     negated  = str =~ /~\s*/
     p,v      = str.gsub(/~\s*/, '').split('=').map &:strip
     property = Atom.parse_name_or_id p, Property
