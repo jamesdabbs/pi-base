@@ -41,7 +41,6 @@ If you want to push up code, open up a pull request. I'll review it, merge it in
 
 ### TODO
 
-* Fix display of conjunctions
 * Get proof tracing visualization working and enabled (and fix link on homepage)
   - "automated deduction" and "follow along"
 * Resolve DNS

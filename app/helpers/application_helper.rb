@@ -15,6 +15,8 @@ module ApplicationHelper
     # FIXME: scan the string and escape contextually depending on if we're in math tags
     text = h text
     text.gsub! '_', '\_'
+    text.gsub! '\{', '\\\\\{'
+    text.gsub! '\}', '\\\\\}'
     Markdown.render(text).html_safe
   end
 
