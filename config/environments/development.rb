@@ -32,4 +32,9 @@ PiBase::Application.configure do
 
   # Preview emails in the browser
   config.action_mailer.delivery_method = :letter_opener
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.raise  = true
+  end
 end

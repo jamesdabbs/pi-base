@@ -51,12 +51,17 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0.beta1'
+  gem 'bullet'
+
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 group :test do
+  gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'rspec-rails', '~> 3.0.0.beta1'
   gem 'simplecov'
 end
 
