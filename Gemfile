@@ -9,7 +9,7 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
 # Infrastructure
-gem 'rails', '~> 4.1.0.beta1'
+gem 'rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'thin'
 gem 'slim-rails'
@@ -31,6 +31,7 @@ gem 'draper'
 gem 'exceptiontrap'
 
 group :assets do
+  gem 'sprockets', '2.11.0'
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
@@ -39,9 +40,6 @@ group :assets do
 end
 
 group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'colorize'
   gem 'letter_opener'
   gem 'pry-rails'
   gem 'quiet_assets'
