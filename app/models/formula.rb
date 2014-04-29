@@ -28,10 +28,10 @@ class Formula
   end
 
   def self.parse_text q
-    q.gsub! /\&/, '+'
-    p = Parser.new q
+    _q = q.gsub /\&/, '+'
+    p = Parser.new _q
     f = if p.conjunction.nil?
-      Atom.parse_text q
+      Atom.parse_text _q
     else
       p.subformulae.map { |s| parse_text s }.inject &p.conjunction.to_sym
     end

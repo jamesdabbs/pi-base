@@ -81,7 +81,7 @@ class Formula::Atom < Formula
     when Value.true
       property.name
     when Value.false
-      "¬ #{property.name}"
+      "¬#{property.name}"
     else
       "#{property.name} = #{value.name}"
     end

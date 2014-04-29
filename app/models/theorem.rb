@@ -54,7 +54,7 @@ class Theorem < ActiveRecord::Base
   # ----------
 
   def self.assert! formula, description: ""
-    a,c = formula.split('=>').map { |f| Formula.load f.strip }
+    a,c = formula.split('=>').map { |f| Formula.parse_text f.strip }
     t = create! antecedent: a, consequent: c, description: description
     TheoremExploreJob.new.async.perform t.id
     t

@@ -64,7 +64,7 @@ describe "Chained deduction", :job do
 
   it "knows its assumptions" do
     q, r = [@q, @r].map { |p| @t.traits.where(property: p).first! }
-    expect( @st.proof.steps.sort ).to eq [r, q, Theorem.first].sort
+    expect( @st.proof.steps ).to eq [q, r, Theorem.first]
   end
 
   it "knows its supporters" do

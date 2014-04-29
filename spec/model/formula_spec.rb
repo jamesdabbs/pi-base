@@ -1,8 +1,5 @@
 require 'spec_helper'
 
-def Formula.ld str
-  Formula.dump Formula.load str
-end
 
 describe Formula do
   atoms :a, :b, :c, :d, :e
@@ -12,11 +9,11 @@ describe Formula do
   end
 
   def standardize str
-    Formula.dump Formula.load str
+    Formula.parse_text(str).to_s
   end
 
   def preserves f
-    d   = Formula.dump f
+    d = f.to_s
     expect( d ).to eq standardize d
   end
 
@@ -32,9 +29,9 @@ describe Formula do
     before(:each) { a; b; c; }
 
     {
-      ' ( a +   b) |  c' => '((a = True + b = True) | c = True)',
-      ' (~a | ~ b) + ~c' => '((a = False | b = False) + c = False)',
-      '~( a +   b)'      => '(a = False | b = False)'
+      ' ( a +   b) |  c' => '((a + b) | c)',
+      ' (~a | ~ b) + ~c' => '((¬a | ¬b) + ¬c)',
+      '~( a +   b)'      => '(¬a | ¬b)'
     }.each do |shorthand, standard|
       it "parses '#{shorthand}'" do
         expect( standardize shorthand ).to eq standard
