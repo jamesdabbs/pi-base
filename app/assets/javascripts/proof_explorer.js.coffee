@@ -39,13 +39,12 @@ window.pi_base.ProofExplorer = class ProofExplorer
         .attr("d", "M 0,0 V 4 L6,2 Z")
 
 
-    d3.json document.URL + ".json", (error, graph) =>
-      @graph = graph
+    d3.json document.URL + ".json", (error, @graph) =>
       @done_loading()
 
       force
-          .nodes(graph.nodes)
-          .links(graph.links)
+          .nodes(@graph.nodes)
+          .links(@graph.links)
           .start()
 
       link = svg.selectAll(".link")
@@ -65,7 +64,7 @@ window.pi_base.ProofExplorer = class ProofExplorer
           .on("click",     (d) -> window.location = "/traits/" + d.id)
           .call(force.drag)
 
-      node.append("title").text((d) -> d.name);
+      node.append("title").text((d) -> d.name)
 
       force.on "tick", =>
         node.attr("cx", (d) => d.x = @bound d.x, 10, @w - 10)

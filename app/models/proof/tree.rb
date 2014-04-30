@@ -16,7 +16,7 @@ class Proof
 
     def nodes
       # FIXME: use rabl?
-      @nodes ||= @space.traits.includes(:supporters, :property, :value, :proof => :theorem).map do |trait|
+      @nodes ||= @space.traits.includes(:supporters, :proof => :theorem).map do |trait|
         node = {
           name: trait.name,
           id:   trait.id,
@@ -45,7 +45,7 @@ class Proof
             source: node_index[assumption.id],
             target: node_index[proof.trait_id]
           }
-        end
+        end.select { |a| a[:source] && a[:target] }
       end
     end
 
@@ -55,20 +55,20 @@ class Proof
 
     # -- Trait deletion tools -----
 
-    def excise trait_id
-      trait = @space.traits.find trait_id
-      raise "You must excise the root (manually input) trait" if trait.deduced?
+    #def excise trait_id
+    #  trait = @space.traits.find trait_id
+    #  raise "You must excise the root (manually input) trait" if trait.deduced?
 
-      supports = trait.supports.includes(implied: { property: :theorems })
-      theorems = supports.flat_map { |t| t.implied.property.theorems }.uniq
+    #  supports = trait.supports.includes(implied: { property: :theorems })
+    #  theorems = supports.flat_map { |t| t.implied.property.theorems }.uniq
 
-      supports.delete_all
-      trait.delete
+    #  supports.delete_all
+    #  trait.delete
 
-      theorems.each do |t|
-        t.apply                @space
-        t.contrapositive.apply @space
-      end
-    end
+    #  theorems.each do |t|
+    #    t.apply                @space
+    #    t.contrapositive.apply @space
+    #  end
+    #end
   end
 end
