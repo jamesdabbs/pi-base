@@ -141,7 +141,7 @@ class Importer
         next unless hash
         hash.each { |k,v| hash[k] = obj.fetch(v) if v.is_a? Symbol }
 
-        buffer << klass.new(hash)
+        buffer << hash
         ids    << obj[:id]
       end
     end
