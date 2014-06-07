@@ -108,4 +108,16 @@ class Theorem < ActiveRecord::Base
     added += contrapositive.candidates.map { |s| contrapositive.apply s }
     added.compact
   end
+
+  def fix_theorem_properties!
+    real = [antecedent, consequent].map do |f|
+      f.atoms.map { |a| a.property.id }
+    end.flatten.uniq.sort
+
+    pids = theorem_properties.map(&:property_id).sort
+    if pids != real
+      theorem_properties.delete_all
+      real.each { |pid| theorem_properties.create! property_id: pid }
+    end
+  end
 end
