@@ -47,9 +47,9 @@ class Formula
     k,v = d.first
     case k.to_s
     when "and"
-      Conjunction.new v.map { |f| self.new_load f }
+      Conjunction.new v.map { |f| self.load f }
     when "or"
-      Disjunction.new v.map { |f| self.new_load f }
+      Disjunction.new v.map { |f| self.load f }
     else
       Atom.new Property.find(k.to_i), Value.find(v.to_i)
     end
