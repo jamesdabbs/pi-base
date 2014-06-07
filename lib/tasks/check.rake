@@ -15,9 +15,14 @@ namespace :check do
   task :print => :environment do
     diffs = Trait::Table::Checker.new.check.map(&:first).reject(&:deduced).group_by(&:space)
     diffs.each do |space, traits|
-      puts space.name
-      traits.each do |trait|
-        puts "- #{trait.property} = #{trait.value}"
+      puts "#{space.name} ( #{space.id} )"
+      e, ne = traits.partition { |t| t.description.empty? }
+      puts "  Empty descriptions"
+      e.each { |t| puts "    - #{t.id} ) #{t.property} = #{t.value}" }
+      puts "  Non-empty Descriptions"
+      ne.each do |t|
+        puts "    - #{t.id} ) #{t.property} = #{t.value}"
+        puts "      #{t.description}"
       end
       puts
     end

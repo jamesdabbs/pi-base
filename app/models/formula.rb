@@ -43,6 +43,21 @@ class Formula
   def self.load str
     return str if str.nil? || str.is_a?(Formula)
     d = str.is_a?(Hash) ? str : JSON.parse(str)
+    return self.legacy_load d if d.length > 1
+    k,v = d.first
+    case k.to_s
+    when "and"
+      Conjunction.new v.map { |f| self.new_load f }
+    when "or"
+      Disjunction.new v.map { |f| self.new_load f }
+    else
+      Atom.new Property.find(k.to_i), Value.find(v.to_i)
+    end
+  end
+
+  def self.legacy_load str
+    return str if str.nil? || str.is_a?(Formula)
+    d = str.is_a?(Hash) ? str : JSON.parse(str)
     case d.delete("_type").to_sym
     when :atom
       Atom.new Property.find(d["property"]), Value.find(d["value"])
@@ -51,7 +66,7 @@ class Formula
     when :disjunction
       Disjunction.new *d["subformulae"].map { |f| self.load f }
     else
-      raise Error, "Unrecognized type: #{type}"
+      raise "Legacy formula load failed"
     end
   end
 

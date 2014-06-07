@@ -69,18 +69,18 @@ module Search
   extend ActiveSupport::Concern
 
   included do
-    include Elasticsearch::Model
+    #include Elasticsearch::Model
 
-    after_commit on: [:create] do
-      IndexJob.new.async.perform :create, self.class.name, id
-    end
+    #after_commit on: [:create] do
+    #  IndexJob.new.async.perform :create, self.class.name, id
+    #end
 
-    after_commit on: [:update] do
-      IndexJob.new.async.perform :update, self.class.name, id
-    end
+    #after_commit on: [:update] do
+    #  IndexJob.new.async.perform :update, self.class.name, id
+    #end
 
-    after_commit on: [:destroy] do
-      IndexJob.new.async.perform :delete, self.class.name, id
-    end
+    #after_commit on: [:destroy] do
+    #  IndexJob.new.async.perform :delete, self.class.name, id
+    #end
   end
 end

@@ -37,4 +37,8 @@ task :haskelize => :environment do
       raise "Need to create initial revisions"
     end
   end
+
+  %w(jamesdabbs@gmail.com austinmohr@gmail.com amohr@nebrwesleyan.edu).each do |e|
+    RemoteUser.find_by_ident(e).update_attributes admin: true
+  end
 end
